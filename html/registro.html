@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Registrarse — Lavandería</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<main>
+  <form class="card" id="registro-form" action ="megustaelepe.php" method = "POST" novalidate>
+    <div class="icon" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A86C4" stroke-width="1.8">
+        <circle cx="12" cy="12" r="7"/>
+        <circle cx="12" cy="12" r="2.5"/>
+      </svg>
+    </div>
+ 
+    <h1>Registro</h1>
+    <p class="subtitle">Accedé según tu rol: cliente, personal o repartidor</p>
+ 
+    <div class="field">
+      <label for="email">Correo electrónico</label>
+      <input type="email" id="email" name="email" placeholder="nombre@correo.com" autocomplete="username" required >
+    </div>
+
+   <div class="field">
+      <label for="Dni">Dni</label>
+      <input type="text" id="Dni" name="Dni" placeholder="XXXXXXXX" autocomplete="off" required >
+    </div>
+
+
+  <div class="select">
+      <label for="role">Elija su rol</label>
+      <select for="role">
+      <option value="usuario">Usuario</option>
+      <option value="repartidor">Repartidor</option>
+      <option value="lavandero">Lavandero</option>
+      </select>
+    </div>
+ 
+    <div class="field">
+      <label for="password">Contraseña</label>
+      <input type="password" id="password" name="password" placeholder="••••••••" autocomplete="new-password" required>
+    </div>
+ 
+ 
+    <button type="submit">Ingresar</button>
+ 
+    <p class="error" id="error-message" role="alert">Correo o contraseña incorrectos. Intentá de nuevo.</p>
+ 
+    <p class="footer">¿Ya tenias cuenta? <a href="login.html" id="register-link">Inicia sesión</a></p>
+  </form>
+</main>
+ 
+</body>
+</html>
