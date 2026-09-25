@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Catálogo de servicios — Lavandería</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="app-body">
+<div class="app-shell">
+
+  <header class="app-header">
+    <h1>Catálogo de servicios</h1>
+    <div class="field search-box" style="margin-bottom: 0;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9C9A90" stroke-width="2" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"/>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input type="text" id="search-input" placeholder="Buscar prenda o servicio" aria-label="Buscar prenda o servicio">
+    </div>
+  </header>
+
+  <nav aria-label="Categorías">
+    <ul class="chips" id="chips">
+      <li><button type="button" class="chip active" data-category="todos">Todos</button></li>
+      <li><button type="button" class="chip" data-category="ropa">Ropa</button></li>
+      <li><button type="button" class="chip" data-category="hogar">Hogar</button></li>
+      <li><button type="button" class="chip" data-category="calzado">Calzado</button></li>
+      <li><button type="button" class="chip" data-category="especiales">Especiales</button></li>
+    </ul>
+  </nav>
+
+  <ul class="service-list" id="service-list">
+
+    <li class="service-item" data-category="ropa" data-name="Camisa" data-price="2200">
+      <div class="service-info">
+        <p class="service-name">Camisa</p>
+        <p class="service-detail">Lavado y planchado</p>
+        <p class="service-price">$2.200</p>
+      </div>
+      <div class="item-action"><button type="button" class="add-btn" aria-label="Agregar Camisa">+</button></div>
+    </li>
+
+    <li class="service-item" data-category="ropa" data-name="Pantalón" data-price="2500">
+      <div class="service-info">
+        <p class="service-name">Pantalón</p>
+        <p class="service-detail">Lavado y planchado</p>
+        <p class="service-price">$2.500</p>
+      </div>
+      <div class="item-action"><button type="button" class="add-btn" aria-label="Agregar Pantalón">+</button></div>
+    </li>
+
+    <li class="service-item" data-category="ropa" data-name="Traje completo" data-price="6800">
+      <div class="service-info">
+        <p class="service-name">Traje completo</p>
+        <p class="service-detail">Lavado en seco</p>
+        <p class="service-price">$6.800</p>
+      </div>
+      <div class="item-action"><button type="button" class="add-btn" aria-label="Agregar Traje completo">+</button></div>
+    </li>
+
+    <li class="service-item" data-category="ropa" data-name="Vestido" data-price="4200">
+      <div class="service-info">
+        <p class="service-name">Vestido</p>
+        <p class="service-detail">Lavado en seco</p>
+        <p class="service-price">$4.200</p>
+      </div>
+      <div class="item-action"><button type="button" class="add-btn" aria-label="Agregar Vestido">+</button></div>
+    </li>
+
+    <li class="service-item" data-category="ropa" data-name="Campera" data-price="5200">
+      <div class="service-info">
+        <p class="service-name">Campera</p>
+        <p class="service-detail">Lavado y planchado</p>
+        <p class="service-price">$5.200</p>
+      </div>
+      <div class="item-action"><button type="button" class="add-btn" aria-label="Agregar Campera">+</button></div>
+    </li>
+
+    <li class="service-item" data-category="hogar" data-name="Cortina" data-price="3200">
+      <div class="service-info">
+        <p class="service-name">Cortina</p>
+        <p class="service-detail">Lavado y planchado — por m²</p>
+        <p class="service-price">$3.200</p>
+      </div>
+      <div class="item-action"><button type="button" class="add-btn" aria-label="Agregar Cortina">+</button></div>
+    </li>
+
+    <li class="service-item" data-category="hogar" data-name="Alfombra" data-price="4800">
+      <div class="service-info">
+        <p class="service-name">Alfombra</p>
+        <p class="service-detail">Lavado profundo — por m²</p>
+        <p class="service-price">$4.800</p>
+      </div>
+      <div class="item-action"><button type="button" class="add-btn" aria-label="Agregar Alfombra">+</button></div>
+    </li>
+
+    <li class="service-item" data-category="hogar" data-name="Acolchado" data-price="7500">
+      <div class="service-info">
+        <p class="service-name">Acolchado</p>
+        <p class="service-detail">Lavado y secado</p>
+        <p class="service-price">$7.500</p>
+      </div>
+      <div class="item-action"><button type="button" class="add-btn" aria-label="Agregar Acolchado">+</button></div>
+    </li>
+
+    <li class="service-item" data-category="hogar" data-name="Juego de sábanas" data-price="3900">
+      <div class="service-info">
+        <p class="service-name">Juego de sábanas</p>
+        <p class="service-detail">Lavado y planchado</p>
+        <p class="service-price">$3.900</p>
+      </div>
+      <div class="item-action"><button type="button" class="add-btn" aria-label="Agregar Juego de sábanas">+</button></div>
+    </li>
+
+    <li class="service-item" data-category="calzado" data-name="Zapatillas" data-price="3500">
+      <div class="service-info">
+        <p class="service-name">Zapatillas</p>
+        <p class="service-detail">Limpieza y desinfección</p>
+        <p class="service-price">$3.500</p>
+      </div>
+      <div class="item-action"><button type="button" class="add-btn" aria-label="Agregar Zapatillas">+</button></div>
+    </li>
+
+    <li class="service-item" data-category="calzado" data-name="Zapatos de cuero" data-price="4200">
+      <div class="service-info">
+        <p class="service-name">Zapatos de cuero</p>
+        <p class="service-detail">Limpieza y nutrición</p>
+        <p class="service-price">$4.200</p>
+      </div>
+      <div class="item-action"><button type="button" class="add-btn" aria-label="Agregar Zapatos de cuero">+</button></div>
+    </li>
+
+    <li class="service-item" data-category="especiales" data-name="Quitamanchas" data-price="1500">
+      <div class="service-info">
+        <p class="service-name">Quitamanchas</p>
+        <p class="service-detail">Tratamiento adicional</p>
+        <p class="service-price">$1.500</p>
+      </div>
+      <div class="item-action"><button type="button" class="add-btn" aria-label="Agregar Quitamanchas">+</button></div>
+    </li>
+
+    <li class="service-item" data-category="especiales" data-name="Planchado express" data-price="1200">
+      <div class="service-info">
+        <p class="service-name">Planchado express</p>
+        <p class="service-detail">Entrega en 24 h</p>
+        <p class="service-price">$1.200</p>
+      </div>
+      <div class="item-action"><button type="button" class="add-btn" aria-label="Agregar Planchado express">+</button></div>
+    </li>
+
+  </ul>
+
+  <p class="empty-state" id="empty-state">No encontramos servicios con ese nombre.</p>
+
+</div>
+
+<div class="cart-bar" id="cart-bar" role="status">
+  <div>
+    <p class="cart-count" id="cart-count">0 prendas seleccionadas</p>
+    <p class="cart-total" id="cart-total">$0</p>
+  </div>
+  <button type="button" class="btn-primary" id="continue-btn">Ver presupuesto</button>
+</div>
+
+<script src="catalogo.js"></script>
+</body>
+</html>
