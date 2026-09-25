@@ -43,45 +43,40 @@ body {
    ============================================================ */
 
 button {
-  width: 100%;
-  background-color: #1A86C4;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  padding: 12px;
-  font-size: 14px;
-  font-weight: 500;
   font-family: inherit;
   cursor: pointer;
-  margin-bottom: 14px;
-  transition: background-color 0.15s ease;
+  border: none;
+  background: none;
+  padding: 0;
+  color: inherit;
 }
-
+ 
 button:focus-visible {
   outline: 2px solid #1A86C4;
   outline-offset: 2px;
 }
-
+ 
 .btn-primary {
   display: block;
   width: 100%;
-  background: var(--primary);
-  color: #ffffff;
+  background: #1A86C4;
+  color: #fff;
   border-radius: var(--radius-md);
   padding: 12px;
   font-size: 14px;
   font-weight: 500;
   text-align: center;
   margin-bottom: 14px;
-  transition: background 0.3s ease;
+  transition: background 0.15s ease;
 }
-
+ 
 .btn-primary:hover {
-  background-color: #16709F;
+  background: #16709F;
 }
-
+ 
 .btn-primary:disabled {
   background: var(--border-strong);
+  cursor: not-allowed;
 }
 
 /* ============================================================
@@ -483,6 +478,694 @@ select {
   margin: 0;
 }
 
-.app-body{
+/*
+=======================================
+ESPACIO DE NAVBAR EN GENERAL
+========================================
+*/
 
+:root {
+  --bg: #F7F6F2;
+  --surface: #FFFFFF;
+  --surface-highlight: #E4F3FB;
+  --border: #E4E1D8;
+  --border-strong: #B4B2A9;
+  --primary: #1A86C4;
+  --primary-hover: #16709F;
+  --primary-ring: #CFE9F7;
+  --text-primary: #1E1E1B;
+  --text-secondary: #6B6A63;
+  --text-muted: #9C9A90;
+  --error-bg: #FBEAEA;
+  --error-text: #A32D2D;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+}
+ 
+* {
+  box-sizing: border-box;
+}
+ 
+html, body {
+  height: 100%;
+  margin: 0;
+}
+ 
+body {
+  background: var(--bg);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text-primary);
+}
+ 
+/* ============================================================
+   GLOBAL — botones
+   Usado por TODAS las pantallas
+   ============================================================ */
+ 
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+ 
+button:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+ 
+.btn-primary {
+  display: block;
+  width: 100%;
+  background: var(--primary);
+  color: #fff;
+  border-radius: var(--radius-md);
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 14px;
+  transition: background 0.15s ease;
+}
+ 
+.btn-primary:hover {
+  background: var(--primary-hover);
+}
+ 
+.btn-primary:disabled {
+  background: var(--border-strong);
+  cursor: not-allowed;
+}
+ 
+/* ============================================================
+   LOGIN (login.html)
+   Formulario centrado: tarjeta, ícono, campos, link de "olvidé
+   mi contraseña", mensaje de error y footer con "Registrate"
+   ============================================================ */
+ 
+.auth-body {
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+ 
+.auth-body main {
+  width: 100%;
+  max-width: 360px;
+}
+ 
+.card {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2rem 1.75rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+ 
+.icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: var(--surface-highlight);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+ 
+h1 {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0 0 4px;
+}
+ 
+.subtitle {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0 0 24px;
+  line-height: 1.4;
+}
+ 
+label {
+  display: block;
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+ 
+.field {
+  margin-bottom: 16px;
+}
+ 
+input {
+  width: 100%;
+  height: 42px;
+  background: #fff;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: 0 12px;
+  font-size: 14px;
+  color: var(--text-primary);
+  font-family: inherit;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+ 
+input::placeholder {
+  color: var(--text-muted);
+}
+ 
+input:focus {
+  outline: none;
+  border: 1.5px solid var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-ring);
+}
+ 
+.forgot {
+  font-size: 12px;
+  color: var(--primary);
+  text-align: right;
+  margin: 0 0 20px;
+}
+ 
+.forgot a {
+  color: inherit;
+  text-decoration: none;
+}
+ 
+.forgot a:hover,
+.forgot a:focus-visible {
+  text-decoration: underline;
+}
+ 
+.error {
+  font-size: 12px;
+  color: var(--error-text);
+  background: var(--error-bg);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  margin: 0 0 14px;
+  display: none;
+}
+ 
+.error.visible {
+  display: block;
+}
+ 
+.footer {
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-align: center;
+  margin: 0;
+}
+ 
+.footer a {
+  color: var(--primary);
+  font-weight: 500;
+  text-decoration: none;
+}
+ 
+.footer a:hover,
+.footer a:focus-visible {
+  text-decoration: underline;
+}
+ 
+/* ============================================================
+   GLOBAL — accesibilidad (movimiento reducido)
+   Usado por TODAS las pantallas
+   ============================================================ */
+ 
+@media (prefers-reduced-motion: reduce) {
+  button, input, .btn-primary, .chip, .cart-bar {
+    transition: none;
+  }
+}
+ 
+/* ============================================================
+   APP SHELL — compartido entre pantallas "internas"
+   (catalogo.html y las que sigan: historial, agenda, etc.)
+   Cabecera pegajosa + buscador + ancho máximo de la pantalla
+   ============================================================ */
+ 
+.app-body {
+  min-height: 100%;
+}
+ 
+.app-shell {
+  max-width: 480px;
+  margin: 0 auto;
+  padding-bottom: 100px;
+}
+ 
+.app-header {
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  padding: 20px 20px 4px;
+  z-index: 5;
+}
+ 
+.app-header h1 {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0 0 14px;
+}
+ 
+.search-box {
+  position: relative;
+  margin: 0;
+}
+ 
+.search-box svg {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+ 
+.search-box input {
+  padding-left: 36px;
+}
+ 
+/* ============================================================
+   CHIPS DE FILTRO — compartido entre pantallas internas
+   Fila de categorías scrolleable horizontal (usado hoy en
+   catalogo.html, reutilizable en otras listas filtrables)
+   ============================================================ */
+ 
+.chips {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 14px 20px 6px;
+  scrollbar-width: none;
+  list-style: none;
+  margin: 0;
+}
+ 
+.chips::-webkit-scrollbar {
+  display: none;
+}
+ 
+.chip {
+  flex: none;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 0.5px solid var(--border);
+  background: var(--surface);
+  font-size: 13px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+ 
+.chip:hover {
+  border-color: var(--border-strong);
+}
+ 
+.chip.active {
+  background: var(--surface-highlight);
+  border: 1.5px solid var(--primary);
+  color: var(--primary-hover);
+  font-weight: 500;
+}
+ 
+/* ============================================================
+   CATÁLOGO (catalogo.html)
+   Lista de servicios, botón agregar / stepper de cantidad,
+   estado vacío de búsqueda y barra de presupuesto fija
+   ============================================================ */
+ 
+.service-list {
+  list-style: none;
+  margin: 0;
+  padding: 8px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+ 
+.service-item {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+ 
+.service-info {
+  min-width: 0;
+}
+ 
+.service-name {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0 0 2px;
+}
+ 
+.service-detail {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin: 0 0 6px;
+}
+ 
+.service-price {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0;
+}
+ 
+.item-action {
+  flex: none;
+}
+ 
+.add-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--primary);
+  background: var(--surface);
+  color: var(--primary);
+  font-size: 18px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+ 
+.add-btn:hover {
+  background: var(--primary);
+  color: #fff;
+}
+ 
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--primary);
+  border-radius: 999px;
+  padding: 4px 6px;
+}
+ 
+.stepper button {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--surface-highlight);
+  color: var(--primary-hover);
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+ 
+.stepper span {
+  font-size: 13px;
+  font-weight: 500;
+  min-width: 14px;
+  text-align: center;
+}
+ 
+.empty-state {
+  display: none;
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+ 
+.empty-state.visible {
+  display: block;
+}
+ 
+.cart-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-width: 480px;
+  margin: 0 auto;
+  background: var(--surface);
+  border-top: 0.5px solid var(--border);
+  padding: 12px 20px calc(12px + env(safe-area-inset-bottom, 0px));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  transform: translateY(100%);
+  transition: transform 0.2s ease;
+}
+ 
+.cart-bar.visible {
+  transform: translateY(0);
+}
+ 
+.cart-count {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin: 0 0 2px;
+}
+ 
+.cart-total {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0;
+}
+ 
+.cart-bar .btn-primary {
+  width: auto;
+  display: inline-block;
+  padding: 12px 22px;
+  margin: 0;
+}
+ 
+/* ============================================================
+   BARRA DE BÚSQUEDA DE NAVEGACIÓN — compartida entre todas las
+   pantallas (accesos rápidos, filtrables por rol: cliente,
+   personal, repartidor)
+   ============================================================ */
+ 
+.nav-search {
+  position: relative;
+}
+ 
+.nav-results {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  max-height: 320px;
+  overflow-y: auto;
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+  display: none;
+  z-index: 20;
+}
+ 
+.nav-results.visible {
+  display: block;
+}
+ 
+.nav-result {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  text-align: left;
+}
+ 
+.nav-result:hover,
+.nav-result:focus-visible {
+  background: var(--surface-highlight);
+}
+ 
+.nav-result-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: var(--surface-highlight);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex: none;
+}
+ 
+.nav-result-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+ 
+.nav-result-title {
+  font-size: 14px;
+  font-weight: 500;
+}
+ 
+.nav-result-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+ 
+.nav-empty {
+  padding: 16px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+ 
+/* ============================================================
+   SIDEBAR — nav lateral (Cliente)
+   Visible solo en pantallas anchas (≥768px). En mobile queda
+   oculto: usar el buscador de navegación de la sección anterior.
+   ============================================================ */
+ 
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 88px;
+  background: var(--surface);
+  border-right: 0.5px solid var(--border);
+  padding: 20px 0;
+  z-index: 10;
+}
+ 
+.app-shell {
+  margin-left: 88px;
+}
+ 
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+ 
+.sidebar-item {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 4px;
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+}
+ 
+.sidebar-item svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+}
+ 
+.sidebar-item span {
+  font-size: 11px;
+}
+ 
+.sidebar-item:hover {
+  background: var(--surface-highlight);
+  color: var(--text-primary);
+}
+ 
+.sidebar-item.active {
+  background: var(--surface-highlight);
+  color: var(--primary-hover);
+  font-weight: 500;
+}
+ 
+.sidebar-logout {
+  margin-top: auto;
+  padding: 10px;
+  color: var(--text-muted);
+}
+ 
+.sidebar-logout:hover {
+  color: var(--error-text);
+}
+ 
+/* ============================================================
+   BOTTOM NAV — nav inferior (Cliente, mobile)
+   Equivalente al sidebar pero para pantallas angostas (<768px).
+   Se oculta automáticamente cuando el sidebar aparece.
+   ============================================================ */
+ 
+.bottom-nav {
+  display: none; /* deshabilitado: el sidebar ahora es visible siempre.
+                    Si preferís el patrón mobile (bottom-nav) en vez del
+                    sidebar, avisame y hago el cambio al revés. */
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-width: 480px;
+  margin: 0 auto;
+  background: var(--surface);
+  border-top: 0.5px solid var(--border);
+  padding: 6px 4px calc(6px + env(safe-area-inset-bottom, 0px));
+  z-index: 15;
+}
+ 
+@media (min-width: 768px) {
+  .bottom-nav {
+    display: none;
+  }
+}
+ 
+.bottom-nav-list {
+  display: flex;
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+ 
+.bottom-nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 0 4px;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+}
+ 
+.bottom-nav-item svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+}
+ 
+.bottom-nav-item span {
+  font-size: 10px;
+}
+ 
+.bottom-nav-item.active {
+  color: var(--primary-hover);
+  font-weight: 500;
 }
