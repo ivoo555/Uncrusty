@@ -133,7 +133,7 @@ h1 {
 
 .subtitle {
   font-size: 13px;
-  color: var(--text-secondary);
+  color: #6B6A63;
   margin: 0 0 24px;
   line-height: 1.4;
 }
@@ -141,7 +141,7 @@ h1 {
 label {
   display: block;
   font-size: 12px;
-  color: var(--text-secondary);
+  color: #6B6A63;
   margin-bottom: 6px;
 }
 
@@ -163,7 +163,7 @@ input {     /*ESTO ES PARA LOS COSITOS DONDE ESCRIB[IS*/
 }
 
 input::placeholder {
-  color: var(--text-muted);
+  color: #9C9A90;
 }
 
 input:focus {
