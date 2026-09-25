@@ -260,7 +260,7 @@ select {
 .app-header {
   position: sticky;
   top: 0;
-  background: #fff;
+  background: #CFE9F7;
   padding: 20px 20px 4px;
   z-index: 5;
 }
@@ -277,7 +277,7 @@ select {
 }
 
 .search-box svg {
-  position: absolute;
+  position:fixed;
   left: 12px;
   top: 50%;
   transform: translateY(-50%);
