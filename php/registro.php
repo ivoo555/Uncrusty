@@ -4,7 +4,7 @@ $conexion = new mysqli(
     "localhost",
     "root",
     "",
-    "tp_colegio"
+    "lavanderia_uncrusty"
 );
 
 if ($conexion->connect_error) {
@@ -20,7 +20,7 @@ if (!preg_match('/^[0-9]{8}$/', $dni)) {
     ?>
     <script>
        alert("dni distintas cifras");
-        window.location = "registro.html";
+        window.location = "../html/registro.html";
     </script>
     <?php
     exit();
@@ -28,8 +28,8 @@ if (!preg_match('/^[0-9]{8}$/', $dni)) {
    
 }
 
-$sql = "INSERT INTO usuarios
-(email,dni,rol,contraseña)
+$sql = "INSERT INTO clientes
+(email,DNI,rol,contrasena)
 VALUES (?, ?, ?, ?)";
 
 $stmt = $conexion->prepare($sql);
@@ -46,7 +46,7 @@ try {
 
     $stmt->execute();
 
-    header("Location: login.html");
+    header("Location: ../html/login.html ");
     exit();
 
 } catch (mysqli_sql_exception $e) {

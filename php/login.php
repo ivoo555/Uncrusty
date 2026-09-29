@@ -6,7 +6,7 @@ $conexion = new mysqli(
     "localhost",
     "root",
     "",
-    "Tp_Colegio"
+    "lavanderia_uncrusty"
 );
 
 if ($conexion->connect_error) {
@@ -16,9 +16,9 @@ if ($conexion->connect_error) {
 $email = $_POST["email"];
 $password = $_POST["password"];
 
-$sql = "SELECT * FROM usuarios
+$sql = "SELECT * FROM clientes
 WHERE email = ?
-AND contraseña = ?";
+AND contrasena = ?";
 
 $stmt = $conexion->prepare($sql);
 
@@ -46,7 +46,7 @@ if ($resultado->num_rows > 0) {
 
     <?php if ($usuario["rol"] == "Usuario") { ?>
 
-        window.location = "ajaj.html";
+        window.location = "../html/panel cliente/catalogoServicio.html";
 
     <?php } elseif ($usuario["rol"] == "Repartidor") { ?>
 
@@ -54,7 +54,7 @@ if ($resultado->num_rows > 0) {
 
     <?php } else { ?>
 
-        window.location = "inicioLavandero.html";
+        window.location = "../html/Panel Lavadero/Pedidos/index.html";
 
     <?php } ?>
 
@@ -69,7 +69,7 @@ if ($resultado->num_rows > 0) {
     <script>
 
     alert("usuario o contraseña incorrectos");
-    window.location = "login.html";
+    window.location = "../html/login.html";
 
     </script>
 
