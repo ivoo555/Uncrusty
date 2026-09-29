@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -34,17 +35,18 @@
     <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
   </a>
 </aside>
- 
+
 <div class="pedidos-shell-outer">
   <div class="pedidos-shell">
     <h1>Mi Historial</h1>
- 
+
     <div class="tabla-pedidos">
       <table>
         <caption>Historial</caption>
         <thead>
           <tr>
             <th>Pedido</th>
+            <th>Fecha</th>
             <th>Precio</th>
             <th>Calificación</th>
           </tr>
@@ -52,53 +54,57 @@
         <tbody>
           <tr>
             <td class="producto">Camisa — lavado y planchado</td>
+            <td>17/02/06</td>
             <td>$2.200</td>
             <td>
               <div class="estrellas-lectura" aria-label="Calificación: 5 de 5 estrellas">
-                <span class="estrella llena">★</span>
-                <span class="estrella llena">★</span>
-                <span class="estrella llena">★</span>
-                <span class="estrella llena">★</span>
-                <span class="estrella llena">★</span>
+                <span class="estrella llena1" onclick="ejecutar(this)">☆</span>
+                <span class="estrella llena2" onclick="ejecutar(this)">☆</span>
+                <span class="estrella llena3" onclick="ejecutar(this)">☆</span>
+                <span class="estrella llena4" onclick="ejecutar(this)">☆</span>
+                <span class="estrella llena5" onclick="ejecutar(this)">☆</span>
               </div>
             </td>
           </tr>
           <tr>
             <td class="producto">Traje completo — lavado en seco</td>
+             <td>17/02/06</td>
             <td>$6.800</td>
             <td>
               <div class="estrellas-lectura" aria-label="Calificación: 4 de 5 estrellas">
-                <span class="estrella llena">★</span>
-                <span class="estrella llena">★</span>
-                <span class="estrella llena">★</span>
-                <span class="estrella llena">★</span>
-                <span class="estrella">★</span>
+                <span class="estrella llena1" onclick="ejecutar(this)">☆</span>
+                <span class="estrella llena2" onclick="ejecutar(this)">☆</span>
+                <span class="estrella llena3" onclick="ejecutar(this)">☆</span>
+                <span class="estrella llena4" onclick="ejecutar(this)">☆</span>
+                <span class="estrella llena5" onclick="ejecutar(this)">☆</span>
               </div>
             </td>
           </tr>
           <tr>
             <td class="producto">Alfombra — lavado profundo</td>
+             <td>17/02/06</td>
             <td>$4.800</td>
             <td>
               <div class="estrellas-lectura" aria-label="Calificación: 3 de 5 estrellas">
-                <span class="estrella llena">★</span>
-                <span class="estrella llena">★</span>
-                <span class="estrella llena">★</span>
-                <span class="estrella">★</span>
-                <span class="estrella">★</span>
+                <span class="estrella llena1" onclick="ejecutar(this)">☆</span>
+                <span class="estrella llena2" onclick="ejecutar(this)">☆</span>
+                <span class="estrella llena3" onclick="ejecutar(this)">☆</span>
+                <span class="estrella llena4" onclick="ejecutar(this)">☆</span>
+                <span class="estrella llena5" onclick="ejecutar(this)">☆</span>
               </div>
             </td>
           </tr>
           <tr>
             <td class="producto">Zapatillas — limpieza y desinfección</td>
+             <td>17/02/06</td>
             <td>$3.500</td>
             <td>
               <div class="estrellas-lectura" aria-label="Calificación: 5 de 5 estrellas">
-                <span class="estrella llena">★</span>
-                <span class="estrella llena">★</span>
-                <span class="estrella llena">★</span>
-                <span class="estrella llena">★</span>
-                <span class="estrella llena">★</span>
+                <span class="estrella llena1" onclick="ejecutar(this)">☆</span>
+                <span class="estrella llena2" onclick="ejecutar(this)">☆</span>
+                <span class="estrella llena3" onclick="ejecutar(this)">☆</span>
+                <span class="estrella llena4" onclick="ejecutar(this)">☆</span>
+                <span class="estrella llena5" onclick="ejecutar(this)">☆</span>
               </div>
             </td>
           </tr>
@@ -107,7 +113,24 @@
     </div>
   </div>
 </div>
- 
+
+<script>
+function ejecutar(span) {
+    let estrellas = span.parentElement.querySelectorAll(".estrella");
+    let numero = Array.from(estrellas).indexOf(span);
+
+    if (span.textContent === "☆") {
+        for (let i = 0; i <= numero; i++) {
+            estrellas[i].textContent = "★";
+        }
+    } else {
+        for (let i = numero; i < estrellas.length; i++) {
+            estrellas[i].textContent = "☆";
+        }
+    }
+}
+</script>
+
 </body>
 </html>
- 
+
