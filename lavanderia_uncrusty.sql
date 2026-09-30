@@ -28,11 +28,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `clientes` (
-  `id_cliente` int(11) NOT NULL,
+  `id_cliente` int(11) NOT NULL primary key,
   `nombreCompleto` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
   `contrasena` varchar(255) NOT NULL,
-  `DNI` varchar(50) NOT NULL
+  `DNI` varchar(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -49,7 +49,7 @@ INSERT INTO `clientes` (`id_cliente`, `nombreCompleto`, `email`, `contrasena`, `
 --
 
 CREATE TABLE `cupones` (
-  `id_cupon` int(11) NOT NULL,
+  `id_cupon` int(11) NOT NULL primary key,
   `codigo` varchar(50) NOT NULL,
   `valor_descuento` decimal(10,2) NOT NULL,
   `fecha_inicio` date NOT NULL,
@@ -64,13 +64,15 @@ CREATE TABLE `cupones` (
 --
 
 CREATE TABLE `pedidos` (
-  `id_pedido` int(11) NOT NULL,
+  `id_pedido` int(11) NOT NULL primary key,
   `id_cliente` int(11) NOT NULL,
   `fecha_pedido` datetime NOT NULL,
   `direccion_entrega` varchar(150) NOT NULL,
   `estado` enum('Pendiente','En recoleccion','En limpieza','Listo para entrega','Entregado') NOT NULL DEFAULT 'Pendiente',
   `descuento` decimal(10,2) NOT NULL DEFAULT 0.00,
   `id_servicio` int(11) NOT NULL
+  foreign key id_cliente references clientes(id_cliente),
+  foreign key id_servicio references servicio(id_servicio)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -82,20 +84,20 @@ INSERT INTO `pedidos` (`id_pedido`, `id_cliente`, `fecha_pedido`, `direccion_ent
 
 -- --------------------------------------------------------
 CREATE TABLE `servicio` (
-  `id_servicio` int(11) NOT NULL,
-  `nombre` varchar(11) NOT NULL,
-  `descripcion` varchar(11) NOT NULL,
-  `categoria` varchar(11) NOT NULL,
-  `estado` int(11) NOT NULL,
+  `id_servicio` int(11) NOT NULL primary key,
+  `nombre` varchar(20) NOT NULL,
+  `descripcion` varchar(200) NOT NULL,
+  `categoria` varchar(50) NOT NULL,
+  `estado` varchar(50) enum('Activo','Inactivo') NOT NULL DEFAULT 'Activo';
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 --
 -- Estructura de tabla para la tabla `personallavanderia`
 --
 
 CREATE TABLE `personallavanderia` (
-  `id_personal` int(11) NOT NULL,
+  `id_personal` int(11) NOT NULL primary key,
   `nombreCompleto` varchar(50) NOT NULL,
-  `DNI` varchar(50) NOT NULL,
+  `DNI` varchar(8) NOT NULL,
   `email` varchar(100) NOT NULL,
   `contrasena` varchar(255) NOT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -107,9 +109,9 @@ CREATE TABLE `personallavanderia` (
 --
 
 CREATE TABLE `repartidores` (
-  `id_repartidor` int(11) NOT NULL,
+  `id_repartidor` int(11) NOT NULL primary key,
   `nombreCompleto` varchar(50) NOT NULL,
-  `DNI` varchar(100) NOT NULL,
+  `DNI` varchar(8) NOT NULL,
   `email` varchar(100) NOT NULL,
   `contrasena` varchar(50) NOT NULL,
   `disponibilidad` enum('Disponible','Ocupado') NOT NULL DEFAULT 'Disponible'
@@ -129,7 +131,7 @@ INSERT INTO `repartidores` (`id_repartidor`, `nombreCompleto`, `DNI`, `email`, `
 --
 
 CREATE TABLE `repartos` (
-  `id_reparto` int(11) NOT NULL,
+  `id_reparto` int(11) NOT NULL primary key,
   `id_pedido` int(11) NOT NULL,
   `id_repartidor` int(11) NOT NULL,
   `tipo` enum('Recoleccion','Entrega') NOT NULL,
@@ -138,6 +140,8 @@ CREATE TABLE `repartos` (
   `fecha_realizada` datetime DEFAULT NULL,
   `estado` enum('Pendiente','En proceso','Completado') NOT NULL DEFAULT 'Pendiente',
   `observaciones` text DEFAULT NULL
+  foreign key id_pedido references pedidos(id_pedido),
+  foreign key id_repartidor references repartidores(id_repartidor)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -147,7 +151,7 @@ CREATE TABLE `repartos` (
 --
 
 CREATE TABLE `producto` (
-  `id_producto` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL primary key,
   `producto` varchar(100) NOT NULL,
   `marca` varchar(100) DEFAULT NULL,
   `cantidad_actual` int(11) NOT NULL DEFAULT 0,
@@ -157,30 +161,33 @@ CREATE TABLE `producto` (
 
 
 CREATE TABLE `detalle_De_Pedido`(
-  `id_detalle` int(11) NOT NULL,
+  `id_detalle` int(11) NOT NULL primary key,
   `id_pedido` int(11) NOT NULL,
   `id_servicio` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
   `precioUnitario` int(11) NOT NULL,
   `subtotal` int(11) NOT NULL,
   `total` int(11) NOT NULL,
+  foreign key id_pedido references pedidos(id_pedido),
+  foreign key id_servicio references  servicio(id_servicio)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Índices para tablas volcadas
 --
 CREATE TABLE `factura`(
-  `id_factura` int(11) NOT NULL,
+  `id_factura` int(11) NOT NULL primary key,
   `id_detalle` int(11) NOT NULL,
   `tipoDeComprobante` int(11) NOT NULL,
   `numeroDeFactura` int(11) NOT NULL,
   `nombreRazon` varchar(11) NOT NULL,
   `identificacion` varchar(11) NOT NULL,
   `metodoDePago` varchar(11) NOT NULL,
+  foreing key id_detalle references detalle_De_Pedido(id_detalle)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE `cupon`(
-  `id_cupon` int(11) NOT NULL,
+  `id_cupon` int(11) NOT NULL primary key,
   `codigo` int(11) NOT NULL,
   `valorDescuento` int(11) NOT NULL,
   `FechaVencimiento` date(11) NOT NULL,
@@ -188,9 +195,10 @@ CREATE TABLE `cupon`(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE `historial`(
-  `idHistorial` int(11) NOT NULL,
+  `idHistorial` int(11) NOT NULL primary key,
   `idPedido` int(11) NOT NULL,
   `estrellas` int(11) NOT NULL,
+  foreign key idPedido references pedidos(id_pedido)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
