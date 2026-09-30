@@ -32,7 +32,6 @@ CREATE TABLE `clientes` (
   `nombreCompleto` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
   `contrasena` varchar(255) NOT NULL,
-  `telefono` varchar(20) NOT NULL,
   `DNI` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -70,11 +69,8 @@ CREATE TABLE `pedidos` (
   `fecha_pedido` datetime NOT NULL,
   `direccion_entrega` varchar(150) NOT NULL,
   `estado` enum('Pendiente','En recoleccion','En limpieza','Listo para entrega','Entregado') NOT NULL DEFAULT 'Pendiente',
-  `subtotal` decimal(10,2) NOT NULL DEFAULT 0.00,
   `descuento` decimal(10,2) NOT NULL DEFAULT 0.00,
-  `costo_envio` decimal(10,2) NOT NULL DEFAULT 0.00,
-  `total` decimal(10,2) NOT NULL DEFAULT 0.00,
-  `observaciones` text DEFAULT NULL
+  `id_servicio` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -85,7 +81,13 @@ INSERT INTO `pedidos` (`id_pedido`, `id_cliente`, `fecha_pedido`, `direccion_ent
 (1, 1, '2026-09-28 21:30:00', 'remedios 2952', 'Pendiente', 20.00, 20.00, 20.00, 60.00, 'Ninguna');
 
 -- --------------------------------------------------------
-
+CREATE TABLE `servicio` (
+  `id_servicio` int(11) NOT NULL,
+  `nombre` varchar(11) NOT NULL,
+  `descripcion` varchar(11) NOT NULL,
+  `categoria` varchar(11) NOT NULL,
+  `estado` int(11) NOT NULL,
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 --
 -- Estructura de tabla para la tabla `personallavanderia`
 --
@@ -96,7 +98,6 @@ CREATE TABLE `personallavanderia` (
   `DNI` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
   `contrasena` varchar(255) NOT NULL,
-  `telefono` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -111,7 +112,6 @@ CREATE TABLE `repartidores` (
   `DNI` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `contrasena` varchar(50) NOT NULL,
-  `telefono` varchar(20) NOT NULL,
   `disponibilidad` enum('Disponible','Ocupado') NOT NULL DEFAULT 'Disponible'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -146,7 +146,7 @@ CREATE TABLE `repartos` (
 -- Estructura de tabla para la tabla `stock`
 --
 
-CREATE TABLE `stock` (
+CREATE TABLE `producto` (
   `id_producto` int(11) NOT NULL,
   `producto` varchar(100) NOT NULL,
   `marca` varchar(100) DEFAULT NULL,
@@ -155,9 +155,43 @@ CREATE TABLE `stock` (
   `estado` enum('Disponible','En alerta','Agotado') NOT NULL DEFAULT 'Disponible'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
+CREATE TABLE `detalle_De_Pedido`(
+  `id_detalle` int(11) NOT NULL,
+  `id_pedido` int(11) NOT NULL,
+  `id_servicio` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `precioUnitario` int(11) NOT NULL,
+  `subtotal` int(11) NOT NULL,
+  `total` int(11) NOT NULL,
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Índices para tablas volcadas
 --
+CREATE TABLE `factura`(
+  `id_factura` int(11) NOT NULL,
+  `id_detalle` int(11) NOT NULL,
+  `tipoDeComprobante` int(11) NOT NULL,
+  `numeroDeFactura` int(11) NOT NULL,
+  `nombreRazon` varchar(11) NOT NULL,
+  `identificacion` varchar(11) NOT NULL,
+  `metodoDePago` varchar(11) NOT NULL,
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `cupon`(
+  `id_cupon` int(11) NOT NULL,
+  `codigo` int(11) NOT NULL,
+  `valorDescuento` int(11) NOT NULL,
+  `FechaVencimiento` date(11) NOT NULL,
+  `estado` varchar(11) NOT NULL,
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `historial`(
+  `idHistorial` int(11) NOT NULL,
+  `idPedido` int(11) NOT NULL,
+  `estrellas` int(11) NOT NULL,
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indices de la tabla `clientes`
