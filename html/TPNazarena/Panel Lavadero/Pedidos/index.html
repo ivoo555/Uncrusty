@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 id="Titulo">Panel Pedidos</h1>
+    <div id="MarcoPedidos">
+        <select name="Estado" id="Estado" required>
+            <option value="" disabled selected hidden>Estado</option>
+            <option value="Entregado"> Entregado</option>
+            <option value="Listo Para la entrega">Listo para entrega</option>
+            <option value="En Limpieza">En Limpieza</option>
+            <option value="En Recoleccion">En Recoleccion</option>
+            <option value="Pendiente">Pendiente</option>
+        </select>
+        <select name="Repartidor" id="Repartidor" required>
+            <option value="" disabled selected hidden>Repartidor</option>
+        </select>
+        
+        <div id="MarcoTitulo"><h1>Gestion de Pedidos</h1></div>
+        <button>Agregar Pedido</button>
+        <button id="btnFiltrar">Filtrar</button>
+        <div id="tabla">
+        <table>
+            <thead>
+                <tr>
+                    <th>Cliente</th>
+                    <th>Prenda/Servicio</th>
+                    <th>Estado Actual</th>
+                    <th>Repartidor Asignado</th>
+                    <th>Direccion</th>
+                    <th>Entrega</th>
+                    <th>Accion</th>
+                </tr>
+            </thead>
+            <tbody id="tablaPedidos"></tbody>
+        </table>
+    </div>
+    </div>
+    <aside class="sidebar"> 
+        <ul class="sidebar-nav">
+            <li> 
+                <a href="../AsignarTarea/index.html" class="sidebar-item"> 
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"> 
+                <path d="M9 11l3 3L20 6"/> 
+                <path d="M4 4h6"/> 
+                <path d="M4 9h4"/> 
+                <path d="M4 14h4"/> 
+                <path d="M4 19h16"/> 
+                </svg> 
+                <span>Asignar Tarea</span> </a> </li> 
+            <li> 
+                <a href="../Pedidos/index.html" class="sidebar-item active"> 
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"> 
+                <path d="M20 7L12 3 4 7v10l8 4 8-4V7z"/> 
+                <path d="M4 7l8 4 8-4"/> 
+                <path d="M12 11v10"/> 
+                </svg> 
+                <span>Gestionar Pedido</span> </a> 
+            </li> 
+            <li> 
+                <a href="../Clientes/index.html" class="sidebar-item"> 
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"> 
+                <circle cx="12" cy="8" r="4"/> 
+                <path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/>
+                </svg>
+                <span>Historial Cliente</span> 
+                </a> 
+            </li>
+            <li>
+                <a href="../controlStock/index.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"> 
+                <path d="M4 4h16v16H4z"/> 
+                <path d="M8 8h8"/> 
+                <path d="M8 12h8"/> 
+                <path d="M8 16h5"/> 
+                </svg> 
+                <span>Control Stock</span> </a> 
+            </li> 
+            <li> 
+                <a href="../crearCupones/index.html" class="sidebar-item"> 
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"> 
+                <path d="M20 12a2 2 0 010-4V5a2 2 0 00-2-2H6a2 2 0 00-2 2v3a2 2 0 010 4v3a2 2 0 002 2h12a2 2 0 002-2v-3a2 2 0 010-4z"/> 
+                <path d="M9 8h6"/> 
+                <path d="M9 16h6"/> 
+                </svg> 
+                <span>Crear Cupón</span> </a> 
+            </li> 
+            <li> 
+                <a href="../facturarPedido/index.html" class="sidebar-item"> 
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"> 
+                <path d="M6 2h12v20l-3-2-3 2-3-2-3 2V2z"/> 
+                <path d="M9 7h6"/>
+                <path d="M9 11h6"/> 
+                <path d="M9 15h4"/> 
+                </svg> 
+                <span>Facturar Pedido</span> 
+                </a> 
+            </li> 
+            <li>
+                <a href="../agregarServicio/index.html" class="sidebar-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <circle cx="12" cy="12" r="9"/>
+                        <path d="M12 8v8"/>
+                        <path d="M8 12h8"/>
+                    </svg>
+                    <span>Agregar Servicio</span>
+                </a>
+            </li>
+        </ul> 
+        <a href="login.html" class="sidebar-item sidebar-logout" aria-label="Cerrar sesión"> 
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"> 
+        <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/> 
+        <path d="M16 17l5-5-5-5"/> 
+        <path d="M21 12H9"/> </svg> 
+        </a> 
+    </aside>
+    <script src="script.js"></script>
+</body>
+</html>

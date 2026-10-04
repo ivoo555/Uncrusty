@@ -1,0 +1,66 @@
+body{
+    background-color: #d8e8f4;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+#Marco{
+    position: relative;
+    background-color: white;
+    width: 400px;
+    height: 350px;
+    left: 480px;
+    top: 80px;
+    border-radius: 50px;
+}
+
+#Titulo{
+    position:absolute;
+    color: #1800ad;
+    left: 560px;
+    bottom: 410px;    
+    font-size: 40px;
+}
+
+#Campo1{
+    position: absolute;
+    background-color: #d8e8f4;
+    width: 300px;
+    height: 30px;
+    left: 530px;
+    bottom: 380px;
+    border-radius: 10px;
+    border: 2px solid black;
+    text-align: left;
+}
+#Campo2{
+    position: relative;
+    background-color: #d8e8f4;
+    width: 300px;
+    height: 30px;
+    left: 520px;
+    bottom:100px;
+    border-radius: 10px;
+    border: 2px solid black;
+}
+#Iniciar{
+    position: relative;
+    background-color: #1800ad;
+    color: white;
+    border: 2px solid black;
+    left: 520px;
+    bottom: 75px;
+    width: 300px;
+    height: 50px;
+    border-radius: 10px;
+    font-size: 20px;
+}
+#Pregunta{
+    position: absolute;
+    left: 580px;
+    top: 370px;
+    color: #1800ad;
+}
+#Registrarse{
+    color: black;
+    text-decoration: none;
+}
