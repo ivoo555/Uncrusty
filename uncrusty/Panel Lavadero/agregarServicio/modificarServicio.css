@@ -1,0 +1,83 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #EAF6FC;
+    color: #315A7D;
+}
+
+.contenedor {
+    width: 500px;
+    margin: 50px auto;
+    background: #F8FCFF;
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid #B8D5E6;
+}
+
+h1 {
+    text-align: center;
+    color: #24558A;
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #B8D5E6;
+    border-radius: 6px;
+    font-size: 15px;
+    background: white;
+    color: #315A7D;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #3478C9;
+}
+
+textarea {
+    height: 80px;
+    resize: vertical;
+}
+
+.botones {
+    display: flex;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+button {
+    flex: 1;
+    padding: 11px;
+    border: none;
+    border-radius: 6px;
+    background: #3478C9;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+#cancelar {
+    background: #6B8499;
+}
+
