@@ -16,9 +16,11 @@ if ($conexion->connect_error) {
 $email = $_POST["email"];
 $password = $_POST["password"];
 
+
+
 $sql = "SELECT * FROM clientes
-WHERE email = ?
-AND contrasena = ?";
+        WHERE email = ?
+        AND contrasena = ?";
 
 $stmt = $conexion->prepare($sql);
 
@@ -32,52 +34,153 @@ $stmt->execute();
 
 $resultado = $stmt->get_result();
 
+
 if ($resultado->num_rows > 0) {
 
     $usuario = $resultado->fetch_assoc();
 
-    $_SESSION["id"] = $usuario["id"];
+    $rol = "Usuario";
+    $id = $usuario["id"];
+
+    $_SESSION["id"] = $id;
 
     ?>
 
     <script>
 
     localStorage.setItem("email", "<?php echo $email; ?>");
+    localStorage.setItem("rol", "<?php echo $rol; ?>");
 
-    <?php if ($usuario["rol"] == "Usuario") { ?>
+    localStorage.setItem(
+        "idusuario",
+        "<?php echo $id; ?>"
+    );
 
-        window.location = "../html/panel cliente/catalogoServicio.html";
-
-    <?php } elseif ($usuario["rol"] == "Repartidor") { ?>
-
-        window.location = "repartidor.html";
-
-    <?php } else { ?>
-
-        window.location = "../html/Panel Lavadero/Pedidos/index.html";
-
-    <?php } ?>
+    window.location = "catalogoServicio.html";
 
     </script>
 
     <?php
 
-} else {
+    exit();
+}
+
+
+/* =========================
+   BUSCAR EN PERSONAL LAVANDERIA
+   ========================= */
+
+$sql = "SELECT * FROM personallavanderia
+        WHERE email = ?
+        AND contrasena = ?";
+
+$stmt = $conexion->prepare($sql);
+
+$stmt->bind_param(
+    "ss",
+    $email,
+    $password
+);
+
+$stmt->execute();
+
+$resultado = $stmt->get_result();
+
+
+if ($resultado->num_rows > 0) {
+
+    $usuario = $resultado->fetch_assoc();
+
+    $rol = "Lavandero";
+    $id = $usuario["id_personal"];
+
+    $_SESSION["id"] = $id;
 
     ?>
 
     <script>
 
-    alert("usuario o contraseña incorrectos");
-    window.location = "../html/login.html";
+    localStorage.setItem("email", "<?php echo $email; ?>");
+    localStorage.setItem("rol", "<?php echo $rol; ?>");
+
+    localStorage.setItem(
+        "id_personal",
+        "<?php echo $id; ?>"
+    );
+
+    window.location = "../html/Panel Lavadero/Pedidos/index.html";
 
     </script>
 
     <?php
 
+    exit();
 }
 
-$stmt->close();
-$conexion->close();
+
+/* =========================
+   BUSCAR EN REPARTIDORES
+   ========================= */
+
+$sql = "SELECT * FROM repartidores
+        WHERE email = ?
+        AND contrasena = ?";
+
+$stmt = $conexion->prepare($sql);
+
+$stmt->bind_param(
+    "ss",
+    $email,
+    $password
+);
+
+$stmt->execute();
+
+$resultado = $stmt->get_result();
+
+
+if ($resultado->num_rows > 0) {
+
+    $usuario = $resultado->fetch_assoc();
+
+    $rol = "Repartidor";
+    $id = $usuario["id_repartidor"];
+
+    $_SESSION["id"] = $id;
+
+    ?>
+
+    <script>
+
+    localStorage.setItem("email", "<?php echo $email; ?>");
+    localStorage.setItem("rol", "<?php echo $rol; ?>");
+
+    localStorage.setItem(
+        "idrepartidor",
+        "<?php echo $id; ?>"
+    );
+
+    window.location = "repartidor.html";
+
+    </script>
+
+    <?php
+
+    exit();
+}
+
+
+
+
+?>
+
+<script>
+
+alert("usuario o contraseña incorrectos");
+window.location = "../html/login.html";
+
+</script>
+
+<?php
 
 ?>
