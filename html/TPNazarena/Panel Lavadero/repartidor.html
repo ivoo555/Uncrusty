@@ -64,7 +64,6 @@
 
         <tbody id="tablaPedidos">
 
-            <!-- Los pedidos aparecen acá -->
 
         </tbody>
 
@@ -254,7 +253,6 @@ if (idrepartidor == null) {
 
 
 
-                // Obtener el select de esta fila
 
                 let select =
                     fila.querySelector(
@@ -263,15 +261,12 @@ if (idrepartidor == null) {
 
 
 
-                // Guardar el estado original
 
                 let estadoOriginal =
                     reparto.estado;
 
 
 
-                // Seleccionar el estado
-                // que viene desde PHP
 
                 select.value =
                     estadoOriginal;
@@ -292,7 +287,6 @@ if (idrepartidor == null) {
 
 
 
-                // Detectar modificación
 
                 select.addEventListener(
                     "change",
@@ -306,8 +300,6 @@ if (idrepartidor == null) {
 
 
 
-                        // Si vuelve al estado original,
-                        // ya no hay modificación
 
                         if (
                             select.value ===
@@ -328,8 +320,6 @@ if (idrepartidor == null) {
                         else {
 
 
-                            // Buscar si el pedido
-                            // ya fue modificado
 
                             let cambioExistente =
                                 cambios.find(
@@ -345,7 +335,6 @@ if (idrepartidor == null) {
                             ) {
 
 
-                                // Actualizar el cambio
 
                                 cambioExistente.estado =
                                     select.value;
@@ -356,7 +345,6 @@ if (idrepartidor == null) {
                             else {
 
 
-                                // Guardar nuevo cambio
 
                                 cambios.push({
 
@@ -430,7 +418,6 @@ if (idrepartidor == null) {
 
 
 
-// TÍTULO DE LA TABLA
 
 
 let marco =
@@ -454,7 +441,6 @@ marco.querySelector(
 
 
 
-// BOTÓN MODIFICAR
 
 
 document.getElementById(
@@ -464,8 +450,6 @@ document.getElementById(
     function() {
 
 
-        // Verificar que exista
-        // al menos un cambio
 
         if (
             cambios.length === 0
@@ -502,7 +486,6 @@ document.getElementById(
 
 
 
-        // Enviar solamente los cambios
 
         fetch(
             "modificartabla.php",
@@ -605,13 +588,11 @@ document.getElementById(
 
 
 
-                // Vaciar cambios
 
                 cambios = [];
 
 
 
-                // Desactivar botón
 
                 document.getElementById(
                     "botonModificar"
