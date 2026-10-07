@@ -12,7 +12,12 @@
         <p id="pNombre">Nombre del Servicio/Prenda</p>
         <input type="text" name="" id="inputNombre" placeholder="ej: Tintoreria(camisas)">
         <p id="pCategoria">Categoria</p>
-        <select name="" id="selectCategoria"></select>
+        <select name="" id="selectCategoria">
+            <option value="Lavandería">Lavandería</option>
+            <option value="Tintorería">Tintorería</option>
+            <option value="Planchado">Planchado</option>
+            <option value="Limpieza en seco">Limpieza en seco</option>
+        </select>
         <p id="pPrecio">Precio Unitario</p>
         <input type="number" name="" id="inputPrecio">
         <button id="btnCrearServicio">Crear Servicio</button>
@@ -32,6 +37,7 @@
                             <th>Acciones</th>
                         </tr>
                     </thead>
+                    <tbody id="tablaServicios"></tbody>
                 </table>
             </div>
         </div>
@@ -115,6 +121,6 @@
         <path d="M21 12H9"/> </svg> 
         </a> 
     </aside>
-    
+    <script src="script.js"></script>
 </body>
 </html>
