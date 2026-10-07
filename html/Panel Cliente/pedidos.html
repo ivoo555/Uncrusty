@@ -1,216 +1,220 @@
 <!DOCTYPE html>
-
 <html lang="es">
 
 <head>
+    <meta charset="UTF-8">
 
-<meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, viewport-fit=cover"
+    >
 
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Mis pedidos — Lavandería</title>
 
-<title>Mis pedidos — Lavandería</title>
-
-<link rel="stylesheet" href="nuevostyle.css">
-
+    <link rel="stylesheet" href="./css/styles.css">
 </head>
 
 <body class="app-body">
 
-
 <aside class="sidebar">
 
-<ul class="sidebar-nav">
+    <ul class="sidebar-nav">
 
-<li>
+        <li>
+            <a
+                href="inicio.html"
+                class="sidebar-item"
+            >
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke-width="2"
+                >
+                    <path d="M3 11l9-8 9 8"/>
+                    <path d="M5 10v10h14V10"/>
+                </svg>
 
-<a href="inicio.html" class="sidebar-item">
-
-<svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-
-<path d="M3 11l9-8 9 8"/>
-
-<path d="M5 10v10h14V10"/>
-
-</svg>
-
-<span>Inicio</span>
-
-</a>
-
-</li>
-
-
-<li>
-
-<a href="catalogoServicio.html" class="sidebar-item">
-
-<svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-
-<rect x="3" y="7" width="18" height="13" rx="2"/>
-
-<path d="M8 7V5a4 4 0 018 0v2"/>
-
-</svg>
-
-<span>Catálogo</span>
-
-</a>
-
-</li>
+                <span>Inicio</span>
+            </a>
+        </li>
 
 
-<li>
+        <li>
+            <a
+                href="catalogoServicio.html"
+                class="sidebar-item"
+            >
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke-width="2"
+                >
+                    <rect
+                        x="3"
+                        y="7"
+                        width="18"
+                        height="13"
+                        rx="2"
+                    />
 
-<a href="pedidos.html" class="sidebar-item active">
+                    <path d="M8 7V5a4 4 0 018 0v2"/>
+                </svg>
 
-<svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-
-<path d="M20 7L12 3 4 7v10l8 4 8-4V7z"/>
-
-<path d="M4 7l8 4 8-4"/>
-
-<path d="M12 11v10"/>
-
-</svg>
-
-<span>Pedidos</span>
-
-</a>
-
-</li>
-
-
-<li>
-
-<a href="mapa.html" class="sidebar-item">
-
-<svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-
-<path d="M12 21s-7-6.5-7-11a7 7 0 0114 0c0 4.5-7 11-7 11z"/>
-
-<circle cx="12" cy="10" r="2.5"/>
-
-</svg>
-
-<span>Mapa</span>
-
-</a>
-
-</li>
+                <span>Catálogo</span>
+            </a>
+        </li>
 
 
-<li>
+        <li>
+            <a
+                href="pedidos.html"
+                class="sidebar-item active"
+            >
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke-width="2"
+                >
+                    <path d="M20 7L12 3 4 7v10l8 4 8-4V7z"/>
+                    <path d="M4 7l8 4 8-4"/>
+                    <path d="M12 11v10"/>
+                </svg>
 
-<a href="historial.html" class="sidebar-item">
-
-<svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-
-<circle cx="12" cy="12" r="9"/>
-
-<path d="M12 7v5l3 3"/>
-
-</svg>
-
-<span>Historial</span>
-
-</a>
-
-</li>
-
-</ul>
+                <span>Pedidos</span>
+            </a>
+        </li>
 
 
-<a
-href="login.html"
-class="sidebar-item sidebar-logout"
-aria-label="Cerrar sesión"
->
+        <li>
+            <a
+                href="mapa.html"
+                class="sidebar-item"
+            >
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke-width="2"
+                >
+                    <path d="M12 21s-7-6.5-7-11a7 7 0 0114 0c0 4.5-7 11-7 11z"/>
+                    <circle
+                        cx="12"
+                        cy="10"
+                        r="2.5"
+                    />
+                </svg>
 
-<svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                <span>Mapa</span>
+            </a>
+        </li>
 
-<path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/>
 
-<path d="M16 17l5-5-5-5"/>
+        <li>
+            <a
+                href="historial.html"
+                class="sidebar-item"
+            >
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke-width="2"
+                >
+                    <circle
+                        cx="12"
+                        cy="12"
+                        r="9"
+                    />
 
-<path d="M21 12H9"/>
+                    <path d="M12 7v5l3 3"/>
+                </svg>
 
-</svg>
+                <span>Historial</span>
+            </a>
+        </li>
 
-</a>
+    </ul>
+
+
+    <a
+        href="../login.html"
+        class="sidebar-item sidebar-logout"
+        aria-label="Cerrar sesión"
+    >
+        <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke-width="2"
+        >
+            <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/>
+            <path d="M16 17l5-5-5-5"/>
+            <path d="M21 12H9"/>
+        </svg>
+    </a>
 
 </aside>
 
 
 <div class="pedidos-shell-outer">
 
-<div class="pedidos-shell">
+    <div class="pedidos-shell">
 
-<h1>Mis pedidos</h1>
-
-
-<div class="tabla-pedidos">
-
-<table>
-
-<caption>Pedidos</caption>
+        <h1>Mis pedidos</h1>
 
 
-<thead>
+        <div class="tabla-pedidos">
 
-<tr>
+            <table>
 
-<th>Producto</th>
+                <caption>Pedidos</caption>
 
-<th>Servicio</th>
+                <thead>
 
-<th>Horario de recoleccion</th>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Servicio</th>
+                        <th>Horario de recolección</th>
+                        <th>Estado</th>
+                        <th>Ubicación del pedido</th>
+                    </tr>
 
-<th>Estado</th>
-
-<th>Ubicación del pedido</th>
-
-</tr>
-
-</thead>
-
-
-<tbody id="pedidos">
-
-</tbody>
+                </thead>
 
 
-</table>
+                <tbody id="pedidos">
 
-</div>
+                </tbody>
 
-</div>
+            </table>
+
+        </div>
+
+    </div>
 
 </div>
 
 
 <script>
 
-let idusuario = localStorage.getItem("idusuario");
+const idusuario = localStorage.getItem("idusuario");
+
+const tabla = document.getElementById("pedidos");
 
 
 if (!idusuario) {
 
-    document.getElementById("pedidos").innerHTML = `
-
+    tabla.innerHTML = `
         <tr>
-
             <td colspan="5">
                 Usuario no encontrado.
             </td>
-
         </tr>
-
     `;
 
 } else {
 
-
-    fetch("pedidos.php?idusuario=" + encodeURIComponent(idusuario))
+    fetch(
+        "../../php/pedidos.php?idusuario=" +
+        encodeURIComponent(idusuario)
+    )
 
     .then(response => {
 
@@ -219,119 +223,145 @@ if (!idusuario) {
             throw new Error(
                 "Error HTTP: " + response.status
             );
-
         }
 
         return response.json();
-
     })
 
-
     .then(data => {
-
-        const tabla = document.getElementById("pedidos");
-
 
         if (!data.ok) {
 
             tabla.innerHTML = `
-
                 <tr>
-
                     <td colspan="5">
                         ${data.mensaje}
                     </td>
-
                 </tr>
-
             `;
 
             return;
-
         }
 
 
-        if (data.pedidos.length === 0) {
+        if (
+            !data.pedidos ||
+            data.pedidos.length === 0
+        ) {
 
             tabla.innerHTML = `
-
                 <tr>
-
                     <td colspan="5">
-                        No hay pedidos pendientes.
+                        No hay pedidos.
                     </td>
-
                 </tr>
-
             `;
 
             return;
-
         }
 
 
         data.pedidos.forEach(pedido => {
 
-
+            /*
+             * Determinar clase del estado
+             */
             let estadoClase = "estado-pendiente";
 
 
-            if (pedido.estado === "En recolección") {
+            if (
+                pedido.estado === "En Recolección"
+            ) {
 
-                estadoClase = "estado-recoleccion";
-
+                estadoClase =
+                    "estado-recoleccion";
             }
 
 
-            if (pedido.estado === "En limpieza") {
+            if (
+                pedido.estado === "En Limpieza"
+            ) {
 
-                estadoClase = "estado-limpieza";
-
+                estadoClase =
+                    "estado-limpieza";
             }
 
 
-            if (pedido.estado === "Listo para la entrega") {
+            if (
+                pedido.estado === "Listo para entrega"
+            ) {
 
-                estadoClase = "estado-listo";
-
+                estadoClase =
+                    "estado-listo";
             }
 
 
-            let horario = pedido.fecha_programada || "";
+            if (
+                pedido.estado === "Entregado"
+            ) {
+
+                estadoClase =
+                    "estado-entregado";
+            }
 
 
+            /*
+             * Fecha y hora
+             */
+            let horario =
+                pedido.fecha_pedido || "";
+
+
+            /*
+             * Dirección
+             */
             let ubicacion =
-                pedido.direccion_reparto ||
-                pedido.direccion_entrega ||
-                "";
+                pedido.direccion || "";
 
 
-            const fila = document.createElement("tr");
+            /*
+             * Crear fila
+             */
+            const fila =
+                document.createElement("tr");
 
 
             fila.innerHTML = `
 
                 <td class="producto">
-                    ${pedido.id_pedido}
+
+                    ${pedido.prenda || "Sin especificar"}
+
+                    <br>
+
+                    <small>
+                        Cantidad:
+                        ${pedido.cantidad || 1}
+                    </small>
+
                 </td>
 
 
                 <td>
-                    ${pedido.id_servicio}
+
+                    ${pedido.servicio || "Sin servicio"}
+
                 </td>
 
 
                 <td class="horario">
+
                     ${horario}
+
                 </td>
 
 
                 <td>
 
-                    <span class="estado ${estadoClase}">
-
+                    <span
+                        class="estado ${estadoClase}"
+                    >
                         ${pedido.estado}
-
                     </span>
 
                 </td>
@@ -352,7 +382,6 @@ if (!idusuario) {
 
     })
 
-
     .catch(error => {
 
         console.error(
@@ -361,16 +390,12 @@ if (!idusuario) {
         );
 
 
-        document.getElementById("pedidos").innerHTML = `
-
+        tabla.innerHTML = `
             <tr>
-
                 <td colspan="5">
                     Error al cargar los pedidos.
                 </td>
-
             </tr>
-
         `;
 
     });
@@ -381,5 +406,4 @@ if (!idusuario) {
 
 
 </body>
-
 </html>
