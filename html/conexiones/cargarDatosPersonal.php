@@ -7,7 +7,6 @@ include("conexion.php");
 header("Content-Type: application/json; charset=utf-8");
 
 
-// Verificar que haya un usuario iniciado
 if (!isset($_SESSION["id_personal"])) {
 
     echo json_encode([
