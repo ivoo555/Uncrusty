@@ -18,9 +18,6 @@ if (!isset($_GET["nombreCompleto"])) {
 $nombreCompleto = trim($_GET["nombreCompleto"]);
 
 
-// ==========================================
-// BUSCAR CLIENTE
-// ==========================================
 
 $sqlCliente = "
     SELECT
@@ -66,9 +63,6 @@ if (!$cliente) {
 }
 
 
-// ==========================================
-// BUSCAR PEDIDOS DEL CLIENTE
-// ==========================================
 
 $sqlPedidos = "
     SELECT
@@ -115,9 +109,6 @@ $resultadoPedidos = $stmtPedidos->get_result();
 $pedidos = [];
 
 
-// ==========================================
-// RECORRER PEDIDOS
-// ==========================================
 
 while ($pedido = $resultadoPedidos->fetch_assoc()) {
 
@@ -128,9 +119,6 @@ while ($pedido = $resultadoPedidos->fetch_assoc()) {
     $subtotalPedido = 0;
 
 
-    // ==========================================
-    // OBTENER DETALLES
-    // ==========================================
 
     $sqlDetalles = "
         SELECT
@@ -165,9 +153,6 @@ while ($pedido = $resultadoPedidos->fetch_assoc()) {
     $resultadoDetalles = $stmtDetalle->get_result();
 
 
-    // ==========================================
-    // CALCULAR SUBTOTALES
-    // ==========================================
 
     while ($detalle = $resultadoDetalles->fetch_assoc()) {
 
@@ -180,12 +165,12 @@ while ($pedido = $resultadoPedidos->fetch_assoc()) {
         );
 
 
-        // PRECIO × CANTIDAD
+
         $subtotalDetalle =
             $precioUnitario * $cantidad;
 
 
-        // SUMAR AL SUBTOTAL DEL PEDIDO
+    
         $subtotalPedido +=
             $subtotalDetalle;
 
@@ -212,9 +197,6 @@ while ($pedido = $resultadoPedidos->fetch_assoc()) {
     $stmtDetalle->close();
 
 
-    // ==========================================
-    // CALCULAR DESCUENTO
-    // ==========================================
 
     $porcentajeDescuento = floatval(
         $pedido["porcentaje_descuento"]
@@ -226,18 +208,12 @@ while ($pedido = $resultadoPedidos->fetch_assoc()) {
         ($porcentajeDescuento / 100);
 
 
-    // ==========================================
-    // CALCULAR TOTAL
-    // ==========================================
 
     $totalPedido =
         $subtotalPedido -
         $descuentoCalculado;
 
 
-    // ==========================================
-    // GUARDAR PEDIDO
-    // ==========================================
 
     $pedidos[] = [
 
@@ -279,9 +255,6 @@ while ($pedido = $resultadoPedidos->fetch_assoc()) {
 $stmtPedidos->close();
 
 
-// ==========================================
-// RESPUESTA
-// ==========================================
 
 echo json_encode([
 
