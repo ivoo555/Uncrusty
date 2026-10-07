@@ -1,141 +1,367 @@
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Mi historial— Lavandería</title>
-<link rel="stylesheet" href="css/styles.css">
+
+<title>Mi historial — Lavandería</title>
+
+<link rel="stylesheet" href="nuevostyle.css">
+
+<style>
+
+.estrella {
+    color: #ccc;
+    font-size: 24px;
+    cursor: pointer;
+    margin: 0 2px;
+}
+
+.estrella.activa {
+    color: #ffc107;
+}
+
+.boton-enviar {
+    margin-left: 8px;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+</style>
+
 </head>
+
 <body class="app-body">
+
 <aside class="sidebar">
-  <ul class="sidebar-nav">
-    <li><a href="inicio.html" class="sidebar-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
-      <span>Inicio</span>
-    </a></li>
-    <li><a href="catalogoServicio.html" class="sidebar-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a4 4 0 018 0v2"/></svg>
-      <span>Catálogo</span>
-    </a></li>
-    <li><a href="pedidos.html" class="sidebar-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 7L12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4"/><path d="M12 11v10"/></svg>
-      <span>Pedidos</span>
-    </a></li>
-    <li><a href="mapa.html" class="sidebar-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 21s-7-6.5-7-11a7 7 0 0114 0c0 4.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
-      <span>Mapa</span>
-    </a></li>
-    <li><a href="historial.html" class="sidebar-item active">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-      <span>Historial</span>
-    </a></li>
-  </ul>
-  <a href="login.html" class="sidebar-item sidebar-logout" aria-label="Cerrar sesión">
-    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
-  </a>
+
+<ul class="sidebar-nav">
+
+<li>
+<a href="inicio.html" class="sidebar-item">
+
+<svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+<path d="M3 11l9-8 9 8"/>
+<path d="M5 10v10h14V10"/>
+</svg>
+
+<span>Inicio</span>
+
+</a>
+</li>
+
+<li>
+<a href="catalogoServicio.html" class="sidebar-item">
+
+<svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+<rect x="3" y="7" width="18" height="13" rx="2"/>
+<path d="M8 7V5a4 4 0 018 0v2"/>
+</svg>
+
+<span>Catálogo</span>
+
+</a>
+</li>
+
+<li>
+<a href="pedidos.html" class="sidebar-item">
+
+<svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+<path d="M20 7L12 3 4 7v10l8 4-8-4V7z"/>
+<path d="M4 7l8 4 8-4"/>
+<path d="M12 11v10"/>
+</svg>
+
+<span>Pedidos</span>
+
+</a>
+</li>
+
+<li>
+<a href="mapa.html" class="sidebar-item">
+
+<svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+<path d="M12 21s-7-6.5-7-11a7 7 0 0114 0c0 4.5-7 11-7 11z"/>
+<circle cx="12" cy="10" r="2.5"/>
+</svg>
+
+<span>Mapa</span>
+
+</a>
+</li>
+
+<li>
+<a href="historial.html" class="sidebar-item active">
+
+<svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+<circle cx="12" cy="12" r="9"/>
+<path d="M12 7v5l3 3"/>
+</svg>
+
+<span>Historial</span>
+
+</a>
+</li>
+
+</ul>
+
+<a
+href="login.html"
+class="sidebar-item sidebar-logout"
+aria-label="Cerrar sesión"
+>
+
+<svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+<path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/>
+<path d="M16 17l5-5-5-5"/>
+<path d="M21 12H9"/>
+</svg>
+
+</a>
+
 </aside>
 
 <div class="pedidos-shell-outer">
-  <div class="pedidos-shell">
-    <h1>Mi Historial</h1>
 
-    <div class="tabla-pedidos">
-      <table>
-        <caption>Historial</caption>
-        <thead>
-          <tr>
-            <th>Pedido</th>
-            <th>Servicio</th>
-            <th>Fecha</th>
-            <th>Precio</th>
-            <th>Calificación</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="producto">Camisa</td>
-            <td>lavado y planchado</td>
-            <td>17/02/06</td>
-            <td>$2.200</td>
-            <td>
-              <div class="estrellas-lectura" aria-label="Calificación: 5 de 5 estrellas">
-                <span class="estrella llena1" onclick="ejecutar(this)">☆</span>
-                <span class="estrella llena2" onclick="ejecutar(this)">☆</span>
-                <span class="estrella llena3" onclick="ejecutar(this)">☆</span>
-                <span class="estrella llena4" onclick="ejecutar(this)">☆</span>
-                <span class="estrella llena5" onclick="ejecutar(this)">☆</span>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td class="producto">Traje completo</td>
-            <td>lavado en seco</td>
-            <td>17/02/06</td>
-            <td>$6.800</td>
-            <td>
-              <div class="estrellas-lectura" aria-label="Calificación: 4 de 5 estrellas">
-                <span class="estrella llena1" onclick="ejecutar(this)">☆</span>
-                <span class="estrella llena2" onclick="ejecutar(this)">☆</span>
-                <span class="estrella llena3" onclick="ejecutar(this)">☆</span>
-                <span class="estrella llena4" onclick="ejecutar(this)">☆</span>
-                <span class="estrella llena5" onclick="ejecutar(this)">☆</span>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td class="producto">Alfombra</td>
-            <td>lavado profundo</td>
-            <td>17/02/06</td>
-            <td>$4.800</td>
-            <td>
-              <div class="estrellas-lectura" aria-label="Calificación: 3 de 5 estrellas">
-                <span class="estrella llena1" onclick="ejecutar(this)">☆</span>
-                <span class="estrella llena2" onclick="ejecutar(this)">☆</span>
-                <span class="estrella llena3" onclick="ejecutar(this)">☆</span>
-                <span class="estrella llena4" onclick="ejecutar(this)">☆</span>
-                <span class="estrella llena5" onclick="ejecutar(this)">☆</span>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td class="producto">Zapatillas</td>
-            <td>limpieza y desinfección</td>
-            <td>17/02/06</td>
-            <td>$3.500</td>
-            <td>
-              <div class="estrellas-lectura" aria-label="Calificación: 5 de 5 estrellas">
-                <span class="estrella llena1" onclick="ejecutar(this)">☆</span>
-                <span class="estrella llena2" onclick="ejecutar(this)">☆</span>
-                <span class="estrella llena3" onclick="ejecutar(this)">☆</span>
-                <span class="estrella llena4" onclick="ejecutar(this)">☆</span>
-                <span class="estrella llena5" onclick="ejecutar(this)">☆</span>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+<div class="pedidos-shell">
+
+<h1>Mi Historial</h1>
+
+<div class="tabla-pedidos">
+
+<table>
+
+<caption>Historial</caption>
+
+<thead>
+
+<tr>
+
+<th>Pedido</th>
+
+<th>Servicio</th>
+
+<th>Fecha</th>
+
+<th>Precio</th>
+
+<th>Calificación</th>
+
+</tr>
+
+</thead>
+
+<tbody id="historial">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
 </div>
 
 <script>
-function ejecutar(span) {
-    let estrellas = span.parentElement.querySelectorAll(".estrella");
-    let numero = Array.from(estrellas).indexOf(span);
 
-    if (span.textContent === "☆") {
-        for (let i = 0; i <= numero; i++) {
-            estrellas[i].textContent = "★";
+let idusuario = localStorage.getItem("idusuario");
+
+console.log("ID USUARIO:", idusuario);
+
+if (idusuario) {
+
+    let url = "historial.php?idusuario=" + encodeURIComponent(idusuario);
+
+    console.log("URL:", url);
+
+    fetch(url)
+    .then(response => response.text())
+    .then(texto => {
+
+        console.log("RESPUESTA PHP:", texto);
+
+        let data;
+
+        try {
+
+            data = JSON.parse(texto);
+
+        } catch (error) {
+
+            console.error("El PHP no devolvió JSON:", texto);
+            return;
+
         }
-    } else {
-        for (let i = numero; i < estrellas.length; i++) {
-            estrellas[i].textContent = "☆";
+
+        let historial = document.getElementById("historial");
+
+        historial.innerHTML = "";
+
+        if (data.error) {
+
+            console.log("Error PHP:", data.error);
+            return;
+
         }
-    }
+
+        if (data.length === 0) {
+
+            historial.innerHTML = `
+                <tr>
+                    <td colspan="5">No hay pedidos en el historial</td>
+                </tr>
+            `;
+
+            return;
+
+        }
+
+        for (let i = 0; i < data.length; i++) {
+
+            let pedido = data[i];
+
+            let calificacion = pedido.estrellas || 0;
+
+            let fila = document.createElement("tr");
+
+            fila.innerHTML = `
+                <td>${pedido.idPedido}</td>
+
+                <td>${pedido.id_servicio}</td>
+
+                <td>${pedido.fecha_pedido}</td>
+
+                <td>${pedido.total}</td>
+
+                <td>
+
+                    <div class="calificacion" data-pedido="${pedido.idPedido}">
+
+                        ${[1,2,3,4,5].map(numero => `
+                            <span
+                                class="estrella ${numero <= calificacion ? "activa" : ""}"
+                                data-valor="${numero}"
+                            >★</span>
+                        `).join("")}
+
+                        <button
+                            class="boton-enviar"
+                            onclick="enviarCalificacion(${pedido.idPedido})"
+                        >
+                            Enviar
+                        </button>
+
+                    </div>
+
+                </td>
+            `;
+
+            historial.appendChild(fila);
+
+            let estrellas = fila.querySelectorAll(".estrella");
+
+            estrellas.forEach(estrella => {
+
+                estrella.addEventListener("click", function() {
+
+                    let valor = parseInt(this.dataset.valor);
+
+                    estrellas.forEach(otra => {
+
+                        let numero = parseInt(otra.dataset.valor);
+
+                        if (numero <= valor) {
+
+                            otra.classList.add("activa");
+
+                        } else {
+
+                            otra.classList.remove("activa");
+
+                        }
+
+                    });
+
+                    fila.querySelector(".calificacion").dataset.seleccionada = valor;
+
+                });
+
+            });
+
+        }
+
+    })
+    .catch(error => {
+
+        console.error("Error:", error);
+
+    });
+
+} else {
+
+    console.log("No existe idusuario en localStorage");
+
 }
+
+
+function enviarCalificacion(idPedido) {
+
+    let contenedor = document.querySelector(
+        `.calificacion[data-pedido="${idPedido}"]`
+    );
+
+    let estrellas = contenedor.dataset.seleccionada;
+
+    if (!estrellas) {
+
+        alert("Seleccione una calificación");
+
+        return;
+
+    }
+
+    let datos = new FormData();
+
+    datos.append("idPedido", idPedido);
+    datos.append("estrellas", estrellas);
+
+    fetch("calificar.php", {
+        method: "POST",
+        body: datos
+    })
+    .then(response => response.json())
+    .then(data => {
+
+        if (data.success) {
+
+            alert("Calificación guardada");
+
+        } else {
+
+            alert(data.error);
+
+        }
+
+    })
+    .catch(error => {
+
+        console.error("Error:", error);
+        alert("Error al enviar la calificación");
+
+    });
+
+}
+
 </script>
 
 </body>
+
 </html>
 
