@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Pedido</title>
+    <link rel="stylesheet" href="modificarPedido.css">
+</head>
+<body>
+
+    <div class="contenedor">
+
+        <h1>Modificar Pedido</h1>
+        <form id="formPedido">
+            <label>Servicio</label>
+            <select id="servicio" required>
+                <option value="" disabled selected>Seleccione un servicio</option>
+            </select>
+
+            <label>Prenda</label>
+            <input type="text" id="prenda" placeholder="Ingrese la prenda" required>
+
+            <label>Cantidad</label>
+            <input type="number" id="cantidad" min="1" placeholder="Ingrese la cantidad" required>
+
+            <label>Dirección</label>
+            <input type="text" id="direccion" placeholder="Ingrese la dirección" required>
+
+            <label>Descuento</label>
+            <input type="number" id="descuento" min="0" step="0.01" placeholder="Ingrese el descuento">
+
+            <label>Observaciones</label>
+            <textarea id="observaciones" placeholder="Ingrese observaciones"></textarea>
+
+            <div class="botones">
+                <button type="submit">Guardar Cambios</button>
+                <button type="button" id="cancelar">Cancelar</button>
+            </div>
+        </form>
+
+
+    </div>
+
+    <script src="modificarPedido.js"></script>
+
+</body>
+</html>
