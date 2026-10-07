@@ -1,230 +1,190 @@
-document.addEventListener("DOMContentLoaded", function () {
+fetch("../../conexiones/cargarDatosAsignarTareas.php")
 
-    const buscarCliente = document.getElementById("BuscarCliente");
+    .then(response => response.json())
 
-    const h1Nombre = document.getElementById("h1Nombre");
+    .then(datos => {
 
-    const h1DNI = document.getElementById("h1DNI");
+        const selectRepartidor =document.getElementById("Repartidor");
 
-    const h1PedidosTotales = document.getElementById("h1PedidosTotales");
+        const selectPedido = document.getElementById("Pedido");
 
-    const tablaPedidos = document.getElementById("tablaPedidos");
-
-    const servicioFavorito = document.getElementById("servicioFavorito");
-
-    const cantidadServicio = document.getElementById("cantidadServicio");
-
-    const prendaFavorita = document.getElementById("prendaFavorita");
-
-    const cantidadPrenda = document.getElementById("cantidadPrenda");
+        const listaRepartidores = document.getElementById("listaRepartidores");
 
 
-    buscarCliente.addEventListener("keydown", function (evento) {
+        datos.repartidores.forEach(repartidor => {
 
-        if (evento.key !== "Enter") {
-            return;
-        }
+            const opcion =document.createElement("option");
 
-        const nombre = buscarCliente.value.trim();
+            opcion.value =repartidor.id_repartidor;
 
-        if (nombre === "") {
-            alert("Ingrese el nombre del cliente.");
-            return;
-        }
+            opcion.textContent =repartidor.nombreCompleto;
 
-        fetch(
-            "../../conexiones/buscarCliente.php?nombreCompleto="
-            + encodeURIComponent(nombre)
-        )
-        .then(response => response.text())
-        .then(texto => {
+            selectRepartidor.appendChild(opcion);
 
-            console.log("Respuesta buscarCliente:", texto);
+            const fila = document.createElement("div");
 
-            let datos;
-
-            try {
-                datos = JSON.parse(texto);
-            } catch (error) {
-                console.error("La respuesta no es JSON:", texto);
-                return;
-            }
-
-            if (datos.error) {
-                alert(datos.error);
-                return;
-            }
-
-            h1Nombre.textContent = "Cliente: " + datos.cliente.nombreCompleto;
-
-            h1DNI.textContent = "DNI: " + datos.cliente.DNI;
-
-            h1PedidosTotales.textContent =  "Pedidos Totales: " + datos.pedidos_totales;
+            fila.classList.add("repartidorDisponible");
 
 
-            tablaPedidos.innerHTML = "";
+            const nombre = document.createElement("span");
+
+            nombre.textContent = repartidor.nombreCompleto;
 
 
-            if (datos.pedidos.length === 0) {
+            const boton = document.createElement("button");
 
-                tablaPedidos.innerHTML = `
-                    <tr>
-                        <td colspan="4">
-                            Este cliente no tiene pedidos.
-                        </td>
-                    </tr>
-                `;
+            boton.textContent = "Asignar";
 
-            } else {
+            boton.type = "button";
 
-                datos.pedidos.forEach(pedido => {
+            boton.addEventListener(
+                "click",
+                function() {
 
-                    const fila =
-                        document.createElement("tr");
+                    selectRepartidor.value =
+                        repartidor.id_repartidor;
 
-                    let detallesTexto = "";
-
-                    if ( pedido.detalles && pedido.detalles.length > 0) {
-                        detallesTexto =
-                            pedido.detalles
-                                .map(detalle => {
-
-                                    return (
-                                        detalle.prenda
-                                        + " - "
-                                        + detalle.servicio
-                                        + " x"
-                                        + detalle.cantidad
-                                    );
-
-                                })
-                                .join(", ");
-
-                    } else {
-
-                        detallesTexto =
-                            "Sin detalles";
-
-                    }
-
-
-                    let fecha = new Date(pedido.fecha_pedido);
-
-                    let fechaFormateada = fecha.toLocaleDateString("es-AR");
-
-
-                    let total = parseFloat(pedido.total) || 0;
-
-
-                    fila.innerHTML = `
-                        <td>${pedido.id_pedido}</td>
-
-                        <td>${detallesTexto}</td>
-
-                        <td>${fechaFormateada}</td>
-
-                        <td>$${total.toFixed(2)}</td>
-                    `;
-
-
-                    tablaPedidos.appendChild(fila);
-
-                });
-
-            }
-
-            cargarPreferencias( datos.cliente.id_cliente);
-        })
-        .catch(error => {
-
-            console.error(
-                "Error al buscar el cliente:",
-                error
+                }
             );
 
+
+            fila.appendChild(nombre);
+
+            fila.appendChild(boton);
+
+            listaRepartidores.appendChild(fila);
+
         });
+
+
+
+        datos.pedidos.forEach(pedido => {
+
+            const opcion = document.createElement("option");
+
+            opcion.value = pedido.id_pedido;
+
+            opcion.textContent = "Pedido #" + pedido.id_pedido + " - " + pedido.estado;
+
+            selectPedido.appendChild(opcion);
+
+        });
+
+    })
+
+
+    .catch(error => {
+
+        console.error(
+            "Error al cargar los datos:",
+            error
+        );
 
     });
 
 
-    function cargarPreferencias(idCliente) {
 
-        fetch(
-            "../../conexiones/obtenerPreferencia.php?id_cliente="
-            + idCliente
-        )
-        .then(response => response.text())
-        .then(texto => {
 
-            console.log(
-                "Respuesta preferencias:",
-                texto
-            );
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
 
-            let datos;
+        const form = document.querySelector("form");
 
-            try {
 
-                datos = JSON.parse(texto);
+        if (!form) {
+            return;
+        }
 
-            } catch (error) {
 
-                console.error(
-                    "La respuesta de preferencias no es JSON:",
-                    texto
-                );
+        form.addEventListener(
+            "submit",
+            async function(e) {
 
-                return;
+                e.preventDefault();
+
+
+                const submitBtn =
+                    document.getElementById("Boton");
+
+
+                submitBtn.disabled = true;
+
+                submitBtn.textContent =
+                    "Asignando...";
+
+
+                const formData =
+                    new FormData(form);
+
+
+                try {
+
+                    const url = form.getAttribute("action");
+                    const response =
+                        await fetch(
+                            url,
+                            {
+                                method: "POST",
+                                body: formData
+                            }
+                        );
+
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            "Error HTTP: " +
+                            response.status
+                        );
+
+                    }
+
+                    const resultado = await response.text();
+
+
+                    console.log(
+                        "Respuesta PHP:",
+                        resultado
+                    );
+
+
+                    alert(resultado);
+
+                    if ( resultado.includes("correctamente")) {
+
+                        form.reset();
+
+                    }
+
+                }
+
+
+                catch(error) {
+
+                    console.error(
+                        "Error al asignar la tarea:",
+                        error
+                    );
+
+
+                    alert(
+                        "Ocurrió un error al intentar asignar la tarea."
+                    );
+
+                }
+
+
+                finally {
+
+                    submitBtn.disabled = false;
+
+                    submitBtn.textContent = "Asignar Tarea";
+
+                }
 
             }
-
-
-            if (datos.error) {
-
-                console.error(datos.error);
-
-                return;
-
-            }
-
-
-            const preferencias = datos.preferencias;
-
-
-            if (!preferencias) {
-
-                servicioFavorito.textContent = "Sin datos";
-
-                cantidadServicio.textContent = "0 prendas";
-
-                prendaFavorita.textContent = "Sin datos";
-
-                cantidadPrenda.textContent = "0 prendas";
-
-                return;
-
-            }
-
-
-            servicioFavorito.textContent = preferencias.nombre_servicio || "Sin datos";
-
-            cantidadServicio.textContent = ( preferencias.cantidad_servicio || 0) + " prendas";
-
-
-            prendaFavorita.textContent =preferencias.prenda_favorita|| "Sin datos";
-
-            cantidadPrenda.textContent =( preferencias.cantidad_prenda || 0)+ " prendas";
-
-        })
-        .catch(error => {
-
-            console.error(
-                "Error al cargar las preferencias:",
-                error
-            );
-
-        });
+        );
 
     }
-
-});
+);
