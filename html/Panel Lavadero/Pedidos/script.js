@@ -71,9 +71,6 @@ document.addEventListener("DOMContentLoaded", function () {
             const servicio =
                 pedido.servicio || "Sin servicio";
 
-            const prenda =
-                pedido.prenda || "Sin prenda";
-
             const estado =
                 pedido.estado || "Sin estado";
 
@@ -88,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             fila.innerHTML = `
                 <td>${cliente}</td>
-                <td>${servicio} / ${prenda}</td>
+                <td>${servicio} 
                 <td>${estado}</td>
                 <td>${repartidor}</td>
                 <td>${direccion}</td>
