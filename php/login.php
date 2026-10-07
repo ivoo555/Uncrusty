@@ -17,6 +17,9 @@ $email = $_POST["email"];
 $password = $_POST["password"];
 
 
+/* =========================
+   BUSCAR EN CLIENTES
+   ========================= */
 
 $sql = "SELECT * FROM clientes
         WHERE email = ?
@@ -47,6 +50,8 @@ if ($resultado->num_rows > 0) {
     ?>
 
     <script>
+
+    localStorage.clear();
 
     localStorage.setItem("email", "<?php echo $email; ?>");
     localStorage.setItem("rol", "<?php echo $rol; ?>");
@@ -100,6 +105,8 @@ if ($resultado->num_rows > 0) {
 
     <script>
 
+    localStorage.clear();
+
     localStorage.setItem("email", "<?php echo $email; ?>");
     localStorage.setItem("rol", "<?php echo $rol; ?>");
 
@@ -118,9 +125,7 @@ if ($resultado->num_rows > 0) {
 }
 
 
-/* =========================
-   BUSCAR EN REPARTIDORES
-   ========================= */
+
 
 $sql = "SELECT * FROM repartidores
         WHERE email = ?
@@ -152,6 +157,8 @@ if ($resultado->num_rows > 0) {
 
     <script>
 
+    localStorage.clear();
+
     localStorage.setItem("email", "<?php echo $email; ?>");
     localStorage.setItem("rol", "<?php echo $rol; ?>");
 
@@ -168,9 +175,6 @@ if ($resultado->num_rows > 0) {
 
     exit();
 }
-
-
-
 
 ?>
 
