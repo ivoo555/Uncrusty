@@ -8,85 +8,105 @@ $conexion = new mysqli(
 );
 
 if ($conexion->connect_error) {
-
-    echo json_encode([
+    die(json_encode([
         "exito" => false,
         "mensaje" => "Error de conexion"
-    ]);
-
-    exit;
+    ]));
 }
-
-
 
 $datos = json_decode(
     file_get_contents("php://input"),
     true
 );
 
-
-
-if (
-    !isset($datos["cambios"]) ||
-    !is_array($datos["cambios"])
-) {
-
+if (!isset($datos["cambios"])) {
     echo json_encode([
         "exito" => false,
         "mensaje" => "No se recibieron cambios"
     ]);
-
     exit;
 }
 
-
-
-$sql = "UPDATE repartos
-        SET estado = ?
-        WHERE id_pedido = ?";
-
-$stmt = $conexion->prepare($sql);
-
-
-
 foreach ($datos["cambios"] as $cambio) {
 
-    $id_pedido = $cambio["id_pedido"];
-
+    $idPedido = $cambio["id_pedido"];
     $estado = $cambio["estado"];
 
+    $sql = "UPDATE repartos SET estado = ? WHERE id_pedido = ?";
 
+    $stmt = $conexion->prepare($sql);
 
-    if (
-        $estado != "pendiente" &&
-        $estado != "en proceso" &&
-        $estado != "completado"
-    ) {
-
-        continue;
+    if (!$stmt) {
+        echo json_encode([
+            "exito" => false,
+            "mensaje" => "Error al preparar la consulta"
+        ]);
+        exit;
     }
-
-
 
     $stmt->bind_param(
         "si",
         $estado,
-        $id_pedido
+        $idPedido
     );
 
-    $stmt->execute();
+    if (!$stmt->execute()) {
+        echo json_encode([
+            "exito" => false,
+            "mensaje" => "Error al modificar el pedido"
+        ]);
+        exit;
+    }
 
+    $stmt->close();
+
+
+    if ($estado == "Completado") {
+
+        $sql_historial = "
+            INSERT INTO historial (idPedido, estrellas)
+            SELECT ?, NULL
+            WHERE NOT EXISTS (
+                SELECT 1
+                FROM historial
+                WHERE idPedido = ?
+            )
+        ";
+
+        $stmt_historial =
+            $conexion->prepare($sql_historial);
+
+        if (!$stmt_historial) {
+            echo json_encode([
+                "exito" => false,
+                "mensaje" => "Error al preparar historial"
+            ]);
+            exit;
+        }
+
+        $stmt_historial->bind_param(
+            "ii",
+            $idPedido,
+            $idPedido
+        );
+
+        if (!$stmt_historial->execute()) {
+            echo json_encode([
+                "exito" => false,
+                "mensaje" => "Error al agregar al historial"
+            ]);
+            exit;
+        }
+
+        $stmt_historial->close();
+    }
 }
-
-
-$stmt->close();
-
-$conexion->close();
-
 
 echo json_encode([
     "exito" => true,
-    "mensaje" => "Cambios realizados correctamente"
+    "mensaje" => "Datos modificados correctamente"
 ]);
+
+$conexion->close();
 
 ?>
