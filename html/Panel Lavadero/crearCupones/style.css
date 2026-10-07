@@ -167,3 +167,71 @@ table{
 .sidebar-logout:hover {
   color: #A32D2D;
 }
+td.acciones {
+    position: relative;
+    text-align: center;
+    right: 25px;
+}
+
+.btnMenu {
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    top: auto;
+    left: auto;
+    background-color: transparent;
+    color: #55718D;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 25px;
+    line-height: 30px;
+}
+
+#tabla .btnMenu:hover {
+    background-color: #E2F0F8;
+    color: #24558A;
+}
+
+.menuAcciones {
+    display: none;
+    position: absolute;
+    top: 45px;
+    right: 5px;
+    width: 170px;
+    background-color: #F8FCFF;
+    border: 1px solid #B8D5E6;
+    border-radius: 7px;
+    padding: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    z-index: 100;
+}
+
+.menuAcciones.mostrar {
+    display: flex;
+    flex-direction: column;
+}
+
+.menuAcciones button {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 10px 12px;
+    background-color: transparent;
+    color: #315A7D;
+    border: none;
+    border-radius: 5px;
+    text-align: left;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.menuAcciones button:hover {
+    background-color: #E2F0F8;
+    color: #2563A6;
+}
