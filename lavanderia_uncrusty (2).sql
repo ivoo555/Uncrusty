@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-10-2026 a las 03:25:10
+-- Tiempo de generación: 07-10-2026 a las 03:13:16
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -62,7 +62,7 @@ CREATE TABLE `cupones` (
 --
 
 INSERT INTO `cupones` (`id_cupon`, `codigo`, `valor_descuento`, `fecha_inicio`, `fecha_vencimiento`, `estado`) VALUES
-(1, 'VERANO2027', 20.00, '2026-09-29', '2026-09-30', 'Activo'),
+(1, 'VERANO2026', 20.00, '2026-09-29', '2026-09-30', 'Activo'),
 (2, 'HOLA123', 21.00, '2026-09-29', '2026-10-01', 'Activo'),
 (3, 'ELIASAPPAP', 20.00, '2026-10-06', '2026-10-28', 'Inactivo');
 
@@ -87,8 +87,7 @@ CREATE TABLE `detalle_pedido` (
 --
 
 INSERT INTO `detalle_pedido` (`id_detalle`, `id_pedido`, `id_servicio`, `prenda`, `cantidad`, `precio_unitario`, `subtotal`) VALUES
-(2, 1, 3, 'remera', 5, 2000.00, 10000.00),
-(3, 2, 2, 'camisa', 5, 2000.00, 10000.00);
+(2, 1, 3, 'remera', 5, 2000.00, 10000.00);
 
 -- --------------------------------------------------------
 
@@ -114,6 +113,13 @@ CREATE TABLE `facturas` (
   `fecha_vencimiento_cae` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `facturas`
+--
+
+INSERT INTO `facturas` (`id_factura`, `id_pedido`, `tipo_comprobante`, `numero_factura`, `fecha_emision`, `nombre_razon_social`, `identificacion`, `metodo_pago`, `subtotal`, `descuento`, `costo_envio`, `total`, `estado`, `cae`, `fecha_vencimiento_cae`) VALUES
+(1, 1, 'Factura B', '0001-00000001', '2026-10-05 22:51:20', 'Gabriel Huallata', '48716983', 'Tarjeta de débito', 10000.00, 0.00, 0.00, 10000.00, 'Emitida', '48560186367960', '2026-10-16');
+
 -- --------------------------------------------------------
 
 --
@@ -125,8 +131,8 @@ CREATE TABLE `pedidos` (
   `id_cliente` int(11) NOT NULL,
   `fecha_pedido` datetime NOT NULL,
   `direccion` varchar(150) NOT NULL,
-  `estado` enum('Pendiente','En recoleccion','En limpieza','Listo para entrega','Entregado') NOT NULL DEFAULT 'Pendiente',
-  `descuento` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `estado` enum('Pendiente','En Recolección','En Limpieza','Listo para Entrega','Entregado') DEFAULT 'Pendiente',
+  `id_descuento` int(11) DEFAULT NULL,
   `observaciones` text DEFAULT NULL,
   `id_servicio` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -135,9 +141,8 @@ CREATE TABLE `pedidos` (
 -- Volcado de datos para la tabla `pedidos`
 --
 
-INSERT INTO `pedidos` (`id_pedido`, `id_cliente`, `fecha_pedido`, `direccion`, `estado`, `descuento`, `observaciones`, `id_servicio`) VALUES
-(1, 1, '2026-09-28 21:30:00', 'remedios 2952', 'Pendiente', 0.00, 'Ninguna', 3),
-(2, 1, '2026-05-20 14:30:00', 'Remedios 2952', 'Pendiente', 0.00, '', 2);
+INSERT INTO `pedidos` (`id_pedido`, `id_cliente`, `fecha_pedido`, `direccion`, `estado`, `id_descuento`, `observaciones`, `id_servicio`) VALUES
+(1, 1, '2026-09-28 21:30:00', 'remedios 2952', 'En Limpieza', 1, 'Ninguna', 3);
 
 -- --------------------------------------------------------
 
@@ -173,7 +178,7 @@ CREATE TABLE `preferencias` (
 --
 
 INSERT INTO `preferencias` (`id_preferencia`, `id_cliente`, `servicio_favorito`, `prenda_favorita`, `cantidad_servicio`, `cantidad_prenda`) VALUES
-(1, 1, 3, 'camisa', 5, 5);
+(1, 1, 3, 'remera', 5, 5);
 
 -- --------------------------------------------------------
 
@@ -223,8 +228,9 @@ INSERT INTO `repartos` (`id_reparto`, `id_pedido`, `id_repartidor`, `tipo`, `dir
 (2, 1, 1, 'Entrega', 'remedios 2952', '2026-09-30 02:40:00', 'Pendiente', NULL),
 (3, 1, 1, 'Entrega', 'remedios 2952', '2026-10-01 09:15:00', 'Pendiente', NULL),
 (4, 1, 1, 'Entrega', 'remedios 2952', '2026-10-05 14:51:00', 'Pendiente', ''),
-(5, 2, 1, 'Entrega', 'Remedios 2952', '2026-10-06 22:26:00', 'Pendiente', ''),
-(6, 1, 1, 'Entrega', 'Remedios 2952', '2026-10-06 20:31:00', 'Pendiente', '');
+(6, 1, 1, 'Entrega', 'Remedios 2952', '2026-10-06 20:31:00', 'Pendiente', ''),
+(7, 1, 1, 'Entrega', 'Remedios 2952', '2026-10-07 02:23:00', 'Pendiente', ''),
+(9, 1, 1, 'Entrega', 'remedios 2952', '2026-10-15 21:57:00', 'Pendiente', '');
 
 -- --------------------------------------------------------
 
@@ -271,7 +277,7 @@ CREATE TABLE `stock` (
 --
 
 INSERT INTO `stock` (`id_producto`, `producto`, `marca`, `cantidad_actual`, `cantidad_minima`, `estado`) VALUES
-(1, 'Detergnete', 'ALA', 10, 5, '');
+(3, 'Detergente', 'ALA', 12, 9, 'Disponible');
 
 --
 -- Índices para tablas volcadas
@@ -313,7 +319,8 @@ ALTER TABLE `facturas`
 ALTER TABLE `pedidos`
   ADD PRIMARY KEY (`id_pedido`),
   ADD KEY `id_cliente` (`id_cliente`),
-  ADD KEY `id_servicios` (`id_servicio`);
+  ADD KEY `id_servicios` (`id_servicio`),
+  ADD KEY `fk_pedidos_cupon` (`id_descuento`);
 
 --
 -- Indices de la tabla `personallavanderia`
@@ -383,7 +390,7 @@ ALTER TABLE `detalle_pedido`
 -- AUTO_INCREMENT de la tabla `facturas`
 --
 ALTER TABLE `facturas`
-  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
@@ -413,7 +420,7 @@ ALTER TABLE `repartidores`
 -- AUTO_INCREMENT de la tabla `repartos`
 --
 ALTER TABLE `repartos`
-  MODIFY `id_reparto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_reparto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `servicios`
@@ -425,7 +432,7 @@ ALTER TABLE `servicios`
 -- AUTO_INCREMENT de la tabla `stock`
 --
 ALTER TABLE `stock`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
@@ -448,6 +455,7 @@ ALTER TABLE `facturas`
 -- Filtros para la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
+  ADD CONSTRAINT `fk_pedidos_cupon` FOREIGN KEY (`id_descuento`) REFERENCES `cupones` (`id_cupon`),
   ADD CONSTRAINT `id_servicios` FOREIGN KEY (`id_servicio`) REFERENCES `servicios` (`id_servicio`),
   ADD CONSTRAINT `pedidos_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`);
 
