@@ -1,130 +1,265 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Facturar Pedido</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
     <div id="marcoFactura">
+
         <h1 id="Titulo">Emisión De Factura electrónica</h1>
+
         <p id="pPedido">ID Pedido:</p>
-        <input type="text" name="" id="inputPedido">
-        <p id="pComprobante">Tipo De Comprobante: </p>
-        <select name="" id="selectComprobante">
-            
-            <option value="facturaA">Factura A</option>
-            <option value="FacturaB">Factura B</option>
-            <option value="FacturaC">Factura C</option>
+
+        <select id="inputPedido">
         </select>
-        <p id="pNombre">Nombre/Razon Social: </p>
-        <input type="text" name="" id="inputNombre">
+
+        <p id="pComprobante">Tipo De Comprobante:</p>
+
+        <select id="selectComprobante">
+            <option value="Factura A">Factura A</option>
+            <option value="Factura B">Factura B</option>
+            <option value="Factura C">Factura C</option>
+        </select>
+
+        <p id="pNombre">Nombre/Razon Social:</p>
+
+        <input type="text" id="inputNombre">
+
         <p id="pIdentificacion">CUIT/CUIL/DNI:</p>
-        <input type="number" name="" id="inputIdentificacion">  
+
+        <input type="text" id="inputIdentificacion">
+
         <p id="pDetalle">Detalle</p>
+
         <div id="marcoTabla">
+
             <div id="Tabla">
+
                 <table>
-                    <th>Servicio/Prenda</th>
-                    <th>Cantidad</th>
-                    <th>Precio Unitario</th>
-                    <th>Subtotal</th>
+
+                    <thead>
+                        <tr>
+                            <th>Servicio/Prenda</th>
+                            <th>Cantidad</th>
+                            <th>Precio Unitario</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tablaDetalle">
+                    </tbody>
+
                 </table>
+
             </div>
+
         </div>
+
     </div>
+
+
     <div id="marcoResumen">
+
         <h1 id="Titulo2">Resumen Final</h1>
-        <p id="pMetodoPago">Metodos De Pago</p>
-        <select name="" id="selectMetodoPago"></select>
-        <p id="pCupon">Cupon de descuento aplicado</p>
-        <input type="text" name="" id="inputCupon">
+
+        <p id="pMetodoPago">Método de Pago</p>
+
+        <select id="selectMetodoPago">
+
+            <option value="">Seleccione un método de pago</option>
+
+            <option value="Efectivo">
+                Efectivo
+            </option>
+
+            <option value="Tarjeta de débito">
+                Tarjeta de débito
+            </option>
+
+            <option value="Tarjeta de crédito">
+                Tarjeta de crédito
+            </option>
+
+            <option value="Transferencia">
+                Transferencia
+            </option>
+
+            <option value="Mercado Pago">
+                Mercado Pago
+            </option>
+
+        </select>
+
+
+        <!-- El cupón ya NO se selecciona manualmente -->
+
+
+
         <div id="marcoTotal">
-            <p id="pServicios">Subtotal Servicios: </p>
-            <p id="pDescuento">Descuento Aplicado: </p>
-            <p id="pEnvio">Costo Envio: </p>
-            <h2 id="h2Total">Total: </h2>
+
+            <p id="pServicios">
+                Subtotal Servicios: $0.00
+            </p>
+
+            <p id="pDescuento">Descuento Aplicado: $0.00</p>
+
+            <p id="pEnvio">
+                Costo Envío: $0.00
+            </p>
+
+            <h2 id="h2Total">
+                Total: $0.00
+            </h2>
+
         </div>
-        <button id="btnFactura">Generar Factura en ARCA</button>
+
+
+        <button id="btnFactura">
+            Generar Factura en ARCA
+        </button>
+
     </div>
-    <aside class="sidebar"> 
+
+
+    <aside class="sidebar">
+
         <ul class="sidebar-nav">
-            <li> 
-                <a href="../AsignarTarea/index.html" class="sidebar-item"> 
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"> 
-                <path d="M9 11l3 3L20 6"/> 
-                <path d="M4 4h6"/> 
-                <path d="M4 9h4"/> 
-                <path d="M4 14h4"/> 
-                <path d="M4 19h16"/> 
-                </svg> 
-                <span>Asignar Tarea</span> </a> </li> 
-            <li> 
-                <a href="../Pedidos/index.html" class="sidebar-item"> 
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"> 
-                <path d="M20 7L12 3 4 7v10l8 4 8-4V7z"/> 
-                <path d="M4 7l8 4 8-4"/> 
-                <path d="M12 11v10"/> 
-                </svg> 
-                <span>Gestionar Pedido</span> </a> 
-            </li> 
-            <li> 
-                <a href="../Clientes/index.html" class="sidebar-item"> 
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"> 
-                <circle cx="12" cy="8" r="4"/> 
-                <path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/>
-                </svg>
-                <span>Historial Cliente</span> 
-                </a> 
+
+            <li>
+                <a href="../AsignarTarea/index.html" class="sidebar-item">
+
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <path d="M9 11l3 3L20 6"/>
+                        <path d="M4 4h6"/>
+                        <path d="M4 9h4"/>
+                        <path d="M4 14h4"/>
+                        <path d="M4 19h16"/>
+                    </svg>
+
+                    <span>Asignar Tarea</span>
+
+                </a>
             </li>
+
+
+            <li>
+                <a href="../Pedidos/index.html" class="sidebar-item">
+
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <path d="M20 7L12 3 4 7v10l8 4 8-4V7z"/>
+                        <path d="M4 7l8 4 8-4"/>
+                        <path d="M12 11v10"/>
+                    </svg>
+
+                    <span>Gestionar Pedido</span>
+
+                </a>
+            </li>
+
+
+            <li>
+                <a href="../Clientes/index.html" class="sidebar-item">
+
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <circle cx="12" cy="8" r="4"/>
+                        <path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/>
+                    </svg>
+
+                    <span>Historial Cliente</span>
+
+                </a>
+            </li>
+
+
             <li>
                 <a href="../controlStock/index.html" class="sidebar-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"> 
-                <path d="M4 4h16v16H4z"/> 
-                <path d="M8 8h8"/> 
-                <path d="M8 12h8"/> 
-                <path d="M8 16h5"/> 
-                </svg> 
-                <span>Control Stock</span> </a> 
-            </li> 
-            <li> 
-                <a href="../crearCupones/index.html" class="sidebar-item"> 
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"> 
-                <path d="M20 12a2 2 0 010-4V5a2 2 0 00-2-2H6a2 2 0 00-2 2v3a2 2 0 010 4v3a2 2 0 002 2h12a2 2 0 002-2v-3a2 2 0 010-4z"/> 
-                <path d="M9 8h6"/> 
-                <path d="M9 16h6"/> 
-                </svg> 
-                <span>Crear Cupón</span> </a> 
-            </li> 
-            <li> 
-                <a href="../facturarPedido/index.html" class="sidebar-item active"> 
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"> 
-                <path d="M6 2h12v20l-3-2-3 2-3-2-3 2V2z"/> 
-                <path d="M9 7h6"/>
-                <path d="M9 11h6"/> 
-                <path d="M9 15h4"/> 
-                </svg> 
-                <span>Facturar Pedido</span> 
-                </a> 
-            </li> 
+
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <path d="M4 4h16v16H4z"/>
+                        <path d="M8 8h8"/>
+                        <path d="M8 12h8"/>
+                        <path d="M8 16h5"/>
+                    </svg>
+
+                    <span>Control Stock</span>
+
+                </a>
+            </li>
+
+
             <li>
-                <a href="../agregarServicio/index.html" class="sidebar-item ">
+                <a href="../crearCupones/index.html" class="sidebar-item">
+
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <path d="M20 12a2 2 0 010-4V5a2 2 0 00-2-2H6a2 2 0 00-2 2v3a2 2 0 010 4v3a2 2 0 002 2h12a2 2 0 002-2v-3a2 2 0 010-4z"/>
+                        <path d="M9 8h6"/>
+                        <path d="M9 16h6"/>
+                    </svg>
+
+                    <span>Crear Cupón</span>
+
+                </a>
+            </li>
+
+
+            <li>
+                <a href="../facturarPedido/index.html" class="sidebar-item active">
+
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <path d="M6 2h12v20l-3-2-3 2-3-2-3 2V2z"/>
+                        <path d="M9 7h6"/>
+                        <path d="M9 11h6"/>
+                        <path d="M9 15h4"/>
+                    </svg>
+
+                    <span>Facturar Pedido</span>
+
+                </a>
+            </li>
+
+
+            <li>
+                <a href="../agregarServicio/index.html" class="sidebar-item">
+
                     <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
                         <circle cx="12" cy="12" r="9"/>
                         <path d="M12 8v8"/>
                         <path d="M8 12h8"/>
                     </svg>
+
                     <span>Agregar Servicio</span>
+
                 </a>
             </li>
-        </ul> 
-        <a href="login.html" class="sidebar-item sidebar-logout" aria-label="Cerrar sesión"> 
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"> 
-        <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/> 
-        <path d="M16 17l5-5-5-5"/> 
-        <path d="M21 12H9"/> </svg> 
-        </a> 
+
+        </ul>
+
+
+        <a href="login.html"
+           class="sidebar-item sidebar-logout"
+           aria-label="Cerrar sesión">
+
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+
+                <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/>
+                <path d="M16 17l5-5-5-5"/>
+                <path d="M21 12H9"/>
+
+            </svg>
+
+        </a>
+
     </aside>
+
+
+    <script src="script.js"></script>
+
 </body>
+
 </html>
