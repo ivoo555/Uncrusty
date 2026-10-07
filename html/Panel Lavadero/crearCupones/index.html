@@ -18,18 +18,40 @@
         <button id="btnCrearCupon">Crear Cupón</button>
     </div>
     <div id="MarcoTabla">
-        <h1 id="marcoTitulo">CUPONES ACTIVOS</h1>
-       <div id="Tabla">
+
+        <h1 id="marcoTitulo">
+            CUPONES ACTIVOS
+        </h1>
+
+        <div id="Tabla">
+
             <table>
-                    <th>ID Cupon</th>
-                    <th>Codigo</th>
-                    <th>Valor</th>
-                    <th>Vencimiento</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID Cupón</th>
+                        <th>Código</th>
+                        <th>Valor</th>
+                        <th>Vencimiento</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tablaCupones">
+
+                </tbody>
+
             </table>
-       </div>
+
+        </div>
+
     </div>
+
     <aside class="sidebar"> 
         <ul class="sidebar-nav">
             <li> 
@@ -108,5 +130,6 @@
         <path d="M21 12H9"/> </svg> 
         </a> 
     </aside>
+    <script src="script.js"></script>
 </body>
 </html>
