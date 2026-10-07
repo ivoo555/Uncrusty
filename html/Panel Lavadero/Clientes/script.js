@@ -1,294 +1,230 @@
-<!DOCTYPE html>
+document.addEventListener("DOMContentLoaded", function () {
 
-<html lang="es">
+    const buscarCliente = document.getElementById("BuscarCliente");
 
-<head>
+    const h1Nombre = document.getElementById("h1Nombre");
 
-    <meta charset="UTF-8">
+    const h1DNI = document.getElementById("h1DNI");
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    const h1PedidosTotales = document.getElementById("h1PedidosTotales");
 
-    <title>Historial Cliente</title>
+    const tablaPedidos = document.getElementById("tablaPedidos");
 
-    <link rel="stylesheet" href="style.css">
+    const servicioFavorito = document.getElementById("servicioFavorito");
 
-</head>
+    const cantidadServicio = document.getElementById("cantidadServicio");
 
-<body>
+    const prendaFavorita = document.getElementById("prendaFavorita");
 
-    <div id="TarjetaCliente">
-
-        <div id="ParteSuperior">
-            <h1>Informacion Cliente</h1>
-        </div>
-
-        <h1 id="h1Nombre">Cliente:</h1>
-
-        <h1 id="h1DNI">DNI:</h1>
-
-        <h1 id="h1PedidosTotales">Pedidos Totales:</h1>
-
-    </div>
+    const cantidadPrenda = document.getElementById("cantidadPrenda");
 
 
-    <h1 id="Titulo">Panel Historial Cliente</h1>
+    buscarCliente.addEventListener("keydown", function (evento) {
+
+        if (evento.key !== "Enter") {
+            return;
+        }
+
+        const nombre = buscarCliente.value.trim();
+
+        if (nombre === "") {
+            alert("Ingrese el nombre del cliente.");
+            return;
+        }
+
+        fetch(
+            "../../conexiones/buscarCliente.php?nombreCompleto="
+            + encodeURIComponent(nombre)
+        )
+        .then(response => response.text())
+        .then(texto => {
+
+            console.log("Respuesta buscarCliente:", texto);
+
+            let datos;
+
+            try {
+                datos = JSON.parse(texto);
+            } catch (error) {
+                console.error("La respuesta no es JSON:", texto);
+                return;
+            }
+
+            if (datos.error) {
+                alert(datos.error);
+                return;
+            }
+
+            h1Nombre.textContent = "Cliente: " + datos.cliente.nombreCompleto;
+
+            h1DNI.textContent = "DNI: " + datos.cliente.DNI;
+
+            h1PedidosTotales.textContent =  "Pedidos Totales: " + datos.pedidos_totales;
 
 
-    <input
-        type="text"
-        name="nombreCompleto"
-        placeholder="Ingrese nombre de Cliente"
-        id="BuscarCliente"
-    >
+            tablaPedidos.innerHTML = "";
 
 
-    <div id="MarcoPedidos">
+            if (datos.pedidos.length === 0) {
 
-        <div id="MarcoTitulo">
-            <h1>Historial de Cliente</h1>
-        </div>
-
-        <div id="tabla">
-
-            <table>
-
-                <thead>
-
+                tablaPedidos.innerHTML = `
                     <tr>
-                        <th>Id Pedido</th>
-                        <th>Prenda/Servicio</th>
-                        <th>Fecha</th>
-                        <th>Total Pagado</th>
+                        <td colspan="4">
+                            Este cliente no tiene pedidos.
+                        </td>
                     </tr>
+                `;
 
-                </thead>
+            } else {
 
-                <tbody id="tablaPedidos">
-                  
-                </tbody>
+                datos.pedidos.forEach(pedido => {
 
-            </table>
+                    const fila =
+                        document.createElement("tr");
 
-        </div>
+                    let detallesTexto = "";
 
-    </div>
+                    if ( pedido.detalles && pedido.detalles.length > 0) {
+                        detallesTexto =
+                            pedido.detalles
+                                .map(detalle => {
 
+                                    return (
+                                        detalle.prenda
+                                        + " - "
+                                        + detalle.servicio
+                                        + " x"
+                                        + detalle.cantidad
+                                    );
 
-    <div id="MarcoPreferencias">
+                                })
+                                .join(", ");
 
-    <div id="ParteSuperiorPreferencias">
-        <h1>Preferencias</h1>
-    </div>
+                    } else {
 
-    <div id="ContenidoPreferencias">
+                        detallesTexto =
+                            "Sin detalles";
 
-        <div class="PreferenciaItem">
+                    }
 
-            <h2>Servicio más utilizado</h2>
 
-            <p id="servicioFavorito">
-                Sin datos
-            </p>
+                    let fecha = new Date(pedido.fecha_pedido);
 
-            <span id="cantidadServicio">
-                0 prendas
-            </span>
+                    let fechaFormateada = fecha.toLocaleDateString("es-AR");
 
-        </div>
 
+                    let total = parseFloat(pedido.total) || 0;
 
-        <div class="PreferenciaItem">
 
-            <h2>Prenda más solicitada</h2>
+                    fila.innerHTML = `
+                        <td>${pedido.id_pedido}</td>
 
-            <p id="prendaFavorita">
-                Sin datos
-            </p>
+                        <td>${detallesTexto}</td>
 
-            <span id="cantidadPrenda">
-                0 prendas
-            </span>
+                        <td>${fechaFormateada}</td>
 
-        </div>
+                        <td>$${total.toFixed(2)}</td>
+                    `;
 
-    </div>
 
-</div>
+                    tablaPedidos.appendChild(fila);
 
+                });
 
-    <aside class="sidebar">
+            }
 
-        <ul class="sidebar-nav">
+            cargarPreferencias( datos.cliente.id_cliente);
+        })
+        .catch(error => {
 
-            <li>
+            console.error(
+                "Error al buscar el cliente:",
+                error
+            );
 
-                <a href="../AsignarTarea/index.html" class="sidebar-item">
+        });
 
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+    });
 
-                        <path d="M9 11l3 3L20 6"/>
-                        <path d="M4 4h6"/>
-                        <path d="M4 9h4"/>
-                        <path d="M4 14h4"/>
-                        <path d="M4 19h16"/>
 
-                    </svg>
+    function cargarPreferencias(idCliente) {
 
-                    <span>Asignar Tarea</span>
+        fetch(
+            "../../conexiones/obtenerPreferencia.php?id_cliente="
+            + idCliente
+        )
+        .then(response => response.text())
+        .then(texto => {
 
-                </a>
+            console.log(
+                "Respuesta preferencias:",
+                texto
+            );
 
-            </li>
+            let datos;
 
+            try {
 
-            <li>
+                datos = JSON.parse(texto);
 
-                <a href="../Pedidos/index.html" class="sidebar-item">
+            } catch (error) {
 
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                console.error(
+                    "La respuesta de preferencias no es JSON:",
+                    texto
+                );
 
-                        <path d="M20 7L12 3 4 7v10l8 4 8-4V7z"/>
-                        <path d="M4 7l8 4 8-4"/>
-                        <path d="M12 11v10"/>
+                return;
 
-                    </svg>
+            }
 
-                    <span>Gestionar Pedido</span>
 
-                </a>
+            if (datos.error) {
 
-            </li>
+                console.error(datos.error);
 
+                return;
 
-            <li>
+            }
 
-                <a href="../Clientes/index.html" class="sidebar-item active">
 
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+            const preferencias = datos.preferencias;
 
-                        <circle cx="12" cy="8" r="4"/>
-                        <path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/>
 
-                    </svg>
+            if (!preferencias) {
 
-                    <span>Historial Cliente</span>
+                servicioFavorito.textContent = "Sin datos";
 
-                </a>
+                cantidadServicio.textContent = "0 prendas";
 
-            </li>
+                prendaFavorita.textContent = "Sin datos";
 
+                cantidadPrenda.textContent = "0 prendas";
 
-            <li>
+                return;
 
-                <a href="../controlStock/index.html" class="sidebar-item">
+            }
 
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
 
-                        <path d="M4 4h16v16H4z"/>
-                        <path d="M8 8h8"/>
-                        <path d="M8 12h8"/>
-                        <path d="M8 16h5"/>
+            servicioFavorito.textContent = preferencias.nombre_servicio || "Sin datos";
 
-                    </svg>
+            cantidadServicio.textContent = ( preferencias.cantidad_servicio || 0) + " prendas";
 
-                    <span>Control Stock</span>
 
-                </a>
+            prendaFavorita.textContent =preferencias.prenda_favorita|| "Sin datos";
 
-            </li>
+            cantidadPrenda.textContent =( preferencias.cantidad_prenda || 0)+ " prendas";
 
+        })
+        .catch(error => {
 
-            <li>
+            console.error(
+                "Error al cargar las preferencias:",
+                error
+            );
 
-                <a href="../crearCupones/index.html" class="sidebar-item">
+        });
 
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+    }
 
-                        <path d="M20 12a2 2 0 010-4V5a2 2 0 00-2-2H6a2 2 0 00-2 2v3a2 2 0 010 4v3a2 2 0 002 2h12a2 2 0 002-2v-3a2 2 0 010-4z"/>
-                        <path d="M9 8h6"/>
-                        <path d="M9 16h6"/>
-
-                    </svg>
-
-                    <span>Crear Cupón</span>
-
-                </a>
-
-            </li>
-
-
-            <li>
-
-                <a href="../facturarPedido/index.html" class="sidebar-item">
-
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-
-                        <path d="M6 2h12v20l-3-2-3 2-3-2-3 2V2z"/>
-                        <path d="M9 7h6"/>
-                        <path d="M9 11h6"/>
-                        <path d="M9 15h4"/>
-
-                    </svg>
-
-                    <span>Facturar Pedido</span>
-
-                </a>
-
-            </li>
-
-
-            <li>
-
-                <a href="../agregarServicio/index.html" class="sidebar-item">
-
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-
-                        <circle cx="12" cy="12" r="9"/>
-                        <path d="M12 8v8"/>
-                        <path d="M8 12h8"/>
-
-                    </svg>
-
-                    <span>Agregar Servicio</span>
-
-                </a>
-
-            </li>
-            <li>
-                <a href="../misDatos/misDatos.html" class="sidebar-item">
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-                        <circle cx="12" cy="8" r="4"/>
-                        <path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/>
-                    </svg>
-
-                    <span>Mis Datos</span>
-                </a>
-            </li>
-
-        </ul>
-
-
-        <a
-            href="login.html"
-            class="sidebar-item sidebar-logout"
-            aria-label="Cerrar sesión"
-        >
-
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-
-                <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/>
-                <path d="M16 17l5-5-5-5"/>
-                <path d="M21 12H9"/>
-
-            </svg>
-
-        </a>
-
-    </aside>
-
-
-    <script src="script.js"></script>
-
-</body>
-
-</html>
+});
