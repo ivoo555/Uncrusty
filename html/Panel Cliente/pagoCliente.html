@@ -1,126 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+
 <head>
+
     <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Factura</title>
 
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="nuevostyle.css">
+
 </head>
 
 <body>
 
-    <div class="cardPago">
-        <p class="subtitle">
-            Seleccione un dia para que pasen a buscar su pedido
-        </p>
-            
-            <div class="textPago">
-                <h2>Elija una fecha</h2>
-                <input
-                    type="date"
-                    name="fecha"
-                    required
-                >
-            </div>
+<div class="cardPago">
 
-            <div class="seccion">
+    <p class="subtitle">
+        Seleccione un día para que pasen a buscar su pedido
+    </p>
 
-                <h2> Elija un horario</h2>
+    <div class="textPago">
 
-                <div class="horarios">
+        <h2>Elija una fecha</h2>
 
-                    <label>
-                        <input type="radio" name="hora" value="08:00" required>
-                        <span>08:00</span>
-                    </label>
+        <input
+            type="date"
+            id="fecha"
+            name="fecha"
+            required>
 
-                    <label>
-                        <input type="radio" name="hora" value="08:30">
-                        <span>08:30</span>
-                    </label>
-
-                    <label>
-                        <input type="radio" name="hora" value="9:00">
-                        <span>09:00</span>
-                    </label>
-
-                    <label>
-                        <input type="radio" name="hora" value="9:30">
-                        <span>09:30</span>
-                    </label>
-
-                    <label>
-                        <input type="radio" name="hora" value="10:00">
-                        <span>10:00</span>
-                    </label>
-
-                    <label>
-                        <input type="radio" name="hora" value="10:30">
-                        <span>10:30</span>
-                    </label>
-
-                    <label>
-                        <input type="radio" name="hora" value="11:00">
-                        <span>11:00</span>
-                    </label>
-
-                    <label>
-                        <input type="radio" name="hora" value="11:30">
-                        <span>11:30</span>
-                    </label>
-
-                    <label>
-                        <input type="radio" name="hora" value="12:00">
-                        <span>12:00</span>
-                    </label>
-
-                    <label>
-                        <input type="radio" name="hora" value="12:30">
-                        <span>12:30</span>
-                    </label>
-
-                    <label>
-                        <input type="radio" name="hora" value="13:00">
-                        <span>13:00</span>
-                    </label>
-
-                    <label>
-                        <input type="radio" name="hora" value="13:30">
-                        <span>13:30</span>
-                    </label>
-
-                    <label>
-                        <input type="radio" name="hora" value="14:00">
-                        <span>14:00</span>
-                    </label>
-
-                    <label>
-                        <input type="radio" name="hora" value="14:30">
-                        <span>14:30</span>
-                    </label>
-
-                    <label>
-                        <input type="radio" name="hora" value="15:00">
-                        <span>15:00</span>
-                    </label>
-
-                    <label>
-                        <input type="radio" name="hora" value="15:30">
-                        <span>15:30</span>
-                    </label>
-
-                </div>
-
-            </div>
-
-                <div class ="pagoTotal">
-                    <h1 class ="pagoTotal" id ="precio"> Total $$$ </h1>
-        <!aca iria el php para que muestre el precio desed la base de datos>
-        </div>
-
-        <div class = "continuarPago">
-            <a href = "confirmacionCliente.html">
-            <button class = "btn-primary">continuar</button>
-            </a>
-        </div>
     </div>
+
+    <div class="seccion">
+
+        <h2>Elija un horario</h2>
+
+        <div class="horarios">
+
+            <label><input type="radio" name="hora" value="08:00" required><span>08:00</span></label>
+            <label><input type="radio" name="hora" value="08:30"><span>08:30</span></label>
+            <label><input type="radio" name="hora" value="09:00"><span>09:00</span></label>
+            <label><input type="radio" name="hora" value="09:30"><span>09:30</span></label>
+            <label><input type="radio" name="hora" value="10:00"><span>10:00</span></label>
+            <label><input type="radio" name="hora" value="10:30"><span>10:30</span></label>
+            <label><input type="radio" name="hora" value="11:00"><span>11:00</span></label>
+            <label><input type="radio" name="hora" value="11:30"><span>11:30</span></label>
+            <label><input type="radio" name="hora" value="12:00"><span>12:00</span></label>
+            <label><input type="radio" name="hora" value="12:30"><span>12:30</span></label>
+            <label><input type="radio" name="hora" value="13:00"><span>13:00</span></label>
+            <label><input type="radio" name="hora" value="13:30"><span>13:30</span></label>
+            <label><input type="radio" name="hora" value="14:00"><span>14:00</span></label>
+            <label><input type="radio" name="hora" value="14:30"><span>14:30</span></label>
+            <label><input type="radio" name="hora" value="15:00"><span>15:00</span></label>
+            <label><input type="radio" name="hora" value="15:30"><span>15:30</span></label>
+
+        </div>
+
+    </div>
+
+    <div class="textPago">
+
+        <h2>Dirección de entrega</h2>
+
+        <input
+            type="text"
+            id="direccion"
+            name="direccion"
+            placeholder="Ingrese su dirección"
+            required>
+
+    </div>
+
+    <div class="textPago">
+
+        <h2>Cupón de descuento</h2>
+
+        <input
+            type="text"
+            id="cupon"
+            name="cupon"
+            placeholder="Ingrese su cupón">
+
+        <p id="mensaje-cupon"></p>
+
+    </div>
+
+    <div class="pagoTotal">
+
+        <h1 id="precio">
+            Total $0
+        </h1>
+
+    </div>
+
+    <p id="mensaje"></p>
+
+    <div class="continuarPago">
+
+        <button
+            type="button"
+            class="btn-primary"
+            id="continuar">
+
+            Continuar
+
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+let pedido =
+    JSON.parse(localStorage.getItem("pedido")) || [];
+
+let subtotal = 0;
+
+pedido.forEach(producto => {
+
+    let cantidad =
+        Number(producto.cantidad) || 1;
+
+    let precio =
+        Number(producto.precio) || 0;
+
+    subtotal += precio * cantidad;
+
+});
+
+document.getElementById("precio").textContent =
+    "Total $" +
+    subtotal.toLocaleString("es-AR");
+
+const fechaInput =
+    document.getElementById("fecha");
+
+let hoy = new Date();
+
+hoy.setDate(
+    hoy.getDate() + 1
+);
+
+let año =
+    hoy.getFullYear();
+
+let mes =
+    String(hoy.getMonth() + 1).padStart(2, "0");
+
+let dia =
+    String(hoy.getDate()).padStart(2, "0");
+
+fechaInput.min =
+    año + "-" + mes + "-" + dia;
+
+document
+    .getElementById("continuar")
+    .addEventListener("click", function() {
+
+        const idusuario =
+            localStorage.getItem("idusuario");
+
+        const fecha =
+            document
+                .getElementById("fecha")
+                .value;
+
+        const direccion =
+            document
+                .getElementById("direccion")
+                .value
+                .trim();
+
+        const cupon =
+            document
+                .getElementById("cupon")
+                .value
+                .trim();
+
+        const horaSeleccionada =
+            document.querySelector(
+                'input[name="hora"]:checked'
+            );
+
+        const mensaje =
+            document.getElementById("mensaje");
+
+        mensaje.textContent = "";
+
+        if (!idusuario) {
+
+            mensaje.textContent =
+                "No se encontró el usuario.";
+
+            return;
+
+        }
+
+        if (!fecha) {
+
+            mensaje.textContent =
+                "Seleccione una fecha.";
+
+            return;
+
+        }
+
+        if (!direccion) {
+
+            mensaje.textContent =
+                "Ingrese su dirección.";
+
+            return;
+
+        }
+
+        if (!horaSeleccionada) {
+
+            mensaje.textContent =
+                "Seleccione un horario.";
+
+            return;
+
+        }
+
+        if (pedido.length === 0) {
+
+            mensaje.textContent =
+                "No hay productos en el pedido.";
+
+            return;
+
+        }
+
+        fetch("procesarPedido.php", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+
+                idusuario: idusuario,
+
+                fecha: fecha,
+
+                hora: horaSeleccionada.value,
+
+                direccion: direccion,
+
+                cupon: cupon,
+
+                pedido: pedido
+
+            })
+
+        })
+
+        .then(response => {
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Error HTTP: " +
+                    response.status
+                );
+
+            }
+
+            return response.json();
+
+        })
+
+        .then(data => {
+
+            if (!data.ok) {
+
+                mensaje.textContent =
+                    data.mensaje;
+
+                return;
+
+            }
+
+            localStorage.setItem(
+                "total_pedido",
+                data.total
+            );
+
+            localStorage.setItem(
+                "descuento_pedido",
+                data.descuento
+            );
+
+            localStorage.setItem(
+                "subtotal_pedido",
+                data.subtotal
+            );
+
+            localStorage.setItem(
+                "fecha_pedido",
+                fecha
+            );
+
+            localStorage.setItem(
+                "hora_pedido",
+                horaSeleccionada.value
+            );
+
+            localStorage.setItem(
+                "direccion_pedido",
+                direccion
+            );
+
+            window.location.href =
+                "confirmacionCliente.html";
+
+        })
+
+        .catch(error => {
+
+            console.error(error);
+
+            mensaje.textContent =
+                "Error al enviar el pedido.";
+
+        });
+
+    });
+
+</script>
+
 </body>
+
 </html>
