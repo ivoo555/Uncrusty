@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("ID del pedido:", idPedido);
 
 
-
     const inputPedido = document.getElementById("inputPedido");
     const estadoActual = document.getElementById("estadoActual");
     const nuevoEstado = document.getElementById("nuevoEstado");
@@ -24,7 +23,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         return;
     }
-
 
 
     inputPedido.value = "Pedido #" + idPedido;
@@ -63,12 +61,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
     formulario.addEventListener("submit", function (evento) {
 
         evento.preventDefault();
 
         const estado = nuevoEstado.value;
+
 
 
         if (!estado) {
@@ -77,7 +75,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
             return;
         }
-
 
         if (estado === estadoActual.value) {
 
@@ -95,6 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         console.log("Enviando ID:", idPedido);
         console.log("Enviando estado:", estado);
+
 
 
         fetch("../../conexiones/cambiarEstadoPedido.php", {
@@ -121,9 +119,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
+
             alert(resultado.mensaje);
 
+
             estadoActual.value = resultado.estado;
+
 
             nuevoEstado.value = "";
 
@@ -137,6 +138,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
     });
+
 
 
     cancelar.addEventListener("click", function () {
