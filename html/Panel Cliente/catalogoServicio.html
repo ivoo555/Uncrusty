@@ -1,213 +1,555 @@
+<!DOCTYPE html>
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover">
+
 <title>Catálogo de servicios — Lavandería</title>
-<link rel="stylesheet" href="css/styles.css">
+
+<link rel="stylesheet" href="nuevostyle.css">
+
+<style>
+
+.app-shell {
+    width: calc(100% - 88px);
+    max-width: none;
+    margin-left: 88px;
+    margin-right: 0;
+    padding-bottom: 100px;
+}
+
+.catalogo-contenido {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1fr)
+        280px;
+    gap: 80px;
+    align-items: start;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.servicios-columna {
+    min-width: 0;
+    width: 100%;
+}
+
+.pedido-columna {
+    width: 280px;
+    min-width: 280px;
+}
+
+.pedido-section {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    width: 100%;
+    height: auto;
+    transform: none !important;
+    box-sizing: border-box;
+}
+
+.cart-lines {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.cart-line {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.cart-line-info {
+    min-width: 0;
+    flex: 1;
+    overflow-wrap: break-word;
+}
+
+.remove-btn {
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    min-height: 34px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: 1px solid #d0ccc2 !important;
+    border-radius: 50% !important;
+    background: white !important;
+    color: #333 !important;
+    font-size: 22px !important;
+    line-height: 1 !important;
+    cursor: pointer !important;
+    flex-shrink: 0 !important;
+}
+
+.item-action {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.cantidad-input {
+    width: 55px;
+    height: 34px;
+    padding: 5px;
+    box-sizing: border-box;
+    border: 1px solid #d0ccc2;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 14px;
+    background: white;
+}
+
+.cantidad-input:focus {
+    outline: none;
+    border-color: #999;
+}
+
+.add-btn {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 22px;
+}
+
+.vaciar-pedido {
+    width: 100%;
+    margin-top: 12px;
+    padding: 10px 15px;
+    border: 1px solid #d0ccc2;
+    border-radius: 8px;
+    background: white;
+    color: #333;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+@media (max-width: 1000px) {
+
+    .catalogo-contenido {
+        grid-template-columns:
+            minmax(0, 1fr)
+            260px;
+        gap: 40px;
+    }
+
+    .pedido-columna {
+        width: 260px;
+        min-width: 260px;
+    }
+
+}
+
+@media (max-width: 800px) {
+
+    .app-shell {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .catalogo-contenido {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .pedido-columna {
+        width: 100%;
+        min-width: 0;
+    }
+
+}
+
+</style>
+
 </head>
+
 <body class="app-body">
+
 <aside class="sidebar">
-  <ul class="sidebar-nav">
-    <li><a href="inicio.html" class="sidebar-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
-      <span>Inicio</span>
-    </a></li>
-    <li><a href="catalogoServicio.html" class="sidebar-item active">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a4 4 0 018 0v2"/></svg>
-      <span>Catálogo</span>
-    </a></li>
-    <li><a href="pedidos.html" class="sidebar-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 7L12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4"/><path d="M12 11v10"/></svg>
-      <span>Pedidos</span>
-    </a></li>
-    <li><a href="mapa.html" class="sidebar-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 21s-7-6.5-7-11a7 7 0 0114 0c0 4.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
-      <span>Mapa</span>
-    </a></li>
-    <li><a href="historial.html" class="sidebar-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-      <span>Historial</span>
-    </a></li>
-  </ul>
-  <a href="login.html" class="sidebar-item sidebar-logout" aria-label="Cerrar sesión">
-    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
-  </a>
-</aside>
-<div class="app-shell">
- 
-  <header class="app-header">
-    <h1>Catálogo de servicios</h1>
-    <div class="field search-box" style="margin-bottom: 0;">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9C9A90" stroke-width="2" aria-hidden="true">
-        <circle cx="11" cy="11" r="7"/>
-        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-      </svg>
-      <input type="text" id="search-input" placeholder="Buscar prenda o servicio" aria-label="Buscar prenda o servicio">
-    </div>
-  </header>
- 
-  <nav aria-label="Categorías">
-    <ul class="chips" id="chips">
-      <li><button type="button" class="chip active" data-category="todos">Todos</button></li>
-      <li><button type="button" class="chip" data-category="ropa">Ropa</button></li>
-      <li><button type="button" class="chip" data-category="hogar">Hogar</button></li>
-      <li><button type="button" class="chip" data-category="calzado">Calzado</button></li>
-      <li><button type="button" class="chip" data-category="especiales">Especiales</button></li>
+
+    <ul class="sidebar-nav">
+
+        <li>
+
+            <a href="inicio.html"
+               class="sidebar-item">
+
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke-width="2">
+
+                    <path d="M3 11l9-8 9 8"/>
+
+                    <path d="M5 10v10h14V10"/>
+
+                </svg>
+
+                <span>Inicio</span>
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a href="catalogoServicio.html"
+               class="sidebar-item active">
+
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke-width="2">
+
+                    <rect x="3"
+                          y="7"
+                          width="18"
+                          height="13"
+                          rx="2"/>
+
+                    <path d="M8 7V5a4 4 0 018 0v2"/>
+
+                </svg>
+
+                <span>Catálogo</span>
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a href="pedidos.html"
+               class="sidebar-item">
+
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke-width="2">
+
+                    <path d="M20 7L12 3 4 7v10l8 4 8-4V7z"/>
+
+                    <path d="M4 7l8 4 8-4"/>
+
+                    <path d="M12 11v10"/>
+
+                </svg>
+
+                <span>Pedidos</span>
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a href="mapa.html"
+               class="sidebar-item">
+
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke-width="2">
+
+                    <path d="M12 21s-7-6.5-7-11a7 7 0 0114 0c0 4.5-7 11-7 11z"/>
+
+                    <circle cx="12"
+                            cy="10"
+                            r="2.5"/>
+
+                </svg>
+
+                <span>Mapa</span>
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a href="historial.html"
+               class="sidebar-item">
+
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke-width="2">
+
+                    <circle cx="12"
+                            cy="12"
+                            r="9"/>
+
+                    <path d="M12 7v5l3 3"/>
+
+                </svg>
+
+                <span>Historial</span>
+
+            </a>
+
+        </li>
+
     </ul>
-  </nav>
- 
-  <ul class="service-list" id="service-list">
- 
-    <li class="service-item" data-category="ropa" data-name="Camisa" data-price="2200">
-      <div class="service-info">
-        <p class="service-name">Camisa</p>
-        <p class="service-detail">Lavado y planchado</p>
-        <p class="service-price">$2.200</p>
-      </div>
-      <div class="item-action"><button type="button" class="add-btn" aria-label="Agregar Camisa">+</button></div>
-    </li>
- 
-    <li class="service-item" data-category="ropa" data-name="Pantalón" data-price="2500">
-      <div class="service-info">
-        <p class="service-name">Pantalón</p>
-        <p class="service-detail">Lavado y planchado</p>
-        <p class="service-price">$2.500</p>
-      </div>
-      <div class="item-action"><button type="button" class="add-btn" aria-label="Agregar Pantalón">+</button></div>
-    </li>
- 
-    <li class="service-item" data-category="ropa" data-name="Traje completo" data-price="6800">
-      <div class="service-info">
-        <p class="service-name">Traje completo</p>
-        <p class="service-detail">Lavado en seco</p>
-        <p class="service-price">$6.800</p>
-      </div>
-      <div class="item-action"><button type="button" class="add-btn" aria-label="Agregar Traje completo">+</button></div>
-    </li>
- 
-    <li class="service-item" data-category="ropa" data-name="Vestido" data-price="4200">
-      <div class="service-info">
-        <p class="service-name">Vestido</p>
-        <p class="service-detail">Lavado en seco</p>
-        <p class="service-price">$4.200</p>
-      </div>
-      <div class="item-action"><button type="button" class="add-btn" aria-label="Agregar Vestido">+</button></div>
-    </li>
- 
-    <li class="service-item" data-category="ropa" data-name="Campera" data-price="5200">
-      <div class="service-info">
-        <p class="service-name">Campera</p>
-        <p class="service-detail">Lavado y planchado</p>
-        <p class="service-price">$5.200</p>
-      </div>
-      <div class="item-action"><button type="button" class="add-btn" aria-label="Agregar Campera">+</button></div>
-    </li>
- 
-    <li class="service-item" data-category="hogar" data-name="Cortina" data-price="3200">
-      <div class="service-info">
-        <p class="service-name">Cortina</p>
-        <p class="service-detail">Lavado y planchado</p>
-        <p class="service-price">$3.200</p>
-      </div>
-      <div class="item-action"><button type="button" class="add-btn" aria-label="Agregar Cortina">+</button></div>
-    </li>
- 
-    <li class="service-item" data-category="hogar" data-name="Alfombra" data-price="4800">
-      <div class="service-info">
-        <p class="service-name">Alfombra</p>
-        <p class="service-detail">Lavado profundo</p>
-        <p class="service-price">$4.800</p>
-      </div>
-      <div class="item-action"><button type="button" class="add-btn" aria-label="Agregar Alfombra">+</button></div>
-    </li>
- 
-    <li class="service-item" data-category="hogar" data-name="Acolchado" data-price="7500">
-      <div class="service-info">
-        <p class="service-name">Acolchado</p>
-        <p class="service-detail">Lavado y secado</p>
-        <p class="service-price">$7.500</p>
-      </div>
-      <div class="item-action"><button type="button" class="add-btn" aria-label="Agregar Acolchado">+</button></div>
-    </li>
- 
-    <li class="service-item" data-category="hogar" data-name="Juego de sábanas" data-price="3900">
-      <div class="service-info">
-        <p class="service-name">Juego de sábanas</p>
-        <p class="service-detail">Lavado y planchado</p>
-        <p class="service-price">$3.900</p>
-      </div>
-      <div class="item-action"><button type="button" class="add-btn" aria-label="Agregar Juego de sábanas">+</button></div>
-    </li>
- 
-    <li class="service-item" data-category="calzado" data-name="Zapatillas" data-price="3500">
-      <div class="service-info">
-        <p class="service-name">Zapatillas</p>
-        <p class="service-detail">Limpieza y desinfección</p>
-        <p class="service-price">$3.500</p>
-      </div>
-      <div class="item-action"><button type="button" class="add-btn" aria-label="Agregar Zapatillas">+</button></div>
-    </li>
- 
-    <li class="service-item" data-category="calzado" data-name="Zapatos de cuero" data-price="4200">
-      <div class="service-info">
-        <p class="service-name">Zapatos de cuero</p>
-        <p class="service-detail">Limpieza y nutrición</p>
-        <p class="service-price">$4.200</p>
-      </div>
-      <div class="item-action"><button type="button" class="add-btn" aria-label="Agregar Zapatos de cuero">+</button></div>
-    </li>
- 
-    <li class="service-item" data-category="especiales" data-name="Quitamanchas" data-price="1500">
-      <div class="service-info">
-        <p class="service-name">Quitamanchas</p>
-        <p class="service-detail">Tratamiento adicional</p>
-        <p class="service-price">$1.500</p>
-      </div>
-      <div class="item-action"><button type="button" class="add-btn" aria-label="Agregar Quitamanchas">+</button></div>
-    </li>
- 
-    <li class="service-item" data-category="especiales" data-name="Planchado express" data-price="1200">
-      <div class="service-info">
-        <p class="service-name">Planchado express</p>
-        <p class="service-detail">Entrega en 24 h</p>
-        <p class="service-price">$1.200</p>
-      </div>
-      <div class="item-action"><button type="button" class="add-btn" aria-label="Agregar Planchado express">+</button></div>
-    </li>
- 
-  </ul>
- 
-  <p class="empty-state" id="empty-state">No encontramos servicios con ese nombre.</p>
- 
-</div>
- 
-<div class="cart-bar" id="cart-bar" role="status">
-  <div>
-    <p class="cart-count" id="cart-count">0 prendas seleccionadas</p>
-    <p class="cart-total" id="">$0</p>
-  </div>
-  <button type="button" class="btn-primary" id="cart-open">Ver carrito</button>
-</div>
- 
-<div class="cart-overlay" id="cart-overlay"></div>
-<section class="cart-sheet" id="cart-sheet" aria-label="Carrito" aria-hidden="true">
-  <div class="cart-sheet-header">
-    <h2>Tu pedido</h2>
-    <button type="button" class="cart-close" id="cart-close" aria-label="Cerrar carrito">✕</button>
-  </div>
-  <ul class="cart-lines" id="cart-lines"></ul>
-  <p class="cart-empty" id="cart-empty">Todavía no agregaste nada.</p>
-  <div class="cart-sheet-footer">
-    <div class="cart-sheet-total">
-      <span>Total estimado</span>
-      <strong id="cart-sheet-total">$0</strong>
-    </div>
-    <a href="pagoCliente.html">
-    <button type="button" class="btn-primary" id="sheet-continue" ">Continuar</button>
+
+    <a href="login.html"
+       class="sidebar-item sidebar-logout"
+       aria-label="Cerrar sesión">
+
+        <svg viewBox="0 0 24 24"
+             fill="none"
+             stroke-width="2">
+
+            <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/>
+
+            <path d="M16 17l5-5-5-5"/>
+
+            <path d="M21 12H9"/>
+
+        </svg>
+
     </a>
-  </div>
-</section>
- 
+
+</aside>
+
+<div class="app-shell">
+
+    <header class="app-header">
+
+        <h1>
+            Catálogo de servicios
+        </h1>
+
+        <div class="field search-box"
+             style="margin-bottom: 0;">
+
+            <svg width="16"
+                 height="16"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="#9C9A90"
+                 stroke-width="2"
+                 aria-hidden="true">
+
+                <circle cx="11"
+                        cy="11"
+                        r="7"/>
+
+                <line x1="21"
+                      y1="21"
+                      x2="16.65"
+                      y2="16.65"/>
+
+            </svg>
+
+            <input
+                type="text"
+                id="search-input"
+                placeholder="Buscar prenda o servicio"
+                aria-label="Buscar prenda o servicio">
+
+        </div>
+
+    </header>
+
+    <nav aria-label="Categorías">
+
+        <ul class="chips"
+            id="chips">
+
+            <li>
+
+                <button
+                    type="button"
+                    class="chip active"
+                    data-category="todos">
+
+                    Todos
+
+                </button>
+
+            </li>
+
+            <li>
+
+                <button
+                    type="button"
+                    class="chip"
+                    data-category="ropa">
+
+                    Ropa
+
+                </button>
+
+            </li>
+
+            <li>
+
+                <button
+                    type="button"
+                    class="chip"
+                    data-category="hogar">
+
+                    Hogar
+
+                </button>
+
+            </li>
+
+            <li>
+
+                <button
+                    type="button"
+                    class="chip"
+                    data-category="calzado">
+
+                    Calzado
+
+                </button>
+
+            </li>
+
+            <li>
+
+                <button
+                    type="button"
+                    class="chip"
+                    data-category="especiales">
+
+                    Especiales
+
+                </button>
+
+            </li>
+
+        </ul>
+
+    </nav>
+
+    <div class="catalogo-contenido">
+
+        <div class="servicios-columna">
+
+            <ul class="service-list"
+                id="service-list">
+
+            </ul>
+
+            <p class="empty-state"
+               id="empty-state">
+
+                No encontramos servicios con ese nombre.
+
+            </p>
+
+        </div>
+
+        <div class="pedido-columna">
+
+            <section
+                class="pedido-section"
+                id="cart-sheet"
+                aria-label="Tu pedido">
+
+                <div class="cart-sheet-header">
+
+                    <h2>
+                        Tu pedido
+                    </h2>
+
+                </div>
+
+                <ul
+                    class="cart-lines"
+                    id="cart-lines">
+
+                </ul>
+
+                <p
+                    class="cart-empty"
+                    id="cart-empty">
+
+                    Todavía no agregaste nada.
+
+                </p>
+
+                <div class="cart-sheet-footer">
+
+                    <div class="cart-sheet-total">
+
+                        <span>
+                            Total estimado
+                        </span>
+
+                        <strong id="cart-sheet-total">
+                            $0
+                        </strong>
+
+                    </div>
+
+                    <a href="pagoCliente.html">
+
+                        <button
+                            type="button"
+                            class="btn-primary"
+                            id="sheet-continue">
+
+                            Continuar
+
+                        </button>
+
+                    </a>
+
+                    <button
+                        type="button"
+                        class="vaciar-pedido"
+                        id="vaciar-pedido">
+
+                        Vaciar todo
+
+                    </button>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </div>
+
+</div>
+
 <script src="catalogo.js"></script>
+
+<script>
+
+document
+    .getElementById("vaciar-pedido")
+    .addEventListener("click", function() {
+
+        localStorage.removeItem("pedido");
+
+        location.reload();
+
+    });
+
+</script>
+
 </body>
+
 </html>
