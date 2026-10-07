@@ -43,7 +43,7 @@ if ($resultado->num_rows > 0) {
     $usuario = $resultado->fetch_assoc();
 
     $rol = "Usuario";
-    $id = $usuario["id"];
+    $id = $usuario["id_cliente"];
 
     $_SESSION["id"] = $id;
 
