@@ -33,7 +33,7 @@ body{
     height: 30px;
     position: absolute;
     left: 230px;
-    bottom: 370px;
+    bottom: 440px;
 }
 #h1Pedido{
     font-size: 20px;
@@ -47,7 +47,7 @@ body{
     height: 30px;
     position: absolute;
     left: 550px;
-    bottom: 370px;
+    bottom: 440px;
 }
 #h1Direccion{
     font-size: 20px;
@@ -119,6 +119,45 @@ body{
     left: 950px;
     top: 80px;
     border: #B8D5E6 solid 2px;
+}
+
+
+.repartidorDisponible {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    margin: 10px 0;
+    background-color: #F8FCFF;
+    border-radius: 8px;
+}
+
+.repartidorDisponible span {
+    color: #315A7D;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.repartidorDisponible button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.repartidorDisponible button:hover,
+.repartidorDisponible button:focus,
+.repartidorDisponible button:active {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    outline: none;
+    box-shadow: none;
 }
 #h1RepartidoresDisponibles{
     font-size: 25px;
