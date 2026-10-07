@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     console.log("CAMBIAR ESTADO JS CARGADO");
 
-    // Obtener el ID del pedido desde la URL
     const parametros = new URLSearchParams(window.location.search);
     const idPedido = parametros.get("id");
 
@@ -11,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("ID del pedido:", idPedido);
 
 
-    // Obtener elementos del HTML
+
     const inputPedido = document.getElementById("inputPedido");
     const estadoActual = document.getElementById("estadoActual");
     const nuevoEstado = document.getElementById("nuevoEstado");
@@ -19,7 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const cancelar = document.getElementById("btnCancelar");
 
 
-    // Verificar que exista el ID
     if (!idPedido) {
 
         alert("No se recibió el ID del pedido.");
@@ -28,13 +26,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    // Mostrar número del pedido
+
     inputPedido.value = "Pedido #" + idPedido;
 
 
-    // ==========================================
-    // OBTENER ESTADO ACTUAL DEL PEDIDO
-    // ==========================================
 
     fetch("../../conexiones/obtenerEstadoPedido.php?id_pedido=" + idPedido)
         .then(response => {
@@ -55,7 +50,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-            // Mostrar estado actual
             estadoActual.value = datos.estado;
 
         })
@@ -68,9 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
 
-    // ==========================================
-    // CAMBIAR ESTADO
-    // ==========================================
+
 
     formulario.addEventListener("submit", function (evento) {
 
@@ -79,7 +71,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const estado = nuevoEstado.value;
 
 
-        // Verificar que se haya seleccionado un estado
         if (!estado) {
 
             alert("Seleccione un nuevo estado.");
@@ -88,7 +79,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        // Verificar que no sea el mismo estado
         if (estado === estadoActual.value) {
 
             alert("El pedido ya tiene ese estado.");
@@ -97,7 +87,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        // Crear los datos que se enviarán al PHP
         const datos = new FormData();
 
         datos.append("id_pedido", idPedido);
@@ -108,7 +97,6 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("Enviando estado:", estado);
 
 
-        // Enviar al PHP
         fetch("../../conexiones/cambiarEstadoPedido.php", {
 
             method: "POST",
@@ -133,16 +121,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-
-            // Mostrar mensaje de éxito
             alert(resultado.mensaje);
 
-
-            // Actualizar el estado mostrado
             estadoActual.value = resultado.estado;
 
-
-            // Limpiar el select
             nuevoEstado.value = "";
 
         })
@@ -156,10 +138,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
-
-    // ==========================================
-    // BOTÓN CANCELAR
-    // ==========================================
 
     cancelar.addEventListener("click", function () {
 
