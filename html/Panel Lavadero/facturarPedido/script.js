@@ -20,8 +20,6 @@ let totalFinal = 0;
 let porcentajeCupon = 0;
 
 
-
-
 fetch("../../conexiones/cargarDatosFactura.php")
     .then(response => {
 
@@ -130,11 +128,14 @@ function cargarPedido(idPedido) {
             }
 
 
+
+
             inputNombre.value =
                 datos.pedido.nombreCompleto || "";
 
             inputIdentificacion.value =
                 datos.pedido.DNI || "";
+
 
 
             subtotalOriginal =
@@ -152,6 +153,7 @@ function cargarPedido(idPedido) {
                 parseFloat(
                     datos.pedido.porcentaje_descuento
                 ) || 0;
+
 
 
 
@@ -262,6 +264,7 @@ btnFactura.addEventListener(
     function () {
 
 
+
         if (!inputPedido.value) {
 
             alert(
@@ -363,7 +366,6 @@ btnFactura.addEventListener(
 
 
 
-
         datos.append(
             "subtotal",
             subtotalOriginal.toFixed(2)
@@ -388,13 +390,10 @@ btnFactura.addEventListener(
         );
 
 
-
-
         btnFactura.disabled = true;
 
         btnFactura.textContent =
             "Generando factura...";
-
 
 
 
