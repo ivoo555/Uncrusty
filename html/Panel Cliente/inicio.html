@@ -2,247 +2,361 @@
 <html lang="es">
 
 <head>
+    <meta charset="UTF-8">
 
-<meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, viewport-fit=cover"
+    >
 
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Inicio — Lavandería</title>
 
-<title>Inicio — Lavandería</title>
-
-<link rel="stylesheet" href="nuevostyle.css">
-
+    <link rel="stylesheet" href="./css/styles.css">
 </head>
 
 <body class="app-body">
 
 <aside class="sidebar">
 
-<ul class="sidebar-nav">
+    <ul class="sidebar-nav">
 
-<li>
-<a href="inicio.html" class="sidebar-item active">
+        <li>
+            <a
+                href="inicio.html"
+                class="sidebar-item active"
+            >
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke-width="2"
+                >
+                    <path d="M3 11l9-8 9 8"/>
+                    <path d="M5 10v10h14V10"/>
+                </svg>
 
-<svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-<path d="M3 11l9-8 9 8"/>
-<path d="M5 10v10h14V10"/>
-</svg>
+                <span>Inicio</span>
+            </a>
+        </li>
 
-<span>Inicio</span>
+        <li>
+            <a
+                href="catalogoServicio.html"
+                class="sidebar-item"
+            >
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke-width="2"
+                >
+                    <rect
+                        x="3"
+                        y="7"
+                        width="18"
+                        height="13"
+                        rx="2"
+                    />
 
-</a>
-</li>
+                    <path d="M8 7V5a4 4 0 018 0v2"/>
+                </svg>
 
-<li>
-<a href="catalogoServicio.html" class="sidebar-item">
+                <span>Catálogo</span>
+            </a>
+        </li>
 
-<svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-<rect x="3" y="7" width="18" height="13" rx="2"/>
-<path d="M8 7V5a4 4 0 018 0v2"/>
-</svg>
+        <li>
+            <a
+                href="pedidos.html"
+                class="sidebar-item"
+            >
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke-width="2"
+                >
+                    <path d="M20 7L12 3 4 7v10l8-4 8 4V7z"/>
+                    <path d="M4 7l8 4 8-4"/>
+                    <path d="M12 11v10"/>
+                </svg>
 
-<span>Catálogo</span>
+                <span>Pedidos</span>
+            </a>
+        </li>
 
-</a>
-</li>
+        <li>
+            <a
+                href="mapa.html"
+                class="sidebar-item"
+            >
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke-width="2"
+                >
+                    <path d="M12 21s-7-6.5-7-11a7 7 0 0114 0c0 4.5-7 11-7 11z"/>
+                    <circle
+                        cx="12"
+                        cy="10"
+                        r="2.5"
+                    />
+                </svg>
 
-<li>
-<a href="pedidos.html" class="sidebar-item">
+                <span>Mapa</span>
+            </a>
+        </li>
 
-<svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-<path d="M20 7L12 3 4 7v10l8-4 8 4V7z"/>
-<path d="M4 7l8 4 8-4"/>
-<path d="M12 11v10"/>
-</svg>
+        <li>
+            <a
+                href="historial.html"
+                class="sidebar-item"
+            >
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke-width="2"
+                >
+                    <circle
+                        cx="12"
+                        cy="12"
+                        r="9"
+                    />
 
-<span>Pedidos</span>
+                    <path d="M12 7v5l3 3"/>
+                </svg>
 
-</a>
-</li>
+                <span>Historial</span>
+            </a>
+        </li>
 
-<li>
-<a href="mapa.html" class="sidebar-item">
+    </ul>
 
-<svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-<path d="M12 21s-7-6.5-7-11a7 7 0 0114 0c0 4.5-7 11-7 11z"/>
-<circle cx="12" cy="10" r="2.5"/>
-</svg>
-
-<span>Mapa</span>
-
-</a>
-</li>
-
-<li>
-<a href="historial.html" class="sidebar-item">
-
-<svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-<circle cx="12" cy="12" r="9"/>
-<path d="M12 7v5l3 3"/>
-</svg>
-
-<span>Historial</span>
-
-</a>
-</li>
-
-</ul>
-
-<a
-href="login.html"
-class="sidebar-item sidebar-logout"
-aria-label="Cerrar sesión"
->
-
-<svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-<path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/>
-<path d="M16 17l5-5-5-5"/>
-<path d="M21 12H9"/>
-</svg>
-
-</a>
+    <a
+        href="../login.html"
+        class="sidebar-item sidebar-logout"
+        aria-label="Cerrar sesión"
+    >
+        <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke-width="2"
+        >
+            <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/>
+            <path d="M16 17l5-5-5-5"/>
+            <path d="M21 12H9"/>
+        </svg>
+    </a>
 
 </aside>
 
 
 <div class="app-shell">
 
-<header class="app-header">
+    <header class="app-header">
 
-<h1 class="inicio-saludo">
-Hola, NOMBRE
-</h1>
+        <h1
+            class="inicio-saludo"
+            id="saludo"
+        >
+            Hola
+        </h1>
 
-<p class="inicio-subtitulo">
-Esto es lo que tenés pendiente hoy
-</p>
+        <p class="inicio-subtitulo">
+            Esto es lo que tenés pendiente hoy
+        </p>
 
-</header>
-
-
-<section class="stats-grid" aria-label="Resumen">
-
-<div class="stat-card">
-
-<p class="stat-label">
-Pedidos activos
-</p>
-
-<p class="stat-value" id="pedidosActivos">
-0
-</p>
-
-</div>
+    </header>
 
 
-<div class="stat-card">
+    <section
+        class="stats-grid"
+        aria-label="Resumen"
+    >
 
-<p class="stat-label">
-Próxima entrega
-</p>
+        <div class="stat-card">
 
-<p class="stat-value" id="proximaEntrega">
-Sin pedidos
-</p>
+            <p class="stat-label">
+                Pedidos activos
+            </p>
 
-</div>
+            <p
+                class="stat-value"
+                id="pedidosActivos"
+            >
+                0
+            </p>
 
-</section>
-
-
-<h2 class="section-title">
-Accesos rápidos
-</h2>
-
-
-<nav class="accesos-grid" aria-label="Accesos rápidos">
+        </div>
 
 
-<a href="catalogoServicio.html" class="acceso-card">
+        <div class="stat-card">
 
-<span class="acceso-icon">
+            <p class="stat-label">
+                Próxima entrega
+            </p>
 
-<svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-<rect x="3" y="7" width="18" height="13" rx="2"/>
-<path d="M8 7V5a4 4 0 018 0v2"/>
-</svg>
+            <p
+                class="stat-value"
+                id="proximaEntrega"
+            >
+                Sin pedidos
+            </p>
 
-</span>
+        </div>
 
-<span class="acceso-label">
-Nuevo pedido
-</span>
-
-</a>
-
-
-<a href="pedidos.html" class="acceso-card">
-
-<span class="acceso-icon">
-
-<svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-<path d="M20 7L12 3 4 7v10l8-4 8-4V7z"/>
-<path d="M4 7l8 4 8-4"/>
-<path d="M12 11v10"/>
-</svg>
-
-</span>
-
-<span class="acceso-label">
-Mis pedidos
-</span>
-
-</a>
+    </section>
 
 
-<a href="mapa.html" class="acceso-card">
-
-<span class="acceso-icon">
-
-<svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-<path d="M12 21s-7-6.5-7-11a7 7 0 0114 0c0 4.5-7 11-7 11z"/>
-<circle cx="12" cy="10" r="2.5"/>
-</svg>
-
-</span>
-
-<span class="acceso-label">
-Mapa
-</span>
-
-</a>
+    <h2 class="section-title">
+        Accesos rápidos
+    </h2>
 
 
-<a href="historial.html" class="acceso-card">
+    <nav
+        class="accesos-grid"
+        aria-label="Accesos rápidos"
+    >
 
-<span class="acceso-icon">
+        <a
+            href="catalogoServicio.html"
+            class="acceso-card"
+        >
 
-<svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-<circle cx="12" cy="12" r="9"/>
-<path d="M12 7v5l3 3"/>
-</svg>
+            <span class="acceso-icon">
 
-</span>
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke-width="2"
+                >
+                    <rect
+                        x="3"
+                        y="7"
+                        width="18"
+                        height="13"
+                        rx="2"
+                    />
 
-<span class="acceso-label">
-Historial
-</span>
+                    <path d="M8 7V5a4 4 0 018 0v2"/>
+                </svg>
 
-</a>
+            </span>
 
-</nav>
+            <span class="acceso-label">
+                Nuevo pedido
+            </span>
+
+        </a>
+
+
+        <a
+            href="pedidos.html"
+            class="acceso-card"
+        >
+
+            <span class="acceso-icon">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke-width="2"
+                >
+                    <path d="M20 7L12 3 4 7v10l8-4 8-4V7z"/>
+                    <path d="M4 7l8 4 8-4"/>
+                    <path d="M12 11v10"/>
+                </svg>
+
+            </span>
+
+            <span class="acceso-label">
+                Mis pedidos
+            </span>
+
+        </a>
+
+
+        <a
+            href="mapa.html"
+            class="acceso-card"
+        >
+
+            <span class="acceso-icon">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke-width="2"
+                >
+                    <path d="M12 21s-7-6.5-7-11a7 7 0 0114 0c0 4.5-7 11-7 11z"/>
+                    <circle
+                        cx="12"
+                        cy="10"
+                        r="2.5"
+                    />
+                </svg>
+
+            </span>
+
+            <span class="acceso-label">
+                Mapa
+            </span>
+
+        </a>
+
+
+        <a
+            href="historial.html"
+            class="acceso-card"
+        >
+
+            <span class="acceso-icon">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke-width="2"
+                >
+                    <circle
+                        cx="12"
+                        cy="12"
+                        r="9"
+                    />
+
+                    <path d="M12 7v5l3 3"/>
+                </svg>
+
+            </span>
+
+            <span class="acceso-label">
+                Historial
+            </span>
+
+        </a>
+
+    </nav>
 
 </div>
 
 
 <script>
 
-let idusuario = localStorage.getItem("idusuario");
+const idusuario = localStorage.getItem("idusuario");
 
 if (idusuario) {
 
-    fetch("inicio.php?idusuario=" + encodeURIComponent(idusuario))
+    fetch(
+        "../../php/inicio.php?idusuario=" +
+        encodeURIComponent(idusuario)
+    )
 
-    .then(response => response.json())
+    .then(response => {
+
+        if (!response.ok) {
+            throw new Error(
+                "Error HTTP: " + response.status
+            );
+        }
+
+        return response.json();
+    })
 
     .then(data => {
 
@@ -253,21 +367,42 @@ if (idusuario) {
             return;
         }
 
-        document.getElementById("pedidosActivos").textContent =
-            data.pedidos_activos;
+
+        /*
+         * Mostrar nombre del cliente
+         */
+        if (data.nombre) {
+
+            document.getElementById("saludo").textContent =
+                "Hola, " + data.nombre;
+        }
 
 
+        /*
+         * Pedidos activos
+         */
+        document.getElementById(
+            "pedidosActivos"
+        ).textContent =
+            data.pedidos_activos ?? 0;
+
+
+        /*
+         * Próxima entrega
+         */
         if (data.proxima_fecha) {
 
-            let fecha = new Date(
+            const fecha = new Date(
                 data.proxima_fecha.replace(" ", "T")
             );
 
-            let hoy = new Date();
+            const hoy = new Date();
 
-            let manana = new Date();
+            const manana = new Date();
 
-            manana.setDate(hoy.getDate() + 1);
+            manana.setDate(
+                hoy.getDate() + 1
+            );
 
 
             let textoFecha;
@@ -292,40 +427,48 @@ if (idusuario) {
             } else {
 
                 textoFecha =
-                    fecha.toLocaleDateString("es-AR", {
-                        day: "2-digit",
-                        month: "2-digit",
-                        year: "numeric"
-                    });
-
+                    fecha.toLocaleDateString(
+                        "es-AR",
+                        {
+                            day: "2-digit",
+                            month: "2-digit",
+                            year: "numeric"
+                        }
+                    );
             }
 
-            document.getElementById("proximaEntrega").textContent =
-                textoFecha;
+
+            document.getElementById(
+                "proximaEntrega"
+            ).textContent = textoFecha;
 
         } else {
 
-            document.getElementById("proximaEntrega").textContent =
-                "Sin pedidos";
-
+            document.getElementById(
+                "proximaEntrega"
+            ).textContent = "Sin pedidos";
         }
 
     })
 
     .catch(error => {
 
-        console.error("Error:", error);
+        console.error(
+            "Error al cargar inicio:",
+            error
+        );
 
     });
 
 } else {
 
-    console.log("No existe idusuario en localStorage");
+    console.log(
+        "No existe idusuario en localStorage"
+    );
 
 }
 
 </script>
 
 </body>
-
 </html>
