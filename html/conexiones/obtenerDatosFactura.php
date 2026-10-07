@@ -21,9 +21,6 @@ if (!isset($_GET['id_pedido'])) {
 $id_pedido = intval($_GET['id_pedido']);
 
 
-// ======================================================
-// OBTENER DATOS DEL PEDIDO
-// ======================================================
 
 $sqlPedido = "
     SELECT 
@@ -82,9 +79,7 @@ if (!$pedido) {
 }
 
 
-// ======================================================
-// OBTENER DETALLES Y PRECIO DESDE SERVICIOS
-// ======================================================
+
 
 $sqlDetalle = "
     SELECT
@@ -130,9 +125,6 @@ $detalles = [];
 $subtotal_calculado = 0;
 
 
-// ======================================================
-// CALCULAR SUBTOTAL
-// ======================================================
 
 while ($detalle = $resultadoDetalle->fetch_assoc()) {
 
@@ -161,10 +153,6 @@ while ($detalle = $resultadoDetalle->fetch_assoc()) {
 }
 
 
-// ======================================================
-// DESCUENTO
-// ======================================================
-
 $porcentaje_descuento =
     floatval(
         $pedido['valor_descuento'] ?? 0
@@ -175,16 +163,8 @@ $descuento_calculado =
     ($porcentaje_descuento / 100);
 
 
-// ======================================================
-// ENVÍO
-// ======================================================
-
 $costo_envio = 0;
 
-
-// ======================================================
-// TOTAL
-// ======================================================
 
 $total_calculado =
     $subtotal_calculado
@@ -192,9 +172,6 @@ $total_calculado =
     + $costo_envio;
 
 
-// ======================================================
-// AGREGAR TOTALES AL PEDIDO
-// ======================================================
 
 $pedido['subtotal'] =
     $subtotal_calculado;
@@ -212,9 +189,6 @@ $pedido['total'] =
     $total_calculado;
 
 
-// ======================================================
-// RESPUESTA
-// ======================================================
 
 $datos = [
     "pedido" => $pedido,
