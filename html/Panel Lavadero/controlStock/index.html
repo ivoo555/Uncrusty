@@ -11,7 +11,7 @@
     <div id="MarcoProductos">
         <div id="MarcoTitulo">
             <h1>Tabla de productos</h1></div>
-            <button>Agregar Producto</button>
+            <button id="btnAgregarProducto">Agregar Producto</button>
             <div id="tabla">
                 <table>
                     <thead>
@@ -25,6 +25,7 @@
                             <th>Acciones</th>
                         </tr>
                     </thead>
+                    <tbody id="tablaProductos"></tbody>
                 </table>
             </div>
         </div>
@@ -32,6 +33,7 @@
     <div id="TarjetaProducto">
         <div id="ParteSuperior">
             <h1>Productos en alerta</h1>
+            <div id="productosAlerta"> </div>
         </div>
     </div>
 
@@ -114,5 +116,6 @@
         <path d="M21 12H9"/> </svg> 
         </a> 
     </aside>
+    <script src="script.js"></script>
 </body>
 </html>
