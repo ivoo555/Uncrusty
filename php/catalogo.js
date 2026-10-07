@@ -1,9 +1,10 @@
 console.log("CATALOGO.JS CARGADO");
 
 let servicios = [];
+
 let pedido = JSON.parse(localStorage.getItem("pedido")) || [];
 
-fetch("catalogoServicio.php")
+fetch("../../php/catalogoServicio.php")
     .then(response => {
 
         if (!response.ok) {
@@ -32,19 +33,23 @@ fetch("catalogoServicio.php")
 
     });
 
+
 function mostrarServicios() {
 
-    const lista = document.getElementById("service-list");
+    const lista =
+        document.getElementById("service-list");
 
-    const busqueda = document
-        .getElementById("search-input")
-        .value
-        .toLowerCase();
+    const busqueda =
+        document
+            .getElementById("search-input")
+            .value
+            .toLowerCase();
 
-    const categoriaActiva = document
-        .querySelector(".chip.active")
-        .dataset.category
-        .toLowerCase();
+    const categoriaActiva =
+        document
+            .querySelector(".chip.active")
+            .dataset.category
+            .toLowerCase();
 
     lista.innerHTML = "";
 
@@ -52,9 +57,11 @@ function mostrarServicios() {
 
     servicios.forEach(servicio => {
 
-        const nombre = String(servicio.nombre).toLowerCase();
+        const nombre =
+            String(servicio.nombre).toLowerCase();
 
-        const categoria = String(servicio.categoria).toLowerCase();
+        const categoria =
+            String(servicio.categoria).toLowerCase();
 
         if (
             !nombre.includes(busqueda) ||
@@ -68,18 +75,16 @@ function mostrarServicios() {
 
         encontrados++;
 
-        const elemento = document.createElement("li");
+        const elemento =
+            document.createElement("li");
 
         elemento.className = "service-item";
 
         elemento.dataset.category = categoria;
-
         elemento.dataset.name = servicio.nombre;
-
         elemento.dataset.price = servicio.precio;
 
         elemento.innerHTML = `
-
             <div class="service-info">
 
                 <p class="service-name">
@@ -103,34 +108,37 @@ function mostrarServicios() {
                     class="cantidad-input"
                     value="1"
                     min="1"
-                    aria-label="Cantidad de ${servicio.nombre}">
+                    aria-label="Cantidad de ${servicio.nombre}"
+                >
 
                 <button
                     type="button"
                     class="add-btn"
-                    aria-label="Agregar ${servicio.nombre}">
-
+                    aria-label="Agregar ${servicio.nombre}"
+                >
                     +
-
                 </button>
 
             </div>
-
         `;
 
-        const boton = elemento.querySelector(".add-btn");
+        const boton =
+            elemento.querySelector(".add-btn");
 
         const cantidadInput =
             elemento.querySelector(".cantidad-input");
 
-        boton.addEventListener("click", function() {
 
-            let cantidad = Number(cantidadInput.value);
+        boton.addEventListener("click", function () {
 
-            if (cantidad < 1 || isNaN(cantidad)) {
+            let cantidad =
+                Number(cantidadInput.value);
 
+            if (
+                cantidad < 1 ||
+                isNaN(cantidad)
+            ) {
                 cantidad = 1;
-
             }
 
             console.log(
@@ -140,9 +148,11 @@ function mostrarServicios() {
                 cantidad
             );
 
-            const existente = pedido.find(
-                producto => producto.id == servicio.id
-            );
+            const existente =
+                pedido.find(
+                    producto =>
+                        producto.id == servicio.id
+                );
 
             if (existente) {
 
@@ -156,16 +166,18 @@ function mostrarServicios() {
 
                     nombre: servicio.nombre,
 
-                    descripcion: servicio.descripcion,
+                    descripcion:
+                        servicio.descripcion,
 
-                    categoria: servicio.categoria,
+                    categoria:
+                        servicio.categoria,
 
-                    precio: Number(servicio.precio),
+                    precio:
+                        Number(servicio.precio),
 
-                    cantidad: cantidad
-
+                    cantidad:
+                        cantidad
                 });
-
             }
 
             localStorage.setItem(
@@ -188,8 +200,8 @@ function mostrarServicios() {
 
     document.getElementById("empty-state").style.display =
         encontrados === 0 ? "block" : "none";
-
 }
+
 
 function actualizarPedido() {
 
@@ -211,17 +223,17 @@ function actualizarPedido() {
 
     let precioTotal = 0;
 
+
     pedido.forEach((producto, indice) => {
 
         if (!producto.cantidad) {
-
             producto.cantidad = 1;
-
         }
 
         precioTotal +=
             Number(producto.precio) *
             Number(producto.cantidad);
+
 
         const elemento =
             document.createElement("li");
@@ -229,7 +241,6 @@ function actualizarPedido() {
         elemento.className = "cart-line";
 
         elemento.innerHTML = `
-
             <div class="cart-line-info">
 
                 <p class="service-name">
@@ -243,9 +254,7 @@ function actualizarPedido() {
                 </p>
 
                 <p class="service-detail">
-
                     ${producto.descripcion}
-
                 </p>
 
                 <p class="service-price">
@@ -262,19 +271,18 @@ function actualizarPedido() {
             <button
                 type="button"
                 class="remove-btn"
-                aria-label="Quitar ${producto.nombre}">
-
+                aria-label="Quitar ${producto.nombre}"
+            >
                 -
-
             </button>
-
         `;
+
 
         elemento
             .querySelector(".remove-btn")
             .addEventListener(
                 "click",
-                function() {
+                function () {
 
                     console.log(
                         "QUITANDO:",
@@ -297,8 +305,10 @@ function actualizarPedido() {
 
     });
 
+
     totalSheet.textContent =
         "$" + precioTotal.toLocaleString("es-AR");
+
 
     if (pedido.length === 0) {
 
@@ -312,30 +322,30 @@ function actualizarPedido() {
 
 }
 
+
 document
     .getElementById("search-input")
     .addEventListener(
         "input",
-        function() {
+        function () {
 
             mostrarServicios();
 
         }
     );
 
+
 document
     .getElementById("chips")
     .addEventListener(
         "click",
-        function(event) {
+        function (event) {
 
             const boton =
                 event.target.closest(".chip");
 
             if (!boton) {
-
                 return;
-
             }
 
             document
@@ -352,5 +362,6 @@ document
 
         }
     );
+
 
 actualizarPedido();
