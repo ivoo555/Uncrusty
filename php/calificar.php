@@ -6,7 +6,7 @@ $conexion = new mysqli(
     "localhost",
     "root",
     "",
-    "lavanderia_uncrusty"
+    "uncrustybd"
 );
 
 if ($conexion->connect_error) {
@@ -16,7 +16,14 @@ if ($conexion->connect_error) {
     exit;
 }
 
-if (!isset($_POST["idPedido"]) || !isset($_POST["estrellas"])) {
+$conexion->set_charset("utf8mb4");
+
+
+
+if (
+    !isset($_POST["idPedido"]) ||
+    !isset($_POST["estrellas"])
+) {
     echo json_encode([
         "error" => "Faltan datos"
     ]);
@@ -33,6 +40,8 @@ if ($idPedido <= 0) {
     exit;
 }
 
+
+
 if ($estrellas < 1 || $estrellas > 5) {
     echo json_encode([
         "error" => "La calificacion debe ser entre 1 y 5"
@@ -40,24 +49,96 @@ if ($estrellas < 1 || $estrellas > 5) {
     exit;
 }
 
-$sql = "UPDATE historial
-        SET estrellas = ?
-        WHERE idPedido = ?";
+$sqlPedido = "
+    SELECT id_pedido
+    FROM pedidos
+    WHERE id_pedido = ?
+";
 
-$stmt = $conexion->prepare($sql);
+$stmtPedido = $conexion->prepare($sqlPedido);
 
-if (!$stmt) {
+if (!$stmtPedido) {
     echo json_encode([
-        "error" => "Error en la consulta: " . $conexion->error
+        "error" => "Error en la consulta del pedido: " . $conexion->error
     ]);
     exit;
 }
 
-$stmt->bind_param("ii", $estrellas, $idPedido);
+$stmtPedido->bind_param(
+    "i",
+    $idPedido
+);
 
-if ($stmt->execute()) {
+$stmtPedido->execute();
 
-    if ($stmt->affected_rows > 0) {
+$resultadoPedido = $stmtPedido->get_result();
+
+if ($resultadoPedido->num_rows === 0) {
+
+    echo json_encode([
+        "error" => "El pedido no existe"
+    ]);
+
+    $stmtPedido->close();
+    $conexion->close();
+    exit;
+}
+
+$stmtPedido->close();
+
+
+
+$sqlHistorial = "
+    SELECT idPedido
+    FROM historial
+    WHERE idPedido = ?
+";
+
+$stmtHistorial = $conexion->prepare($sqlHistorial);
+
+if (!$stmtHistorial) {
+    echo json_encode([
+        "error" => "Error al consultar el historial: " . $conexion->error
+    ]);
+    exit;
+}
+
+$stmtHistorial->bind_param(
+    "i",
+    $idPedido
+);
+
+$stmtHistorial->execute();
+
+$resultadoHistorial = $stmtHistorial->get_result();
+
+
+if ($resultadoHistorial->num_rows > 0) {
+
+    $stmtHistorial->close();
+
+    $sqlUpdate = "
+        UPDATE historial
+        SET estrellas = ?
+        WHERE idPedido = ?
+    ";
+
+    $stmtUpdate = $conexion->prepare($sqlUpdate);
+
+    if (!$stmtUpdate) {
+        echo json_encode([
+            "error" => "Error al actualizar la calificacion"
+        ]);
+        exit;
+    }
+
+    $stmtUpdate->bind_param(
+        "ii",
+        $estrellas,
+        $idPedido
+    );
+
+    if ($stmtUpdate->execute()) {
 
         echo json_encode([
             "success" => true,
@@ -67,20 +148,60 @@ if ($stmt->execute()) {
     } else {
 
         echo json_encode([
-            "error" => "No se encontro el pedido"
+            "error" => "No se pudo actualizar la calificacion"
         ]);
-
     }
+
+    $stmtUpdate->close();
+
+
 
 } else {
 
-    echo json_encode([
-        "error" => "No se pudo guardar la calificacion"
-    ]);
+    $stmtHistorial->close();
 
+    $sqlInsert = "
+        INSERT INTO historial
+        (
+            idPedido,
+            estrellas
+        )
+        VALUES (?, ?)
+    ";
+
+    $stmtInsert = $conexion->prepare($sqlInsert);
+
+    if (!$stmtInsert) {
+        echo json_encode([
+            "error" => "Error al crear el historial: " . $conexion->error
+        ]);
+        exit;
+    }
+
+    $stmtInsert->bind_param(
+        "ii",
+        $idPedido,
+        $estrellas
+    );
+
+    if ($stmtInsert->execute()) {
+
+        echo json_encode([
+            "success" => true,
+            "mensaje" => "Calificacion guardada"
+        ]);
+
+    } else {
+
+        echo json_encode([
+            "error" => "No se pudo guardar la calificacion"
+        ]);
+    }
+
+    $stmtInsert->close();
 }
 
-$stmt->close();
+
 $conexion->close();
 
 ?>
