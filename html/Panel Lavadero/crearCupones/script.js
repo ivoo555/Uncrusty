@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    // MOSTRAR CUPONES
+
     function mostrarCupones(cupones) {
 
         tablaCupones.innerHTML = "";
@@ -185,7 +185,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    // EDITAR CUPÓN
+
     window.editarCupon = function (idCupon) {
 
         window.location.href =
@@ -194,7 +194,6 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
 
-    // DESACTIVAR CUPÓN
     window.cancelarCupon = function (idCupon) {
 
         const confirmar = confirm(
@@ -240,8 +239,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     };
 
-
-    // MOSTRAR / OCULTAR MENÚ
     window.mostrarMenu = function (boton) {
 
         const menu =
@@ -260,9 +257,6 @@ document.addEventListener("DOMContentLoaded", function () {
         menu.classList.toggle("mostrar");
 
     };
-
-
-    // CERRAR MENÚ AL HACER CLIC AFUERA
     document.addEventListener("click", function (event) {
 
         if (!event.target.closest(".acciones")) {
