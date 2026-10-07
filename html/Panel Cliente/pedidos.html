@@ -1,47 +1,94 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Mis pedidos — Lavandería</title>
-<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="nuevostyle.css">
 </head>
+
 <body class="app-body">
+
 <aside class="sidebar">
+
   <ul class="sidebar-nav">
-    <li><a href="inicio.html" class="sidebar-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
-      <span>Inicio</span>
-    </a></li>
-    <li><a href="catalogoServicio.html" class="sidebar-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a4 4 0 018 0v2"/></svg>
-      <span>Catálogo</span>
-    </a></li>
-    <li><a href="pedidos.html" class="sidebar-item active">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 7L12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4"/><path d="M12 11v10"/></svg>
-      <span>Pedidos</span>
-    </a></li>
-    <li><a href="mapa.html" class="sidebar-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 21s-7-6.5-7-11a7 7 0 0114 0c0 4.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
-      <span>Mapa</span>
-    </a></li>
-    <li><a href="historial.html" class="sidebar-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-      <span>Historial</span>
-    </a></li>
+
+    <li>
+      <a href="inicio.html" class="sidebar-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+          <path d="M3 11l9-8 9 8"/>
+          <path d="M5 10v10h14V10"/>
+        </svg>
+        <span>Inicio</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="catalogoServicio.html" class="sidebar-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+          <rect x="3" y="7" width="18" height="13" rx="2"/>
+          <path d="M8 7V5a4 4 0 018 0v2"/>
+        </svg>
+        <span>Catálogo</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="pedidos.html" class="sidebar-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+          <path d="M20 7L12 3 4 7v10l8 4 8-4V7z"/>
+          <path d="M4 7l8 4 8-4"/>
+          <path d="M12 11v10"/>
+        </svg>
+        <span>Pedidos</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="mapa.html" class="sidebar-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+          <path d="M12 21s-7-6.5-7-11a7 7 0 0114 0c0 4.5-7 11-7 11z"/>
+          <circle cx="12" cy="10" r="2.5"/>
+        </svg>
+        <span>Mapa</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="historial.html" class="sidebar-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 7v5l3 3"/>
+        </svg>
+        <span>Historial</span>
+      </a>
+    </li>
+
   </ul>
+
   <a href="login.html" class="sidebar-item sidebar-logout" aria-label="Cerrar sesión">
-    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+      <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 014 0h4"/>
+      <path d="M16 17l5-5-5-5"/>
+      <path d="M21 12H9"/>
+    </svg>
   </a>
+
 </aside>
 
 <div class="pedidos-shell-outer">
+
   <div class="pedidos-shell">
+
     <h1>Mis pedidos</h1>
 
     <div class="tabla-pedidos">
+
       <table>
+
         <caption>Pedidos</caption>
+
         <thead>
           <tr>
             <th>Producto</th>
@@ -51,47 +98,101 @@
             <th>Ubicación del pedido</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td class="producto">Pantalón</td>
-            <td>Limpieza</td>
-            <td class = "horario">9:30</td>
-            <td><span class="estado estado-recoleccion">En recolección</span></td>
-            <td class="ubicacion"></td>
-          </tr>
-          <tr>
-            <td class="producto">Vestido</td>
-            <td>Planchado</td>
-            <td class= "horario">15:30</td>
-            <td><span class="estado estado-pendiente">Pendiente</span></td>
-            <td class="ubicacion"></td>
-          </tr>
-          <tr>
-            <td class="producto">Traje</td>
-            <td>Lavado en seco</td>
-            <td class = "horario"> 11:00</td>
-            <td><span class="estado estado-limpieza">En limpieza</span></td>
-            <td class="ubicacion"></td>
-          </tr>
-          <tr>
-            <td class="producto">Alfombra</td>
-            <td>Limpieza y desinfección</td>
-            <td class = "horario"> 12:30</td>
-            <td><span class="estado estado-listo">Listo para la entrega</span></td>
-            <td class="ubicacion"></td>
-          </tr>
-          <tr>
-            <td class="producto">Sábanas</td>
-            <td>Lavado y planchado</td>
-            <td class = "Horario"> 14:00</td>
-            <td><span class="estado estado-entregado">Entregado</span></td>
-            <td class="ubicacion"></td>
-          </tr>
-        </tbody>
+
+        <tbody id="pedidos"></tbody>
+
       </table>
+
     </div>
+
   </div>
+
 </div>
+
+<script>
+
+fetch("pedidos.php")
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Error HTTP: " + response.status);
+        }
+
+        return response.json();
+    })
+    .then(data => {
+
+        const tabla = document.getElementById("pedidos");
+
+        if (!data.ok) {
+            tabla.innerHTML = `
+                <tr>
+                    <td colspan="5">${data.mensaje}</td>
+                </tr>
+            `;
+            return;
+        }
+
+        if (data.pedidos.length === 0) {
+            tabla.innerHTML = `
+                <tr>
+                    <td colspan="5">No hay pedidos pendientes.</td>
+                </tr>
+            `;
+            return;
+        }
+
+        data.pedidos.forEach(pedido => {
+
+            let estadoClase = "estado-pendiente";
+
+            if (pedido.estado === "En recolección") {
+                estadoClase = "estado-recoleccion";
+            }
+
+            if (pedido.estado === "En limpieza") {
+                estadoClase = "estado-limpieza";
+            }
+
+            if (pedido.estado === "Listo para la entrega") {
+                estadoClase = "estado-listo";
+            }
+
+            let horario = pedido.fecha_programada || "";
+
+            let ubicacion = pedido.direccion_reparto || pedido.direccion_entrega || "";
+
+            const fila = document.createElement("tr");
+
+            fila.innerHTML = `
+                <td class="producto">${pedido.id_pedido}</td>
+                <td>${pedido.id_servicio}</td>
+                <td class="horario">${horario}</td>
+                <td>
+                    <span class="estado ${estadoClase}">
+                        ${pedido.estado}
+                    </span>
+                </td>
+                <td class="ubicacion">${ubicacion}</td>
+            `;
+
+            tabla.appendChild(fila);
+
+        });
+
+    })
+    .catch(error => {
+
+        console.error("Error al cargar pedidos:", error);
+
+        document.getElementById("pedidos").innerHTML = `
+            <tr>
+                <td colspan="5">Error al cargar los pedidos.</td>
+            </tr>
+        `;
+
+    });
+
+</script>
 
 </body>
 </html>
