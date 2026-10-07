@@ -20,28 +20,24 @@
         <select name="Repartidor" id="Repartidor" required>
             <option value="" disabled selected hidden>Repartidor</option>
         </select>
-        <select name="Sucursal" id="Sucursal" required>
-            <option value="" disabled selected hidden>Sucursal</option>
-        </select>
-        <input type="date" name="Dia" id="Dia">
         
         <div id="MarcoTitulo"><h1>Gestion de Pedidos</h1></div>
-        <button>Agregar Pedido</button>
+       
         <button id="btnFiltrar">Filtrar</button>
         <div id="tabla">
         <table>
             <thead>
                 <tr>
-                    <th>Id Pedido</th>
                     <th>Cliente</th>
                     <th>Prenda/Servicio</th>
                     <th>Estado Actual</th>
                     <th>Repartidor Asignado</th>
-                    <th>Sucursal</th>
-                    <th>Horario Estimado</th>
+                    <th>Direccion</th>
+                    <th>Entrega</th>
                     <th>Accion</th>
                 </tr>
             </thead>
+            <tbody id="tablaPedidos"></tbody>
         </table>
     </div>
     </div>
@@ -105,6 +101,16 @@
                 <span>Facturar Pedido</span> 
                 </a> 
             </li> 
+            <li>
+                <a href="../agregarServicio/index.html" class="sidebar-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <circle cx="12" cy="12" r="9"/>
+                        <path d="M12 8v8"/>
+                        <path d="M8 12h8"/>
+                    </svg>
+                    <span>Agregar Servicio</span>
+                </a>
+            </li>
         </ul> 
         <a href="login.html" class="sidebar-item sidebar-logout" aria-label="Cerrar sesión"> 
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2"> 
@@ -113,5 +119,6 @@
         <path d="M21 12H9"/> </svg> 
         </a> 
     </aside>
+    <script src="script.js"></script>
 </body>
 </html>
