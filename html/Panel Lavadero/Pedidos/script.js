@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function () {
 
     const selectEstado = document.getElementById("Estado");
@@ -6,11 +7,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const tablaPedidos = document.getElementById("tablaPedidos");
 
     fetch("../../conexiones/cargarDatosPedido.php")
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Error HTTP: " + response.status);
+            }
+            return response.json();
+        })
         .then(datos => {
 
-            console.log(datos);
-            console.log(datos.pedidos);
+            console.log("Datos recibidos:", datos);
 
             if (datos.error) {
                 console.error(datos.error);
@@ -22,7 +27,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 const option = document.createElement("option");
 
                 option.value = repartidor.id_repartidor;
-                option.textContent = repartidor.nombreCompleto;
+                option.textContent =
+                    repartidor.nombreCompleto || "Sin nombre";
 
                 selectRepartidor.appendChild(option);
             });
@@ -30,9 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
             mostrarPedidos(datos.pedidos);
         })
         .catch(error => {
-
             console.error("Error al cargar los datos:", error);
-
         });
 
 
@@ -40,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         tablaPedidos.innerHTML = "";
 
-        if (pedidos.length === 0) {
+        if (!pedidos || pedidos.length === 0) {
 
             const fila = document.createElement("tr");
 
@@ -55,63 +59,66 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-
         pedidos.forEach(pedido => {
 
             console.log("Pedido:", pedido);
-            console.log("Cliente:", pedido.cliente);
-            console.log("Repartidor:", pedido.repartidor);
 
             const fila = document.createElement("tr");
 
-            const cliente = pedido.cliente || "Sin cliente";
-            const servicio = pedido.servicio || "Sin servicio";
-            const prenda = pedido.prenda || "Sin prenda";
+            const cliente =
+                pedido.cliente || "Sin cliente";
+
+            const servicio =
+                pedido.servicio || "Sin servicio";
+
+            const prenda =
+                pedido.prenda || "Sin prenda";
+
+            const estado =
+                pedido.estado || "Sin estado";
+
+            const repartidor =
+                pedido.repartidor || "Sin asignar";
+
+            const direccion =
+                pedido.direccion || "Sin direccion";
+
+            const fecha =
+                pedido.fecha_pedido || "Sin fecha";
 
             fila.innerHTML = `
-                <td>
-                    ${cliente}
-                </td>
-
-                <td>
-                    ${servicio} / ${prenda}
-                </td>
-
-                <td>
-                    ${pedido.estado}
-                </td>
-
-                <td>
-                    ${pedido.repartidor || "Sin asignar"}
-                </td>
-
-                <td>
-                    ${pedido.direccion}
-                </td>
-
-                <td>
-                    ${pedido.fecha_pedido}
-                </td>
-
+                <td>${cliente}</td>
+                <td>${servicio} / ${prenda}</td>
+                <td>${estado}</td>
+                <td>${repartidor}</td>
+                <td>${direccion}</td>
+                <td>${fecha}</td>
                 <td class="acciones">
 
                     <button
                         class="btnMenu"
-                        onclick="mostrarMenu(this)">
+                        onclick="mostrarMenu(this)"
+                    >
                         ⋮
                     </button>
 
                     <div class="menuAcciones">
 
-                        <button onclick="cambiarEstado(${pedido.id_pedido})">
+                        <button
+                            onclick="cambiarEstado(${pedido.id_pedido})"
+                        >
                             Cambiar estado
                         </button>
 
-                        <button onclick="editarPedido(${pedido.id_pedido})">
+                        <button
+                            onclick="editarPedido(${pedido.id_pedido})"
+                        >
                             Editar
                         </button>
 
-                        <button onclick="cancelarPedido(${pedido.id_pedido})">
+                        <button
+                            onclick="cancelarPedido(${pedido.id_pedido})"
+                        >
                             Cancelar
                         </button>
 
@@ -139,38 +146,48 @@ document.addEventListener("DOMContentLoaded", function () {
             method: "POST",
             body: datos
         })
+            .then(response => {
 
-        .then(response => response.json())
+                if (!response.ok) {
+                    throw new Error(
+                        "Error HTTP: " + response.status
+                    );
+                }
 
-        .then(respuestaFiltro => {
+                return response.json();
+            })
+            .then(respuestaFiltro => {
 
-            if (respuestaFiltro.error) {
+                console.log(
+                    "Respuesta del filtro:",
+                    respuestaFiltro
+                );
 
-                console.error(respuestaFiltro.error);
+                if (respuestaFiltro.error) {
+                    console.error(
+                        respuestaFiltro.error
+                    );
+                    return;
+                }
 
-                return;
-            }
+                if (respuestaFiltro.pedidos) {
+                    mostrarPedidos(
+                        respuestaFiltro.pedidos
+                    );
+                } else {
+                    mostrarPedidos(
+                        respuestaFiltro
+                    );
+                }
+            })
+            .catch(error => {
 
-            if (respuestaFiltro.pedidos) {
+                console.error(
+                    "Error al filtrar los pedidos:",
+                    error
+                );
 
-                mostrarPedidos(respuestaFiltro.pedidos);
-
-            } else {
-
-                mostrarPedidos(respuestaFiltro);
-
-            }
-
-        })
-
-        .catch(error => {
-
-            console.error(
-                "Error al filtrar los pedidos:",
-                error
-            );
-
-        });
+            });
 
     });
 
@@ -180,17 +197,19 @@ document.addEventListener("DOMContentLoaded", function () {
 function mostrarMenu(boton) {
 
     const menu =
-        boton.parentElement.querySelector(".menuAcciones");
+        boton.parentElement.querySelector(
+            ".menuAcciones"
+        );
 
-    document.querySelectorAll(".menuAcciones").forEach(elemento => {
+    document
+        .querySelectorAll(".menuAcciones")
+        .forEach(elemento => {
 
-        if (elemento !== menu) {
+            if (elemento !== menu) {
+                elemento.classList.remove("mostrar");
+            }
 
-            elemento.classList.remove("mostrar");
-
-        }
-
-    });
+        });
 
     menu.classList.toggle("mostrar");
 }
@@ -200,11 +219,13 @@ document.addEventListener("click", function (event) {
 
     if (!event.target.closest(".acciones")) {
 
-        document.querySelectorAll(".menuAcciones").forEach(menu => {
+        document
+            .querySelectorAll(".menuAcciones")
+            .forEach(menu => {
 
-            menu.classList.remove("mostrar");
+                menu.classList.remove("mostrar");
 
-        });
+            });
 
     }
 
@@ -239,76 +260,81 @@ function cancelarPedido(idPedido) {
         return;
     }
 
-
     const datos = new FormData();
 
-    datos.append("id_pedido", idPedido);
-
+    datos.append(
+        "id_pedido",
+        idPedido
+    );
 
     fetch("../../conexiones/cancelarPedido.php", {
-
         method: "POST",
         body: datos
-
     })
+        .then(response => response.text())
+        .then(texto => {
 
-    .then(response => {
-
-        return response.text();
-
-    })
-
-    .then(texto => {
-
-        console.log("Respuesta REAL del servidor:");
-        console.log(texto);
-
-        try {
-
-            const resultado = JSON.parse(texto);
-
-            console.log("Respuesta al eliminar:", resultado);
-
-            if (resultado.error) {
-
-                alert(resultado.mensaje);
-
-                return;
-            }
-
-            alert(resultado.mensaje);
-
-            location.reload();
-
-        } catch (error) {
-
-            console.error(
-                "La respuesta del servidor NO es JSON válido."
+            console.log(
+                "Respuesta REAL del servidor:"
             );
 
+            console.log(texto);
+
+            try {
+
+                const resultado =
+                    JSON.parse(texto);
+
+                console.log(
+                    "Respuesta al eliminar:",
+                    resultado
+                );
+
+                if (resultado.error) {
+
+                    alert(
+                        resultado.mensaje
+                    );
+
+                    return;
+                }
+
+                alert(
+                    resultado.mensaje
+                );
+
+                location.reload();
+
+            } catch (error) {
+
+                console.error(
+                    "La respuesta del servidor NO es JSON valido."
+                );
+
+                console.error(
+                    "Respuesta recibida:",
+                    texto
+                );
+
+                alert(
+                    "El servidor no devolvio una respuesta valida. Revisa la consola."
+                );
+
+            }
+
+        })
+        .catch(error => {
+
             console.error(
-                "Respuesta recibida:",
-                texto
+                "Error al eliminar el pedido:",
+                error
             );
 
             alert(
-                "El servidor no devolvió una respuesta válida. Revisá la consola."
+                "Ocurrio un error al eliminar el pedido."
             );
-        }
 
-    })
-
-    .catch(error => {
-
-        console.error(
-            "Error al eliminar el pedido:",
-            error
-        );
-
-        alert(
-            "Ocurrió un error al eliminar el pedido."
-        );
-
-    });
+        });
 
 }
+
