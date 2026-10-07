@@ -6,7 +6,7 @@ $conexion = new mysqli(
     "localhost",
     "root",
     "",
-    "lavanderia_uncrusty"
+    "uncrustybd"
 );
 
 if ($conexion->connect_error) {
