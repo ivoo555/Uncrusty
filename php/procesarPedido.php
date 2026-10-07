@@ -238,29 +238,6 @@ if (!$stmtPedido) {
     exit;
 }
 
-$sqlHistorial = "
-    INSERT INTO historial
-    (
-        idPedido,
-        estrellas
-    )
-    VALUES
-    (?, NULL)
-";
-
-$stmtHistorial =
-    $conexion->prepare($sqlHistorial);
-
-if (!$stmtHistorial) {
-
-    echo json_encode([
-        "ok" => false,
-        "mensaje" => "Error al preparar el historial."
-    ]);
-
-    exit;
-}
-
 $pedidosCreados = [];
 
 foreach ($pedido as $producto) {
@@ -322,21 +299,6 @@ foreach ($pedido as $producto) {
     $idPedido =
         $conexion->insert_id;
 
-    $stmtHistorial->bind_param(
-        "i",
-        $idPedido
-    );
-
-    if (!$stmtHistorial->execute()) {
-
-        echo json_encode([
-            "ok" => false,
-            "mensaje" => "Error al guardar el historial."
-        ]);
-
-        exit;
-    }
-
     $pedidosCreados[] = [
         "idPedido" => $idPedido,
         "id_servicio" => $id_servicio,
@@ -348,8 +310,6 @@ foreach ($pedido as $producto) {
 }
 
 $stmtPedido->close();
-
-$stmtHistorial->close();
 
 $conexion->close();
 
