@@ -21,7 +21,7 @@ $sql = "
         p.fecha_pedido,
         p.estado,
         p.direccion AS direccion_pedido,
-        p.descuento,
+        p.id_descuento,
         p.observaciones,
 
         COALESCE(SUM(dp.subtotal), 0) AS total
@@ -45,7 +45,7 @@ $sql = "
         p.fecha_pedido,
         p.estado,
         p.direccion,
-        p.descuento,
+        p.id_descuento,
         p.observaciones
 
     ORDER BY p.fecha_pedido DESC
@@ -130,7 +130,7 @@ while ($fila = $resultado->fetch_assoc()) {
             "fecha_pedido" => $fila["fecha_pedido"],
             "estado" => $fila["estado"],
             "direccion" => $fila["direccion_pedido"],
-            "descuento" => $fila["descuento"],
+            "id_descuento" => $fila["id_descuento"],
             "observaciones" => $fila["observaciones"],
             "total" => $fila["total"],
             "detalles" => $detalles
