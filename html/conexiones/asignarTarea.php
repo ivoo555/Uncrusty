@@ -18,7 +18,7 @@ $conexion->begin_transaction();
 
 try {
 
-    // 1. Obtener la dirección del pedido
+
     $sqlDireccion = "
         SELECT direccion
         FROM pedidos
@@ -50,7 +50,7 @@ try {
     $stmtDireccion->close();
 
 
-    // 2. Crear el reparto
+
     $sql = "
         INSERT INTO repartos
         (
@@ -89,7 +89,7 @@ try {
     $stmt->close();
 
 
-    // 3. Cambiar disponibilidad del repartidor
+
     $sqlRepartidor = "
         UPDATE repartidores
         SET disponibilidad = 'Ocupado'
@@ -120,7 +120,6 @@ try {
     $stmtRepartidor->close();
 
 
-    // 4. Cambiar estado del pedido
     $sqlPedido = "
         UPDATE pedidos
         SET estado = 'En Recolección'
@@ -151,7 +150,6 @@ try {
     $stmtPedido->close();
 
 
-    // 5. Confirmar los cambios
     $conexion->commit();
 
     echo "Tarea asignada correctamente.";
