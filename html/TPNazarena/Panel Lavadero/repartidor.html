@@ -64,7 +64,6 @@
 
         <tbody id="tablaPedidos">
 
-
         </tbody>
 
     </table>
@@ -82,16 +81,9 @@
 
 <script>
 
-
 let idrepartidor = localStorage.getItem("idrepartidor");
 
-
-// Acá solamente se guardan los pedidos
-// cuyo estado fue modificado
-
 let cambios = [];
-
-
 
 console.log(
     "ID del repartidor:",
@@ -99,52 +91,41 @@ console.log(
 );
 
 
-
 if (idrepartidor == null) {
-
 
     alert(
         "No se encontro el id del repartidor"
     );
 
-
 } else {
-
 
     fetch(
         "repartir.php?idrepartidor=" +
         idrepartidor
     )
 
-
     .then(respuesta => {
-
 
         console.log(
             "Respuesta de repartir.php:",
             respuesta
         );
 
-
         return respuesta.json();
 
     })
 
-
     .then(data => {
-
 
         console.log(
             "Datos recibidos:",
             data.repartos
         );
 
-
         localStorage.setItem(
             "cantidad_columnas",
             data.cantidad_columnas
         );
-
 
 
         let tabla =
@@ -153,16 +134,33 @@ if (idrepartidor == null) {
             );
 
 
+        let pedidosMostrados = [];
+
 
         data.repartos.forEach(
             reparto => {
+
+
+                if (
+                    pedidosMostrados.includes(
+                        reparto.id_pedido
+                    )
+                ) {
+
+                    return;
+
+                }
+
+
+                pedidosMostrados.push(
+                    reparto.id_pedido
+                );
 
 
                 let fila =
                     document.createElement(
                         "tr"
                     );
-
 
 
                 fila.innerHTML = `
@@ -204,17 +202,14 @@ if (idrepartidor == null) {
                             ${reparto.estado}
                         </span>
 
-
                         <br>
                         <br>
-
 
                         <strong>
                             Cambiar estado:
                         </strong>
 
                         <br>
-
 
                         <select class="estado">
 
@@ -246,12 +241,9 @@ if (idrepartidor == null) {
                 `;
 
 
-
                 tabla.appendChild(
                     fila
                 );
-
-
 
 
                 let select =
@@ -260,17 +252,12 @@ if (idrepartidor == null) {
                     );
 
 
-
-
                 let estadoOriginal =
                     reparto.estado;
 
 
-
-
                 select.value =
                     estadoOriginal;
-
 
 
                 console.log(
@@ -279,13 +266,10 @@ if (idrepartidor == null) {
                 );
 
 
-
                 console.log(
                     "Estado original:",
                     estadoOriginal
                 );
-
-
 
 
                 select.addEventListener(
@@ -299,13 +283,10 @@ if (idrepartidor == null) {
                         );
 
 
-
-
                         if (
                             select.value ===
                             estadoOriginal
                         ) {
-
 
                             cambios =
                                 cambios.filter(
@@ -314,12 +295,9 @@ if (idrepartidor == null) {
                                         reparto.id_pedido
                                 );
 
-
                         }
 
                         else {
-
-
 
                             let cambioExistente =
                                 cambios.find(
@@ -329,22 +307,16 @@ if (idrepartidor == null) {
                                 );
 
 
-
                             if (
                                 cambioExistente
                             ) {
 
-
-
                                 cambioExistente.estado =
                                     select.value;
-
 
                             }
 
                             else {
-
-
 
                                 cambios.push({
 
@@ -356,11 +328,9 @@ if (idrepartidor == null) {
 
                                 });
 
-
                             }
 
                         }
-
 
 
                         console.log(
@@ -368,10 +338,6 @@ if (idrepartidor == null) {
                             cambios
                         );
 
-
-
-                        // Activar el botón solamente
-                        // si existe algún cambio
 
                         if (
                             cambios.length > 0
@@ -391,33 +357,25 @@ if (idrepartidor == null) {
 
                         }
 
-
                     }
                 );
 
-
             }
         );
-
 
     })
 
 
     .catch(error => {
 
-
         console.log(
             "Error al obtener los repartos:",
             error
         );
 
-
     });
 
 }
-
-
-
 
 
 let marco =
@@ -441,14 +399,11 @@ marco.querySelector(
 
 
 
-
-
 document.getElementById(
     "botonModificar"
 ).addEventListener(
     "click",
     function() {
-
 
 
         if (
@@ -462,7 +417,6 @@ document.getElementById(
             return;
 
         }
-
 
 
         console.log(
@@ -485,14 +439,11 @@ document.getElementById(
         );
 
 
-
-
         fetch(
             "modificartabla.php",
             {
 
                 method: "POST",
-
 
                 headers: {
 
@@ -500,7 +451,6 @@ document.getElementById(
                         "application/json"
 
                 },
-
 
                 body:
                     JSON.stringify({
@@ -516,21 +466,17 @@ document.getElementById(
 
         .then(respuesta => {
 
-
             console.log(
                 "Respuesta del servidor:",
                 respuesta
             );
 
-
             return respuesta.json();
-
 
         })
 
 
         .then(data => {
-
 
             console.log(
                 "Datos recibidos del PHP:",
@@ -538,20 +484,14 @@ document.getElementById(
             );
 
 
-
             if (
                 data.exito === true
             ) {
-
 
                 alert(
                     "Datos enviados correctamente"
                 );
 
-
-
-                // Actualizar los estados
-                // mostrados como actuales
 
                 document
                     .querySelectorAll(
@@ -559,7 +499,6 @@ document.getElementById(
                     )
                     .forEach(
                         fila => {
-
 
                             let select =
                                 fila.querySelector(
@@ -587,11 +526,7 @@ document.getElementById(
                     );
 
 
-
-
                 cambios = [];
-
-
 
 
                 document.getElementById(
@@ -603,42 +538,35 @@ document.getElementById(
 
             else {
 
-
                 alert(
                     "Error: " +
                     data.mensaje
                 );
 
-
             }
-
 
         })
 
 
         .catch(error => {
 
-
             console.log(
                 "Error al enviar los datos:",
                 error
             );
 
-
             alert(
                 "No se pudieron enviar los datos."
             );
 
-
         });
-
 
     }
 );
-
 
 </script>
 
 </body>
 
 </html>
+
