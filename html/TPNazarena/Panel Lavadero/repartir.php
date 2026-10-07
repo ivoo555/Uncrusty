@@ -54,7 +54,7 @@ while ($fila = $resultado->fetch_assoc()) {
 
 if (count($repartos) == 0) {
 
-    $sql_disponibilidad = "UPDATE repartidores SET disponibilidad = 'Ocupado' WHERE id_repartidor = ?";
+    $sql_disponibilidad = "UPDATE repartidores SET disponibilidad = 'Disponible' WHERE id_repartidor = ?";
 
     $stmt_disponibilidad = $conexion->prepare($sql_disponibilidad);
 
