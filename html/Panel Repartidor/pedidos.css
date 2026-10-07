@@ -1,0 +1,185 @@
+body {
+    background-color: #E4F3FB;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--text-primary);
+}
+
+#Titulo {
+    position: absolute;
+    left: 130px;
+    top: 20px;
+    color: #24558A;
+    font-size: 30px;
+}
+
+#MarcoProductos {
+    width: 1100px;
+    height: 500px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 1px 1px black;
+    position: absolute;
+    left: 130px;
+    top: 90px;
+    border: #B8D5E6 solid 2px;
+    overflow: hidden;
+}
+
+#MarcoTitulo {
+    height: 65px;
+    background-color: #E2F0F8;
+    display: flex;
+    align-items: center;
+    padding-left: 25px;
+    box-sizing: border-box;
+}
+
+#MarcoTitulo h1 {
+    font-size: 25px;
+    margin: 0;
+    color: #24558A;
+}
+
+/* TABLA */
+#tabla {
+    width: calc(100% - 50px);
+    margin-left: 25px;
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+th {
+    background-color: #E2F0F8;
+    color: #24558A;
+    padding: 12px 8px;
+    border: 1px solid #B8D5E6;
+    font-size: 14px;
+    text-align: center;
+}
+
+td {
+    padding: 10px 8px;
+    border: 1px solid #B8D5E6;
+    text-align: center;
+    font-size: 13px;
+}
+
+#TarjetaProducto {
+    width: 400px;
+    height: 250px;
+    background-color: white;
+    box-shadow: 1px 1px black;
+    border-radius: 10px;
+    position: absolute;
+    left: 130px;
+    top: 620px;
+    border: #B8D5E6 solid 2px;
+    overflow: hidden;
+}
+
+#ParteSuperior {
+    height: 60px;
+    background-color: #E2F0F8;
+}
+
+#ParteSuperior h1 {
+    margin: 0;
+    padding: 17px 20px;
+    font-size: 23px;
+    color: #24558A;
+}
+
+/* SIDEBAR */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 95px;
+    background: white;
+    border-right: 0.5px solid black;
+    padding: 20px 0;
+    z-index: 10;
+}
+
+.app-shell {
+    margin-left: 88px;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar-item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 4px;
+    border-radius: 10px;
+    color: #6B6A63;
+    text-decoration: none;
+}
+
+.sidebar-item svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+}
+
+.sidebar-item span {
+    font-size: 10px;
+}
+
+.sidebar-item:hover {
+    background: transparent;
+    color: #1E1E1B;
+    width: 85px;
+}
+
+.sidebar-item.active {
+    background: transparent;
+    color: #16709F;
+    font-weight: 500;
+    width: 85px;
+}
+
+.sidebar-logout {
+    margin-top: auto;
+    padding: 10px;
+    color: #9C9A90;
+}
+
+.sidebar-logout:hover {
+    color: #A32D2D;
+}
+button {
+  width: 100%;
+  background: #1A86C4;
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  margin-bottom: 14px;
+  transition: background 0.15s ease;
+}

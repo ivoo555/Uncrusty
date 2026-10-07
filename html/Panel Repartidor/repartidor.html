@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionar Pedidos</title>
+    <link rel="stylesheet" href="pedidos.css">
+</head>
+
+<body>
+
+    <h1 id="Titulo">
+        Panel Gestión de Pedidos
+    </h1>
+
+    <div id="MarcoProductos">
+
+        <div id="MarcoTitulo">
+            <h1>
+                Tabla de pedidos
+            </h1>
+        </div>
+
+        <div id="tabla">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Id Pedido</th>
+                        <th>Id Repartidor</th>
+                        <th>Tipo</th>
+                        <th>Dirección</th>
+                        <th>Fecha Programada</th>
+                        <th>Fecha Realizada</th>
+                        <th>Estado</th>
+                        <th>Observaciones</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tablaPedidos">
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <button id="botonModificar" disabled>
+            Modificar
+        </button>
+
+    </div>
+
+
+    <script>
+
+        let idrepartidor =
+            localStorage.getItem("idrepartidor");
+
+        let cambios = [];
+
+        console.log(
+            "ID del repartidor:",
+            idrepartidor
+        );
+
+
+        if (idrepartidor == null) {
+
+            alert(
+                "No se encontro el id del repartidor"
+            );
+
+        } else {
+
+            fetch(
+                "repartir.php?idrepartidor=" +
+                encodeURIComponent(idrepartidor)
+            )
+
+            .then(respuesta => {
+
+                console.log(
+                    "Respuesta de repartir.php:",
+                    respuesta
+                );
+
+                if (!respuesta.ok) {
+                    throw new Error(
+                        "Error HTTP: " +
+                        respuesta.status
+                    );
+                }
+
+                return respuesta.json();
+
+            })
+
+            .then(data => {
+
+                console.log(
+                    "Datos recibidos:",
+                    data
+                );
+
+
+                // ==========================================
+                // MOSTRAR CANTIDAD DE PEDIDOS PENDIENTES
+                // ==========================================
+
+                let marco =
+                    document.getElementById(
+                        "MarcoTitulo"
+                    );
+
+                marco.querySelector(
+                    "h1"
+                ).textContent =
+                    "Tabla De Pedidos-" +
+                    data.cantidad +
+                    " pendientes.";
+
+
+                // ==========================================
+                // TABLA
+                // ==========================================
+
+                let tabla =
+                    document.getElementById(
+                        "tablaPedidos"
+                    );
+
+                let pedidosMostrados = [];
+
+
+                // ==========================================
+                // MOSTRAR REPARTOS
+                // ==========================================
+
+                data.repartos.forEach(
+                    reparto => {
+
+
+                        // Evitar pedidos repetidos
+
+                        if (
+                            pedidosMostrados.includes(
+                                reparto.id_pedido
+                            )
+                        ) {
+                            return;
+                        }
+
+
+                        pedidosMostrados.push(
+                            reparto.id_pedido
+                        );
+
+
+                        // Crear fila
+
+                        let fila =
+                            document.createElement(
+                                "tr"
+                            );
+
+
+                        fila.innerHTML = `
+
+                            <td>
+                                ${reparto.id_pedido}
+                            </td>
+
+                            <td>
+                                ${reparto.id_repartidor}
+                            </td>
+
+                            <td>
+                                ${reparto.tipo}
+                            </td>
+
+                            <td>
+                                ${reparto.direccion}
+                            </td>
+
+                            <td>
+                                ${reparto.fecha_programada ?? "Sin fecha"}
+                            </td>
+
+                            <td>
+                                ${reparto.fecha_realizada ?? "Pendiente"}
+                            </td>
+
+                            <td>
+
+                                <strong>
+                                    Estado actual:
+                                </strong>
+
+                                <br>
+
+                                <span class="estadoActual">
+                                    ${reparto.estado}
+                                </span>
+
+                                <br>
+                                <br>
+
+                                <strong>
+                                    Cambiar estado:
+                                </strong>
+
+                                <br>
+
+                                <select class="estado">
+
+                                    <option value="Pendiente">
+                                        Pendiente
+                                    </option>
+
+                                    <option value="En proceso">
+                                        En proceso
+                                    </option>
+
+                                    <option value="Completado">
+                                        Completado
+                                    </option>
+
+                                </select>
+
+                            </td>
+
+                            <td>
+                                ${reparto.observaciones ?? ""}
+                            </td>
+
+                            <td>
+                            </td>
+
+                        `;
+
+
+                        tabla.appendChild(
+                            fila
+                        );
+
+
+                        // ==========================================
+                        // SELECT DE ESTADO
+                        // ==========================================
+
+                        let select =
+                            fila.querySelector(
+                                ".estado"
+                            );
+
+
+                        let estadoOriginal =
+                            reparto.estado;
+
+
+                        select.value =
+                            estadoOriginal;
+
+
+                        console.log(
+                            "Pedido:",
+                            reparto.id_pedido
+                        );
+
+                        console.log(
+                            "Estado original:",
+                            estadoOriginal
+                        );
+
+
+                        // ==========================================
+                        // CAMBIAR ESTADO
+                        // ==========================================
+
+                        select.addEventListener(
+                            "change",
+                            function () {
+
+
+                                console.log(
+                                    "Estado seleccionado:",
+                                    select.value
+                                );
+
+
+                                // Si vuelve al estado original,
+                                // quitar el cambio
+
+                                if (
+                                    select.value ===
+                                    estadoOriginal
+                                ) {
+
+                                    cambios =
+                                        cambios.filter(
+                                            cambio =>
+                                                cambio.id_pedido !==
+                                                reparto.id_pedido
+                                        );
+
+                                }
+
+                                else {
+
+                                    let cambioExistente =
+                                        cambios.find(
+                                            cambio =>
+                                                cambio.id_pedido ===
+                                                reparto.id_pedido
+                                        );
+
+
+                                    if (
+                                        cambioExistente
+                                    ) {
+
+                                        cambioExistente.estado =
+                                            select.value;
+
+                                    }
+
+                                    else {
+
+                                        cambios.push({
+
+                                            id_pedido:
+                                                reparto.id_pedido,
+
+                                            estado:
+                                                select.value
+
+                                        });
+
+                                    }
+
+                                }
+
+
+                                console.log(
+                                    "CAMBIOS A ENVIAR:",
+                                    cambios
+                                );
+
+
+                                // Activar/desactivar botón
+
+                                if (
+                                    cambios.length > 0
+                                ) {
+
+                                    document.getElementById(
+                                        "botonModificar"
+                                    ).disabled = false;
+
+                                }
+
+                                else {
+
+                                    document.getElementById(
+                                        "botonModificar"
+                                    ).disabled = true;
+
+                                }
+
+                            }
+                        );
+
+                    }
+                );
+
+            })
+
+            .catch(error => {
+
+                console.log(
+                    "Error al obtener los repartos:",
+                    error
+                );
+
+                alert(
+                    "No se pudieron cargar los pedidos."
+                );
+
+            });
+
+        }
+
+
+        // ==========================================
+        // BOTÓN MODIFICAR
+        // ==========================================
+
+        document.getElementById(
+            "botonModificar"
+        ).addEventListener(
+            "click",
+            function () {
+
+
+                if (
+                    cambios.length === 0
+                ) {
+
+                    alert(
+                        "No hay cambios para enviar."
+                    );
+
+                    return;
+                }
+
+
+                console.log(
+                    "================================"
+                );
+
+                console.log(
+                    "ENVIANDO ESTOS DATOS:"
+                );
+
+                console.log(
+                    cambios
+                );
+
+                console.log(
+                    "================================"
+                );
+
+
+                fetch(
+                    "modificartabla.php",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify({
+                                cambios:
+                                    cambios
+                            })
+                    }
+                )
+
+                .then(respuesta => {
+
+                    console.log(
+                        "Respuesta del servidor:",
+                        respuesta
+                    );
+
+                    if (!respuesta.ok) {
+                        throw new Error(
+                            "Error HTTP: " +
+                            respuesta.status
+                        );
+                    }
+
+                    return respuesta.json();
+
+                })
+
+                .then(data => {
+
+                    console.log(
+                        "Datos recibidos del PHP:",
+                        data
+                    );
+
+
+                    if (
+                        data.exito === true
+                    ) {
+
+                        alert(
+                            "Datos enviados correctamente"
+                        );
+
+
+                        // Actualizar el estado visual
+
+                        document
+                            .querySelectorAll(
+                                "#tablaPedidos tr"
+                            )
+                            .forEach(
+                                fila => {
+
+                                    let select =
+                                        fila.querySelector(
+                                            ".estado"
+                                        );
+
+                                    let estadoActual =
+                                        fila.querySelector(
+                                            ".estadoActual"
+                                        );
+
+
+                                    if (
+                                        select &&
+                                        estadoActual
+                                    ) {
+
+                                        estadoActual.textContent =
+                                            select.value;
+
+                                    }
+
+                                }
+                            );
+
+
+                        cambios = [];
+
+
+                        document.getElementById(
+                            "botonModificar"
+                        ).disabled = true;
+
+
+                    }
+
+                    else {
+
+                        alert(
+                            "Error: " +
+                            data.mensaje
+                        );
+
+                    }
+
+                })
+
+                .catch(error => {
+
+                    console.log(
+                        "Error al enviar los datos:",
+                        error
+                    );
+
+                    alert(
+                        "No se pudieron enviar los datos."
+                    );
+
+                });
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>
