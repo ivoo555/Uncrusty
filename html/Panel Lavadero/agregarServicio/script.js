@@ -108,7 +108,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-
     function mostrarServicios(servicios) {
 
         tablaServicios.innerHTML = "";
@@ -236,6 +235,7 @@ function cancelarServicio(idServicio) {
     });
 
 }
+
 
 function mostrarMenu(boton) {
 
