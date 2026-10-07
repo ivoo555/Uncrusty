@@ -19,7 +19,6 @@ if (idrepartidor) {
     exit;
 }
 
-
 $conexion = new mysqli(
     "localhost",
     "root",
@@ -31,11 +30,9 @@ if ($conexion->connect_error) {
     die("Error de conexion: " . $conexion->connect_error);
 }
 
-
 $idrepartidor = $_GET["idrepartidor"];
 
-
-$sql = "SELECT * FROM repartos WHERE id_repartidor = ?";
+$sql = "SELECT * FROM repartos WHERE id_repartidor = ? AND estado != 'Completado'";
 
 $stmt = $conexion->prepare($sql);
 
@@ -49,43 +46,33 @@ $stmt->execute();
 
 $resultado = $stmt->get_result();
 
-
-$sql_columnas = "SELECT * FROM repartos WHERE id_repartidor = ? AND estado = 'pendiente'";
-
-$stmt_columnas = $conexion->prepare($sql_columnas);
-
-if (!$stmt_columnas) {
-    die("Error en la consulta");
-}
-
-$stmt_columnas->bind_param("i", $idrepartidor);
-
-$stmt_columnas->execute();
-
-$resultado_columnas = $stmt_columnas->get_result();
-
-$valor_columnas = $resultado_columnas->num_rows;
-
-
 $repartos = [];
 
 while ($fila = $resultado->fetch_assoc()) {
-
     $repartos[] = $fila;
-
 }
 
+if (count($repartos) == 0) {
+
+    $sql_disponibilidad = "UPDATE repartidores SET disponibilidad = 'Ocupado' WHERE id_repartidor = ?";
+
+    $stmt_disponibilidad = $conexion->prepare($sql_disponibilidad);
+
+    if ($stmt_disponibilidad) {
+        $stmt_disponibilidad->bind_param("i", $idrepartidor);
+        $stmt_disponibilidad->execute();
+        $stmt_disponibilidad->close();
+    }
+}
 
 header("Content-Type: application/json");
 
 echo json_encode([
     "repartos" => $repartos,
-    "cantidad_columnas" => $valor_columnas
+    "cantidad_columnas" => count($repartos)
 ]);
 
-
 $stmt->close();
-$stmt_columnas->close();
 $conexion->close();
 
 ?>
