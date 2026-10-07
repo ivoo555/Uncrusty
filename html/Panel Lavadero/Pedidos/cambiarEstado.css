@@ -1,0 +1,101 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor {
+    width: 100%;
+    max-width: 500px;
+    background-color: white;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 26px;
+}
+
+.campo {
+    margin-bottom: 20px;
+}
+
+.campo label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #444;
+}
+
+.campo input,
+.campo select {
+    width: 100%;
+    height: 45px;
+    padding: 0 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    background-color: white;
+}
+
+.campo input:read-only {
+    background-color: #f0f0f0;
+    color: #555;
+}
+
+.campo select {
+    cursor: pointer;
+}
+
+.campo input:focus,
+.campo select:focus {
+    outline: none;
+    border-color: #4a90e2;
+}
+
+.botones {
+    display: flex;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.botones button {
+    flex: 1;
+    height: 45px;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.botones button[type="submit"] {
+    background-color: #4a90e2;
+    color: white;
+}
+
+.botones button[type="submit"]:hover {
+    background-color: #357abd;
+}
+
+#btnCancelar {
+    background-color: #ddd;
+    color: #333;
+}
+
+#btnCancelar:hover {
+    background-color: #c8c8c8;
+}
