@@ -4,14 +4,12 @@ session_start();
 
 header("Content-Type: application/json");
 
-
 $conexion = new mysqli(
     "localhost",
     "root",
     "",
     "lavanderia_uncrusty"
 );
-
 
 if ($conexion->connect_error) {
 
@@ -23,13 +21,10 @@ if ($conexion->connect_error) {
     exit;
 }
 
-
-
 $datos = json_decode(
     file_get_contents("php://input"),
     true
 );
-
 
 $fecha = $datos["fecha"] ?? "";
 
@@ -44,9 +39,6 @@ $cupon = trim(
 );
 
 $pedido = $datos["pedido"] ?? [];
-
-
-
 
 if (
     empty($fecha) ||
@@ -63,10 +55,7 @@ if (
     exit;
 }
 
-
-
 $hoy = date("Y-m-d");
-
 
 if ($fecha <= $hoy) {
 
@@ -78,19 +67,13 @@ if ($fecha <= $hoy) {
     exit;
 }
 
-
-
-
 $id_cliente = $_SESSION["id"] ?? null;
-
 
 if (!$id_cliente) {
 
     $id_cliente =
         $_SESSION["idusuario"] ?? null;
-
 }
-
 
 if (!$id_cliente) {
 
@@ -102,9 +85,7 @@ if (!$id_cliente) {
     exit;
 }
 
-
-$subtotal = 0;
-
+$subtotalTotal = 0;
 
 foreach ($pedido as $producto) {
 
@@ -114,24 +95,17 @@ foreach ($pedido as $producto) {
     $cantidad =
         intval($producto["cantidad"] ?? 1);
 
-
     if ($cantidad < 1) {
         $cantidad = 1;
     }
 
-
-    $subtotal +=
+    $subtotalTotal +=
         $precio * $cantidad;
-
 }
-
-
 
 $descuento = 0;
 
-
 if ($cupon !== "") {
-
 
     $sql = "
         SELECT
@@ -145,23 +119,18 @@ if ($cupon !== "") {
         LIMIT 1
     ";
 
-
-    $stmt =
+    $stmtCupon =
         $conexion->prepare($sql);
 
-
-    $stmt->bind_param(
+    $stmtCupon->bind_param(
         "s",
         $cupon
     );
 
-
-    $stmt->execute();
-
+    $stmtCupon->execute();
 
     $resultado =
-        $stmt->get_result();
-
+        $stmtCupon->get_result();
 
     if ($resultado->num_rows === 0) {
 
@@ -173,16 +142,11 @@ if ($cupon !== "") {
         exit;
     }
 
-
     $datosCupon =
         $resultado->fetch_assoc();
 
-
     $fechaActual =
         date("Y-m-d");
-
-
-    // VERIFICAR ESTADO
 
     if (
         strtolower($datosCupon["estado"]) !==
@@ -210,8 +174,6 @@ if ($cupon !== "") {
         exit;
     }
 
-
-
     if (
         $fechaActual >
         $datosCupon["fecha_vencimiento"]
@@ -225,45 +187,27 @@ if ($cupon !== "") {
         exit;
     }
 
-
     $descuento =
         floatval(
             $datosCupon["valor_descuento"]
         );
 
+    if ($descuento > $subtotalTotal) {
 
-
-    if ($descuento > $subtotal) {
-
-        $descuento = $subtotal;
-
+        $descuento = $subtotalTotal;
     }
 
+    $stmtCupon->close();
 }
-
-
-
 
 $costo_envio = 0;
 
-
-$total =
-    $subtotal -
-    $descuento +
-    $costo_envio;
-
-
-
 $estado = "pendiente";
-
-
 
 $observaciones =
     "Horario de retiro: " . $hora;
 
-
-
-$sql = "
+$sqlPedido = "
     INSERT INTO pedidos
     (
         id_cliente,
@@ -281,12 +225,10 @@ $sql = "
     (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 ";
 
+$stmtPedido =
+    $conexion->prepare($sqlPedido);
 
-$stmt =
-    $conexion->prepare($sql);
-
-
-if (!$stmt) {
+if (!$stmtPedido) {
 
     echo json_encode([
         "ok" => false,
@@ -296,30 +238,78 @@ if (!$stmt) {
     exit;
 }
 
+$sqlHistorial = "
+    INSERT INTO historial
+    (
+        idPedido,
+        estrellas
+    )
+    VALUES
+    (?, NULL)
+";
+
+$stmtHistorial =
+    $conexion->prepare($sqlHistorial);
+
+if (!$stmtHistorial) {
+
+    echo json_encode([
+        "ok" => false,
+        "mensaje" => "Error al preparar el historial."
+    ]);
+
+    exit;
+}
+
+$pedidosCreados = [];
 
 foreach ($pedido as $producto) {
 
-
     $id_servicio =
-        intval($producto["id"]);
+        intval($producto["id"] ?? 0);
 
+    $precio =
+        floatval($producto["precio"] ?? 0);
 
-    $stmt->bind_param(
+    $cantidad =
+        intval($producto["cantidad"] ?? 1);
+
+    if ($cantidad < 1) {
+        $cantidad = 1;
+    }
+
+    $subtotalServicio =
+        $precio * $cantidad;
+
+    $descuentoServicio = 0;
+
+    if ($subtotalTotal > 0 && $descuento > 0) {
+
+        $descuentoServicio =
+            ($subtotalServicio / $subtotalTotal)
+            * $descuento;
+    }
+
+    $totalServicio =
+        $subtotalServicio -
+        $descuentoServicio +
+        $costo_envio;
+
+    $stmtPedido->bind_param(
         "isssddddsi",
         $id_cliente,
         $fecha,
         $direccion,
         $estado,
-        $subtotal,
-        $descuento,
+        $subtotalServicio,
+        $descuentoServicio,
         $costo_envio,
-        $total,
+        $totalServicio,
         $observaciones,
         $id_servicio
     );
 
-
-    if (!$stmt->execute()) {
+    if (!$stmtPedido->execute()) {
 
         echo json_encode([
             "ok" => false,
@@ -329,30 +319,44 @@ foreach ($pedido as $producto) {
         exit;
     }
 
+    $idPedido =
+        $conexion->insert_id;
+
+    $stmtHistorial->bind_param(
+        "i",
+        $idPedido
+    );
+
+    if (!$stmtHistorial->execute()) {
+
+        echo json_encode([
+            "ok" => false,
+            "mensaje" => "Error al guardar el historial."
+        ]);
+
+        exit;
+    }
+
+    $pedidosCreados[] = [
+        "idPedido" => $idPedido,
+        "id_servicio" => $id_servicio,
+        "cantidad" => $cantidad,
+        "subtotal" => $subtotalServicio,
+        "descuento" => $descuentoServicio,
+        "total" => $totalServicio
+    ];
 }
 
+$stmtPedido->close();
 
-
-
-echo json_encode([
-
-    "ok" => true,
-
-    "mensaje" => "Pedido realizado correctamente.",
-
-    "subtotal" => $subtotal,
-
-    "descuento" => $descuento,
-
-    "costo_envio" => $costo_envio,
-
-    "total" => $total
-
-]);
-
-
-$stmt->close();
+$stmtHistorial->close();
 
 $conexion->close();
+
+echo json_encode([
+    "ok" => true,
+    "mensaje" => "Pedido realizado correctamente.",
+    "pedidos" => $pedidosCreados
+]);
 
 ?>
