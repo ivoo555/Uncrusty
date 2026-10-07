@@ -1,8 +1,6 @@
 <?php
 
-session_start();
-
-header("Content-Type: application/json");
+header("Content-Type: application/json; charset=UTF-8");
 
 $conexion = new mysqli(
     "localhost",
@@ -19,10 +17,16 @@ if ($conexion->connect_error) {
     exit;
 }
 
-$id_cliente = $_SESSION["id"] ?? null;
+$id_cliente = $_GET["idusuario"] ?? null;
 
 if (!$id_cliente) {
-    $id_cliente = $_SESSION["idusuario"] ?? null;
+    session_start();
+
+    $id_cliente = $_SESSION["id"] ?? null;
+
+    if (!$id_cliente) {
+        $id_cliente = $_SESSION["idusuario"] ?? null;
+    }
 }
 
 if (!$id_cliente) {
@@ -32,6 +36,8 @@ if (!$id_cliente) {
     ]);
     exit;
 }
+
+$id_cliente = intval($id_cliente);
 
 $sql = "SELECT
             p.id_pedido,
@@ -44,7 +50,8 @@ $sql = "SELECT
             r.direccion AS direccion_reparto,
             r.estado AS estado_reparto
         FROM pedidos p
-        LEFT JOIN repartos r ON p.id_pedido = r.id_pedido
+        LEFT JOIN repartos r
+            ON p.id_pedido = r.id_pedido
         WHERE p.id_cliente = ?
         AND p.estado <> 'Entregado'
         ORDER BY p.id_pedido DESC";
@@ -60,7 +67,14 @@ if (!$stmt) {
 }
 
 $stmt->bind_param("i", $id_cliente);
-$stmt->execute();
+
+if (!$stmt->execute()) {
+    echo json_encode([
+        "ok" => false,
+        "mensaje" => "Error al ejecutar: " . $stmt->error
+    ]);
+    exit;
+}
 
 $resultado = $stmt->get_result();
 
@@ -70,11 +84,12 @@ while ($fila = $resultado->fetch_assoc()) {
     $pedidos[] = $fila;
 }
 
-$stmt->close();
-$conexion->close();
-
 echo json_encode([
     "ok" => true,
     "pedidos" => $pedidos
 ]);
+
+$stmt->close();
+$conexion->close();
+
 ?>
