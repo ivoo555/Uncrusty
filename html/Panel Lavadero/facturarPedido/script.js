@@ -20,9 +20,7 @@ let totalFinal = 0;
 let porcentajeCupon = 0;
 
 
-// ==========================================
-// CARGAR PEDIDOS
-// ==========================================
+
 
 fetch("../../conexiones/cargarDatosFactura.php")
     .then(response => {
@@ -78,9 +76,6 @@ fetch("../../conexiones/cargarDatosFactura.php")
     });
 
 
-// ==========================================
-// SELECCIONAR PEDIDO
-// ==========================================
 
 inputPedido.addEventListener(
     "change",
@@ -98,9 +93,6 @@ inputPedido.addEventListener(
 );
 
 
-// ==========================================
-// CARGAR DATOS DEL PEDIDO
-// ==========================================
 
 function cargarPedido(idPedido) {
 
@@ -138,20 +130,12 @@ function cargarPedido(idPedido) {
             }
 
 
-            // ==================================
-            // DATOS DEL CLIENTE
-            // ==================================
-
             inputNombre.value =
                 datos.pedido.nombreCompleto || "";
 
             inputIdentificacion.value =
                 datos.pedido.DNI || "";
 
-
-            // ==================================
-            // DATOS ECONÓMICOS
-            // ==================================
 
             subtotalOriginal =
                 parseFloat(
@@ -170,9 +154,6 @@ function cargarPedido(idPedido) {
                 ) || 0;
 
 
-            // ==================================
-            // CALCULAR DESCUENTO
-            // ==================================
 
             descuentoCuponActual =
                 subtotalOriginal *
@@ -180,9 +161,6 @@ function cargarPedido(idPedido) {
                 100;
 
 
-            // ==================================
-            // CALCULAR TOTAL
-            // ==================================
 
             totalFinal =
                 subtotalOriginal -
@@ -190,9 +168,6 @@ function cargarPedido(idPedido) {
                 costoEnvioOriginal;
 
 
-            // ==================================
-            // MOSTRAR RESUMEN
-            // ==================================
 
             pServicios.textContent =
                 "Subtotal Servicios: $" +
@@ -214,9 +189,6 @@ function cargarPedido(idPedido) {
                 totalFinal.toFixed(2);
 
 
-            // ==================================
-            // CARGAR DETALLES
-            // ==================================
 
             tabla.innerHTML = "";
 
@@ -284,18 +256,11 @@ function cargarPedido(idPedido) {
 }
 
 
-// ==========================================
-// GENERAR FACTURA
-// ==========================================
 
 btnFactura.addEventListener(
     "click",
     function () {
 
-
-        // ==============================
-        // VALIDACIONES
-        // ==============================
 
         if (!inputPedido.value) {
 
@@ -343,9 +308,6 @@ btnFactura.addEventListener(
         }
 
 
-        // ==============================
-        // CONFIRMAR
-        // ==============================
 
         const confirmar =
             confirm(
@@ -360,17 +322,11 @@ btnFactura.addEventListener(
         }
 
 
-        // ==============================
-        // TIPO DE COMPROBANTE
-        // ==============================
 
         const tipoComprobante =
             selectComprobante.value;
 
 
-        // ==============================
-        // PREPARAR DATOS
-        // ==============================
 
         const datos =
             new FormData();
@@ -406,13 +362,7 @@ btnFactura.addEventListener(
         );
 
 
-        /*
-         * Estos valores se envían solamente
-         * como información.
-         *
-         * generarFactura.php los vuelve a
-         * calcular desde la base de datos.
-         */
+
 
         datos.append(
             "subtotal",
@@ -438,9 +388,7 @@ btnFactura.addEventListener(
         );
 
 
-        // ==============================
-        // DESACTIVAR BOTÓN
-        // ==============================
+
 
         btnFactura.disabled = true;
 
@@ -448,9 +396,7 @@ btnFactura.addEventListener(
             "Generando factura...";
 
 
-        // ==============================
-        // ENVIAR AL PHP
-        // ==============================
+
 
         fetch(
             "../../conexiones/generarFactura.php",
@@ -502,10 +448,6 @@ btnFactura.addEventListener(
                     data.fecha_vencimiento_cae
                 );
 
-
-                // ==========================
-                // ABRIR FACTURA TXT
-                // ==========================
 
                 window.open(
                     "../../conexiones/generarFacturaTXT.php?id_factura=" +
