@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const btnAgregarProducto = document.getElementById("btnAgregarProducto");
 
 
+
     function cargarProductos() {
 
         fetch("../../conexiones/cargarDatosStock.php")
@@ -26,6 +27,8 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     }
 
+
+    
     window.mostrarProductos = function (productos) {
 
         tablaProductos.innerHTML = "";
@@ -90,6 +93,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             tablaProductos.appendChild(fila);
 
+
+
             if (estado === "Alerta") {
 
                 const alerta = document.createElement("div");
@@ -127,12 +132,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
+
+
 function editarStock(idProducto) {
 
     window.location.href =
         "modificarStock.html?id=" + idProducto;
 
 }
+
+
 
 function eliminarProducto(idProducto) {
 
@@ -206,6 +215,8 @@ function eliminarProducto(idProducto) {
     });
 
 }
+
+
 
 function mostrarMenu(boton) {
 
