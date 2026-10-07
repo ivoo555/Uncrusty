@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Agregar Producto</title>
+
+    <link rel="stylesheet" href="agregarProducto.css">
+</head>
+
+<body>
+
+    <main class="contenedor">
+
+        <h1>Agregar Producto</h1>
+
+        <form id="formProducto">
+
+            <div class="campo">
+                <label>Producto</label>
+                <input type="text" name="" id="Producto" placeholder="ingrese el nombre del producto">
+                <label>
+                    Marca
+                </label>
+
+                <input
+                    type="text"
+                    id="marca"
+                    name="marca"
+                    placeholder="Ingrese la marca"
+                    required
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label>
+                    Cantidad actual
+                </label>
+
+                <input
+                    type="number"
+                    id="cantidadActual"
+                    name="cantidad_actual"
+                    min="0"
+                    placeholder="Ingrese la cantidad actual"
+                    required
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label >
+                    Cantidad mínima
+                </label>
+
+                <input
+                    type="number"
+                    id="cantidadMinima"
+                    name="cantidad_minima"
+                    min="0"
+                    placeholder="Ingrese la cantidad mínima"
+                    required
+                >
+
+            </div>
+
+
+            <div class="botones">
+
+                <button type="submit" class="btnGuardar">
+                    Agregar producto
+                </button>
+
+                <button
+                    type="button"
+                    id="btnCancelar"
+                    class="btnCancelar">
+                    Cancelar
+                </button>
+
+            </div>
+
+        </form>
+
+    </main>
+
+
+    <script src="agregarProducto.js"></script>
+
+</body>
+
+</html>
