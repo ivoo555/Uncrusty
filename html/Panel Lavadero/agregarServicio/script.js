@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
     cargarServicios();
 
 
-    // CREAR SERVICIO
+
     btnCrearServicio.addEventListener("click", function () {
 
         const nombre = inputNombre.value.trim();
@@ -73,7 +73,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-    // CARGAR SERVICIOS
     function cargarServicios() {
 
         fetch("../../conexiones/cargarDatosServicios.php")
@@ -110,7 +109,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    // MOSTRAR SERVICIOS
     function mostrarServicios(servicios) {
 
         tablaServicios.innerHTML = "";
@@ -188,7 +186,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-// EDITAR SERVICIO
 function editarServicio(idServicio) {
 
     window.location.href =
@@ -197,7 +194,6 @@ function editarServicio(idServicio) {
 }
 
 
-// DESACTIVAR SERVICIO
 function cancelarServicio(idServicio) {
 
     const confirmar = confirm(
@@ -241,8 +237,6 @@ function cancelarServicio(idServicio) {
 
 }
 
-
-// MOSTRAR MENÚ
 function mostrarMenu(boton) {
 
     const menu =
