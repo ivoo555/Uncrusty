@@ -10,25 +10,28 @@
     <div id="marcoAsignarTarea">
         <h1>Datos De Entrega</h1>
     </div>
-    <h1 id="h1Repartidor">Repartidor</h1>
-    <select name="Repartidor" id="Repartidor" required>
-            <option value="" disabled selected hidden>Seleccione un repartidor</option>
-    </select>
-    <h1 id="h1Pedido">Pedido</h1>
-    <select name="Pedido" id="Pedido" required>
+    <form action="../../conexiones/asignarTarea.php" method="POST">
+        <h1 id="h1Repartidor">Repartidor</h1>
+        <select name="id_repartidor" id="Repartidor" required>
+        <option value="" disabled selected hidden>Seleccione un repartidor</option>
+        </select>
+        <h1 id="h1Pedido">Pedido</h1>
+        <select name="id_pedido" id="Pedido" required>
         <option value="" disabled selected hidden>Seleccione un pedido</option>
-    </select>
-    <h1 id="h1Direccion">Direccion Entrega</h1>
-    <input type="text" name="Direccion" id="Direccion" placeholder="Ingrese la direccion">
-    <h1 id="h1FechaYHora">Fecha y Hora de Entrega</h1>
-    <input type="date" name="" id="Dia">
-    <input type="time" name="" id="Tiempo">
-    <h1 id="h1InformacionAdicional">Informacion Adicional</h1>
-    <input type="text" name="" id="InformacionAdicional">
-    <button id="Boton">Asignar Tarea</button>
+        </select>
+        <h1 id="h1Direccion">Direccion Entrega</h1>
+        <input type="text" name="direccion" id="Direccion" placeholder="Ingrese la direccion">
+        <h1 id="h1FechaYHora">Fecha y Hora de Entrega</h1>
+        <input type="date" name="fecha" id="Dia">
+        <input type="time" name="hora" id="Tiempo">
+        <h1 id="h1InformacionAdicional">Informacion Adicional</h1>
+        <input type="text" name="observaciones" id="InformacionAdicional">
+        <button type="submit" id="Boton">Asignar Tarea</button>
+    </form>
     <div id="MarcoRepartidores">
         <div id="ParteSuperior"></div>
         <h1 id="h1RepartidoresDisponibles">Repartidores Disponibles</h1>
+        <div id="listaRepartidores"></div>
     </div>
     <aside class="sidebar"> 
         <ul class="sidebar-nav">
@@ -108,5 +111,6 @@
         <path d="M21 12H9"/> </svg> 
         </a> 
     </aside>
+    <script src="script.js"></script>
 </body>
 </html>
