@@ -4,20 +4,28 @@ $conexion = new mysqli(
     "localhost",
     "root",
     "",
-    "lavanderia_uncrusty"
+    "uncrustybd"
 );
 
 if ($conexion->connect_error) {
     die("Error de conexion x.x");
 }
 
-$contraseña = trim($_POST["password"]);
-$dni = trim($_POST["Dni"]);
-$email = trim($_POST["email"]);
-$rol = trim($_POST["rol"]);
+$contraseña = trim($_POST["password"] ?? "");
+$dni = trim($_POST["Dni"] ?? "");
+$email = trim($_POST["email"] ?? "");
+$rol = trim($_POST["rol"] ?? "");
 
-$nombre = isset($_POST["nombre"]) ? trim($_POST["nombre"]) : "";
-$telefono = isset($_POST["telefono"]) ? trim($_POST["telefono"]) : "";
+$nombre = isset($_POST["nombre"])
+    ? trim($_POST["nombre"])
+    : "";
+
+$telefono = isset($_POST["telefono"])
+    ? trim($_POST["telefono"])
+    : "";
+
+
+
 
 if (!preg_match('/^[0-9]{8}$/', $dni)) {
     ?>
@@ -29,17 +37,31 @@ if (!preg_match('/^[0-9]{8}$/', $dni)) {
     exit();
 }
 
-/* VERIFICAR SI EL GMAIL YA EXISTE EN ALGUNA DE LAS 3 TABLAS */
+
 
 $sql_verificar = "
-    SELECT email FROM clientes WHERE email = ?
+    SELECT email
+    FROM clientes
+    WHERE email = ?
+
     UNION
-    SELECT email FROM personallavanderia WHERE email = ?
+
+    SELECT email
+    FROM personallavanderia
+    WHERE email = ?
+
     UNION
-    SELECT email FROM repartidores WHERE email = ?
+
+    SELECT email
+    FROM repartidores
+    WHERE email = ?
 ";
 
 $stmt_verificar = $conexion->prepare($sql_verificar);
+
+if (!$stmt_verificar) {
+    die("Error al preparar la consulta.");
+}
 
 $stmt_verificar->bind_param(
     "sss",
@@ -62,28 +84,53 @@ if ($resultado->num_rows > 0) {
     exit();
 }
 
+$stmt_verificar->close();
+
+
+
+
 try {
+
 
     if ($rol == "Usuario") {
 
-        $sql = "INSERT INTO clientes
-        (email, DNI, contrasena)
-        VALUES (?, ?, ?)";
+        $sql = "
+            INSERT INTO clientes
+            (
+                nombreCompleto,
+                email,
+                DNI,
+                contrasena
+            )
+            VALUES (?, ?, ?, ?)
+        ";
 
         $stmt = $conexion->prepare($sql);
 
         $stmt->bind_param(
-            "sss",
+            "ssss",
+            $nombre,
             $email,
             $dni,
             $contraseña
         );
+    }
 
-    } elseif ($rol == "Lavandero") {
 
-        $sql = "INSERT INTO personallavanderia
-        (nombreCompleto, DNI, email, contrasena)
-        VALUES (?, ?, ?, ?)";
+
+
+    elseif ($rol == "Lavandero") {
+
+        $sql = "
+            INSERT INTO personallavanderia
+            (
+                nombreCompleto,
+                DNI,
+                email,
+                contrasena
+            )
+            VALUES (?, ?, ?, ?)
+        ";
 
         $stmt = $conexion->prepare($sql);
 
@@ -94,14 +141,27 @@ try {
             $email,
             $contraseña
         );
+    }
 
-    } elseif ($rol == "Repartidor") {
+
+    
+
+    elseif ($rol == "Repartidor") {
 
         $disponibilidad = 1;
 
-        $sql = "INSERT INTO repartidores
-        (nombreCompleto, DNI, email, contrasena, telefono, disponibilidad)
-        VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "
+            INSERT INTO repartidores
+            (
+                nombreCompleto,
+                DNI,
+                email,
+                contrasena,
+                telefono,
+                disponibilidad
+            )
+            VALUES (?, ?, ?, ?, ?, ?)
+        ";
 
         $stmt = $conexion->prepare($sql);
 
@@ -114,9 +174,12 @@ try {
             $telefono,
             $disponibilidad
         );
+    }
 
-    } else {
 
+
+
+    else {
         ?>
         <script>
             alert("Rol no valido");
@@ -126,16 +189,23 @@ try {
         exit();
     }
 
+
+
     $stmt->execute();
 
     ?>
 
     <script>
+        localStorage.clear();
 
-        localStorage.setItem("rol", "<?php echo $rol; ?>");
+        localStorage.setItem(
+            "rol",
+            "<?php echo $rol; ?>"
+        );
 
-        window.location = "../colegio/login.html";
+        alert("Registro realizado correctamente");
 
+        window.location = "../html/login.html";
     </script>
 
     <?php
@@ -146,11 +216,12 @@ try {
 
     if ($e->getCode() == 1062) {
 
-        echo "gmail o dni ya en uso";
+        echo "Gmail o DNI ya en uso.";
 
     } else {
 
         echo "Error de MySQL: " . $e->getMessage();
-
     }
 }
+
+?>
