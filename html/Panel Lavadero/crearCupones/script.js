@@ -194,6 +194,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
 
+  
     window.cancelarCupon = function (idCupon) {
 
         const confirmar = confirm(
@@ -239,6 +240,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     };
 
+
+
     window.mostrarMenu = function (boton) {
 
         const menu =
@@ -257,6 +260,8 @@ document.addEventListener("DOMContentLoaded", function () {
         menu.classList.toggle("mostrar");
 
     };
+
+
     document.addEventListener("click", function (event) {
 
         if (!event.target.closest(".acciones")) {
