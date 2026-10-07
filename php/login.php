@@ -17,10 +17,6 @@ $email = $_POST["email"];
 $password = $_POST["password"];
 
 
-/* =========================
-   BUSCAR EN CLIENTES
-   ========================= */
-
 $sql = "SELECT * FROM clientes
         WHERE email = ?
         AND contrasena = ?";
@@ -70,10 +66,6 @@ if ($resultado->num_rows > 0) {
     exit();
 }
 
-
-/* =========================
-   BUSCAR EN PERSONAL LAVANDERIA
-   ========================= */
 
 $sql = "SELECT * FROM personallavanderia
         WHERE email = ?
