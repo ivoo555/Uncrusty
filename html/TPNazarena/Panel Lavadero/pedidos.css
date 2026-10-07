@@ -4,7 +4,6 @@ body {
     color: var(--text-primary);
 }
 
-/* Título principal */
 #Titulo {
     position: absolute;
     left: 130px;
@@ -13,7 +12,6 @@ body {
     font-size: 30px;
 }
 
-/* MARCO PRINCIPAL */
 #MarcoProductos {
     width: 1100px;
     height: 500px;
@@ -27,7 +25,6 @@ body {
     overflow: hidden;
 }
 
-/* TÍTULO DE LA TABLA */
 #MarcoTitulo {
     height: 65px;
     background-color: #E2F0F8;
@@ -57,7 +54,6 @@ table {
     background-color: white;
 }
 
-/* ENCABEZADOS */
 th {
     background-color: #E2F0F8;
     color: #24558A;
@@ -67,7 +63,6 @@ th {
     text-align: center;
 }
 
-/* DATOS */
 td {
     padding: 10px 8px;
     border: 1px solid #B8D5E6;
@@ -75,7 +70,6 @@ td {
     font-size: 13px;
 }
 
-/* TARJETA DE PEDIDOS PENDIENTES */
 #TarjetaProducto {
     width: 400px;
     height: 250px;
@@ -89,7 +83,6 @@ td {
     overflow: hidden;
 }
 
-/* PARTE SUPERIOR DE LA TARJETA */
 #ParteSuperior {
     height: 60px;
     background-color: #E2F0F8;
@@ -154,14 +147,12 @@ td {
     font-size: 10px;
 }
 
-/* SIN FONDO AZUL AL PASAR EL MOUSE */
 .sidebar-item:hover {
     background: transparent;
     color: #1E1E1B;
     width: 85px;
 }
 
-/* SIN FONDO AZUL EN LA PÁGINA ACTUAL */
 .sidebar-item.active {
     background: transparent;
     color: #16709F;
