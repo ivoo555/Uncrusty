@@ -7,7 +7,6 @@ include("conexion.php");
 header("Content-Type: application/json; charset=utf-8");
 
 
-// Verificar sesión
 if (!isset($_SESSION["id_personal"])) {
 
     echo json_encode([
@@ -21,14 +20,12 @@ if (!isset($_SESSION["id_personal"])) {
 $id_personal = intval($_SESSION["id_personal"]);
 
 
-// Recibir datos
 $nombreCompleto = $_POST["nombreCompleto"] ?? "";
 $DNI = $_POST["DNI"] ?? "";
 $email = $_POST["email"] ?? "";
 $contrasena = $_POST["contrasena"] ?? "";
 
 
-// Verificar datos obligatorios
 if (
     $nombreCompleto == "" ||
     $DNI == "" ||
@@ -43,7 +40,6 @@ if (
 }
 
 
-// Si NO se ingresó una nueva contraseña
 if ($contrasena == "") {
 
     $sql = "
@@ -75,7 +71,6 @@ if ($contrasena == "") {
     );
 
 
-// Si ingresó una nueva contraseña
 } else {
 
     $sql = "
@@ -110,7 +105,6 @@ if ($contrasena == "") {
 }
 
 
-// Ejecutar actualización
 if (!$stmt->execute()) {
 
     echo json_encode([
